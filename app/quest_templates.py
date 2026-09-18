@@ -210,6 +210,8 @@ def read_templates(db, templates):
     from app.models import RaidRotation
     data = [read_template(t) for t in templates]
     raids = [d['journey']['raid'] for d in data if d['journey'].get('raid')]
+    from app.raids import rotation_completions
+    completions = rotation_completions(db, [r['rotation']['seed'] for r in raids])
     keys = [r['rotation']['key'] for r in raids]
     saved = {r.key: r for r in db.scalars(select(RaidRotation).where(RaidRotation.key.in_(keys)))} if keys else {}
     for entry in data:
@@ -217,6 +219,8 @@ def read_templates(db, templates):
         if not raid:
             continue
         info = raid['rotation']
+        info['completions'] = completions[info['seed']]
+        info['completion_count'] = len(info['completions'])
         rotation = saved.get(info['key'])
         count = len(rotation.snapshot['plan']) if rotation else Random(info['seed']).randint(raid['min_encounters'], raid['max_encounters'])
         info['encounter_count'] = count

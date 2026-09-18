@@ -77,3 +77,40 @@ def build_raid_plan(db, slug, settings, now=None):
     for entry in plan:
         entry['encounter_id'] = str(uuid4())
     return plan, deepcopy(saved.snapshot['settings'])
+
+
+def rotation_completions(db, seeds):
+    """Read full-route victories, never retreats or intermediate boss clears."""
+    from uuid import UUID
+    from sqlalchemy.orm import joinedload, selectinload
+    from app.models import QuestRun, Quest, Adventurer, User
+
+    result = {seed: [] for seed in seeds}
+    if not seeds:
+        return result
+    runs = db.scalars(select(QuestRun).join(Quest).where(
+        QuestRun.status == 'victory', QuestRun.current_stage == 'complete',
+        Quest.rewards['journey']['raid_seed'].as_string().in_(seeds)
+    ).options(joinedload(QuestRun.quest), joinedload(QuestRun.party),
+              selectinload(QuestRun.encounters))).all()
+    clears = []
+    for run in runs:
+        journey = run.quest.rewards.get('journey', {})
+        plan = run.quest.encounter_pool or []
+        if not journey.get('raid') or not plan:
+            continue
+        final = next((e for e in run.encounters if str(e.id) == plan[-1].get('encounter_id')
+                      and e.state == 'victory'), None)
+        if final is not None:
+            clears.append((run, final))
+    ids = {UUID(p['id']) for _, final in clears for p in final.participants}
+    owners = dict(db.execute(select(Adventurer.id, User.username).join(
+        User, Adventurer.owner == User.id).where(Adventurer.id.in_(ids))).all()) if ids else {}
+    for run, final in sorted(clears, key=lambda row: (row[1].updated_at, str(row[0].id))):
+        players = [{'character': p['name'], 'player': owners.get(UUID(p['id'])),
+                    'survived': p.get('hp', 0) > 0} for p in final.participants]
+        result[run.quest.rewards['journey']['raid_seed']].append({
+            'run_id': str(run.id), 'team': run.party.name if len(players) > 1 else None,
+            'completed_at': final.updated_at.replace(tzinfo=timezone.utc).isoformat(),
+            'players': players})
+    return result
