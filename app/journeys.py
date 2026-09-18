@@ -146,7 +146,8 @@ def village_rest(db, hero):
     policy = db.get(RestPolicy, "village")
     if policy is None:
         raise HTTPException(409, "Village rest is unavailable.")
-    actor = {"hp": hero.health, "max_hp": derived_stats(hero.attributes)["max_hp"], "statuses": deepcopy(hero.combat_statuses or []), **restore_cooldowns(hero.combat_cooldowns)}
+    from app.gear import stats as gear_stats
+    actor = {"hp": hero.health, "max_hp": gear_stats(db, hero)["max_hp"], "statuses": deepcopy(hero.combat_statuses or []), **restore_cooldowns(hero.combat_cooldowns)}
     healed = apply_rest(actor, RestRules.model_validate(policy.settings))
     if healed or hero.combat_statuses or hero.combat_cooldowns != saved_cooldowns(actor, 1):
         db.add(GameEvent(event_type="village_rest", payload={"adventurer_id": str(hero.id), "healed": healed}))

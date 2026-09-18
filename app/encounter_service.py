@@ -1,4 +1,5 @@
 from app.attributes import derived_stats
+from app.gear import stats as gear_stats, effective_attributes
 from app.consumables import inventory as consumable_inventory
 from app.models import OwnedConsumable
 from app.progression import award_experience, rank_for, validate_rank_entry
@@ -184,8 +185,8 @@ def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-ba
         id=UUID(plan[0]["encounter_id"]), quest_run_id=run.id, state="player_turn", turn=1,
         enemy_instances=roll_group(db, plan[0], len(heroes), journey),
         participants=[{"id": str(h.id), "name": h.name, "hp": h.health,
-                       "max_hp": derived_stats(h.attributes)["max_hp"], "derived_stats": derived_stats(h.attributes),
-                       "attributes": deepcopy(h.attributes), "power": 10, "acted": False, "guarding": False,
+                       "max_hp": gear_stats(db, h)["max_hp"], "derived_stats": gear_stats(db, h),
+                       "attributes": effective_attributes(db, h), "power": 10, "acted": False, "guarding": False,
                        "equipped_weapon": equipped_weapon(db, h),
                        "weapons": combat_weapons(db, h),
                        "consumables": consumable_inventory(db, h.id),

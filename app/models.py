@@ -483,3 +483,29 @@ class AuctionListing(Base):
         CheckConstraint("status IN ('open', 'sold', 'cancelled', 'expired')"),
         CheckConstraint('quantity > 0 AND price > 0 AND bid >= 0'),
     )
+
+
+class GearDefinition(Base):
+    __tablename__ = 'gear_definitions'
+    slug = Column(String, primary_key=True)
+    name = Column(String, nullable=False)
+    slot = Column(String, nullable=False)
+    bonuses = Column(JSON, nullable=False, default=dict)
+    required_rank = Column(String, ForeignKey('rank_definitions.slug'), nullable=False, default='iron')
+    price = Column(Integer, nullable=False)
+
+
+class Gear(Base):
+    __tablename__ = 'gear'
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    adventurer_id = Column(UUID(as_uuid=True), ForeignKey('adventurers.id'), nullable=False, index=True)
+    definition_slug = Column(String, ForeignKey('gear_definitions.slug'), nullable=False)
+    definition = relationship('GearDefinition', lazy='joined')
+
+
+class EquippedGear(Base):
+    __tablename__ = 'equipped_gear'
+    adventurer_id = Column(UUID(as_uuid=True), ForeignKey('adventurers.id'), primary_key=True)
+    slot = Column(String, primary_key=True)
+    gear_id = Column(UUID(as_uuid=True), ForeignKey('gear.id'), nullable=False, unique=True)
+    gear = relationship('Gear', lazy='joined')

@@ -35,6 +35,7 @@ from app import encounter_service
 from app.quest_templates import router as quest_template_router, seed_quest_templates
 from app.enemies import router as enemy_router, seed_enemies, link_legacy_enemies
 from app.loot_types import router as loot_type_router, seed_loot_types
+from app import gear
 from app.shop import router as shop_router
 from app.auction_house import router as auction_router
 from app.auth import router as auth_router, current_user, own_adventurer, own_state
@@ -121,6 +122,7 @@ app.include_router(quest_template_router)
 app.include_router(enemy_router)
 app.include_router(loot_type_router)
 app.include_router(shop_router)
+app.include_router(gear.router)
 app.include_router(auction_router)
 app.include_router(auth_router)
 app.include_router(weapon_router)
@@ -327,14 +329,14 @@ def adventurer_details(adventurer_id: uuid.UUID, db: Session = Depends(get_db), 
         'created_at': run.created_at.isoformat(),
     } for run in runs]
     return {"id": str(hero.id), "name": hero.name, "level": hero.level,
-            "health": hero.health, "max_health": (next(p["max_hp"] for p in current.participants if p["id"] == str(hero.id)) if current else derived_stats(hero.attributes)["max_hp"]),
-            "derived_stats": (next(p.get("derived_stats", {}) for p in current.participants if p["id"] == str(hero.id)) if current else derived_stats(hero.attributes)), "attribute_descriptions": ATTRIBUTE_DESCRIPTIONS, "statuses": hero.combat_statuses, "consumables": consumable_inventory(db, hero.id), "experience": hero.experience,
-            "gold": hero.gold, "is_alive": hero.is_alive, "attributes": hero.attributes,
+            "health": hero.health, "max_health": (next(p["max_hp"] for p in current.participants if p["id"] == str(hero.id)) if current else gear.stats(db, hero)["max_hp"]),
+            "derived_stats": (next(p.get("derived_stats", {}) for p in current.participants if p["id"] == str(hero.id)) if current else gear.stats(db, hero)), "attribute_descriptions": ATTRIBUTE_DESCRIPTIONS, "statuses": hero.combat_statuses, "consumables": consumable_inventory(db, hero.id), "experience": hero.experience,
+            "gold": hero.gold, "is_alive": hero.is_alive, "attributes": hero.attributes, "effective_attributes": gear.effective_attributes(db, hero),
             "statistics": hero.statistics or {}, "account_statistics": user.statistics or {},
             "progression": describe_progression(db, hero),
             "inventory": (hero.inventory.items if hero.inventory else []) + soul_inventory(db, hero.id) +
-                         [serialize_weapon(w) for w in db.query(Weapon).filter(Weapon.adventurer_id == hero.id).all()],
-            "equipment": {**{slot: None for slot in ("Head", "Chest", "Hands", "Legs", "Feet", "Off Hand", "Amulet", "Ring")},
+                         [serialize_weapon(w) for w in db.query(Weapon).filter(Weapon.adventurer_id == hero.id).all()] + gear.inventory(db, hero),
+            "equipment": {**gear.equipment(db, hero),
                           "Main Hand": equipped_weapon(db, hero)},
             "essences": describe_essences(db, hero.id), "essence_limit": 3, "essence_catalog": essence_catalog(db), "orb_options": orb_options(db),
             "skills": [],
@@ -476,7 +478,7 @@ def allocate_attributes(adventurer_id: uuid.UUID, payload: AttributeAllocation,
     hero.attributes = {**hero.attributes, **{k: hero.attributes.get(k, 0) + v for k, v in values.items()}}
     hero.attribute_points -= total
     db.commit()
-    return {"attributes": hero.attributes, "attribute_points": hero.attribute_points, "derived_stats": derived_stats(hero.attributes)}
+    return {"attributes": hero.attributes, "attribute_points": hero.attribute_points, "derived_stats": gear.stats(db, hero)}
 
 
 @app.post('/api/adventurers/{adventurer_id}/essences/{essence_slug}/absorb')

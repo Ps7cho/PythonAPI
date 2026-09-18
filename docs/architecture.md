@@ -199,8 +199,8 @@ retries, and extraction never reroll. New raid loot uses independent per-run ran
 while raid enemies/AI stay seeded. Old rotations and runs retain their saved loot rules.
 Catalog previews report unconditional item odds and current database weapon tags.
 Weapon drops use existing type relationships; basic attack accepts melee or ranged
-weapons, while Power Strike still requires melee. Shields are excluded until usable
-shield equipment rules exist.
+weapons, while Power Strike still requires melee. Weapon-type shields remain excluded from weapon drops; off-hand bucklers use
+the gear catalog.
 Run gains and loot are banked in quest-progress JSON. For new quests/epics, a downed
 member stays at zero HP during the run. If a survivor returns, survivors claim their
 banked rewards and loot, while downed members recover at 1 HP and forfeit their own
@@ -267,3 +267,16 @@ Highest bids are held in gold; outbids refund immediately. Auctions with bids ca
 be cancelled. Expiry delivers to the winner and pays the seller, or returns unsold
 items. PostgreSQL workers settle every 15 seconds; market reads and actions also
 settle overdue listings after downtime. Closed rows and game events retain history.
+
+
+## Armor and Accessories
+
+Database gear definitions provide a slot, rank, price, and attribute bonuses.
+Owned gear instances and equipped-slot rows cover Head, Chest, Hands, Legs, Feet,
+Off Hand, Amulet, and Ring. One item fits each slot; weapons keep their existing
+Main Hand system. Gear purchases use the shop and unequipped gear can be auctioned.
+Equipping locks the character, requires ownership and rank, and is blocked during
+adventures. Base attributes remain permanent; equipped bonuses feed the existing
+stat formulas and snapshot at departure. Gear changes never heal; reducing maximum
+HP clamps current HP. Village rest uses the equipped maximum. Gear is currently
+acquired from the shop or other players, not quest loot tables.

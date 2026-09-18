@@ -10,6 +10,8 @@ from sqlalchemy.orm import Session
 
 from app.auth import current_user, own_adventurer
 from app.database import get_db
+from app.models import Gear, EquippedGear
+from app.gear import serialize as serialize_gear
 from app.models import AuctionListing, Adventurer, User, Weapon, EquippedWeapon, OwnedConsumable, GameEvent
 from app.consumables import grant
 from app.journeys import active_adventure
@@ -23,6 +25,7 @@ class ListingRequest(BaseModel):
     adventurer_id: UUID
     mode: Literal['fixed', 'auction']
     weapon_id: UUID | None = None
+    gear_id: UUID | None = None
     consumable_slug: str | None = Field(default=None, min_length=1, max_length=100)
     quantity: int = Field(default=1, ge=1, le=9999, strict=True)
     price: int = Field(ge=1, le=100000000, strict=True)
@@ -30,10 +33,10 @@ class ListingRequest(BaseModel):
 
     @model_validator(mode='after')
     def valid_item(self):
-        if (self.weapon_id is None) == (self.consumable_slug is None):
-            raise ValueError('Choose one weapon or consumable stack.')
-        if self.weapon_id and self.quantity != 1:
-            raise ValueError('Weapons are listed one at a time.')
+        if sum(value is not None for value in (self.weapon_id, self.gear_id, self.consumable_slug)) != 1:
+            raise ValueError('Choose one weapon, gear item, or consumable stack.')
+        if (self.weapon_id or self.gear_id) and self.quantity != 1:
+            raise ValueError('Equipment is listed one item at a time.')
         return self
 
 
@@ -70,6 +73,8 @@ def deliver(db, listing, hero):
     if item['item_type'] == 'weapon':
         db.add(Weapon(id=UUID(item['id']), adventurer_id=hero.id, name=item['name'],
             weapon_type_slug=item['weapon_type'], base_damage=item['base_damage'], required_rank=item['required_rank']))
+    elif item['item_type'] == 'gear':
+        db.add(Gear(id=UUID(item['id']), adventurer_id=hero.id, definition_slug=item['definition_slug']))
     else:
         grant(db, hero.id, item['slug'], listing.quantity)
 
@@ -137,6 +142,14 @@ def create_listing(payload: ListingRequest, db: Session = Depends(get_db), user:
             raise HTTPException(409, 'Unequip the weapon before listing it.')
         item = {**serialize_weapon(weapon), 'item_type': 'weapon'}
         db.delete(weapon)
+    elif payload.gear_id:
+        gear = db.scalar(select(Gear).where(Gear.id == payload.gear_id).with_for_update(of=Gear))
+        if gear is None or gear.adventurer_id != hero.id:
+            raise HTTPException(409, 'You do not own that gear.')
+        if db.scalar(select(EquippedGear).where(EquippedGear.gear_id == gear.id)):
+            raise HTTPException(409, 'Unequip gear before listing it.')
+        item = serialize_gear(gear)
+        db.delete(gear)
     else:
         stock = db.scalar(select(OwnedConsumable).where(OwnedConsumable.adventurer_id == hero.id,
             OwnedConsumable.consumable_slug == payload.consumable_slug).with_for_update())

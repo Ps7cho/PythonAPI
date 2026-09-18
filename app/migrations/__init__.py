@@ -59,3 +59,8 @@ def migrate(engine):
             from app.migrations.v022_auction_house import upgrade as auction_upgrade
             auction_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('022_auction_house')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='023_equipment'")).first():
+            from app.migrations.v023_equipment import upgrade as gear_upgrade
+            gear_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('023_equipment')"))

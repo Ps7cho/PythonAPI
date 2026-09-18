@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.auth import current_user, own_adventurer
 from app.consumables import DEFINITIONS, grant
 from app.database import get_db
+from app.models import Gear, GearDefinition
 from app.models import Adventurer, Consumable, RankDefinition, User, Weapon, WeaponType
 
 WEAPON_PRICES = {
@@ -39,6 +40,9 @@ router = APIRouter(prefix="/api/shop", tags=["shop"])
 
 def catalog(db: Session):
     return {
+        "gear": [{"item_type": "gear", "slug": g.slug, "name": g.name, "slot": g.slot,
+                  "bonuses": g.bonuses, "price": g.price, "required_rank": g.required_rank}
+                 for g in db.scalars(select(GearDefinition).order_by(GearDefinition.name))],
         "weapons": [{"item_type": "weapon", "slug": weapon.slug, "name": weapon.name,
                      "price": WEAPON_PRICES[weapon.slug], "tags": weapon.tags,
                      "base_damage": 12 + list(WEAPON_PRICES).index(weapon.slug) * 2}
@@ -68,6 +72,12 @@ def purchase(payload: PurchaseRequest, db: Session = Depends(get_db), user: User
     elif payload.item_type == "weapon":
         item = db.get(WeaponType, payload.item_slug)
         price = WEAPON_PRICES.get(payload.item_slug)
+    elif payload.item_type == 'gear':
+        from app.journeys import active_adventure
+        if active_adventure(db, [hero.id]):
+            raise HTTPException(409, 'Return to the village before purchasing gear.')
+        item = db.get(GearDefinition, payload.item_slug)
+        price = item.price if item else None
     else:
         raise HTTPException(422, "Unknown shop category.")
     if item is None or price is None:
@@ -78,6 +88,8 @@ def purchase(payload: PurchaseRequest, db: Session = Depends(get_db), user: User
     hero.gold -= total
     if payload.item_type == "consumable":
         grant(db, hero.id, payload.item_slug, payload.quantity)
+    elif payload.item_type == 'gear':
+        db.add_all([Gear(adventurer_id=hero.id, definition_slug=item.slug) for _ in range(payload.quantity)])
     else:
         rank = db.scalar(select(RankDefinition).where(RankDefinition.slug == "iron"))
         for _ in range(payload.quantity):
