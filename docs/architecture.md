@@ -254,3 +254,16 @@ character action without casting, allowing turn cooldowns to recover. Optional `
 selects a primary target; `target_ids` selects an explicit ordered list. Commands
 cannot supply authoritative damage, weapon stats, or results. Responses return
 saved snapshots and action results. Stale turns and unavailable actions are rejected.
+
+
+## Auction House
+
+Fixed-price listings and timed auctions hold items outside character inventory in
+`auction_listings`. Listing a weapon preserves its ID and stats in escrow JSON;
+consumable lots subtract owned stock. Equipped weapons cannot be listed. Trading
+requires a living character outside an active adventure. Souls are not tradable.
+Gold and items transfer atomically under a listing lock and ordered character locks.
+Highest bids are held in gold; outbids refund immediately. Auctions with bids cannot
+be cancelled. Expiry delivers to the winner and pays the seller, or returns unsold
+items. PostgreSQL workers settle every 15 seconds; market reads and actions also
+settle overdue listings after downtime. Closed rows and game events retain history.

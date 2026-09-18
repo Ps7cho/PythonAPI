@@ -461,3 +461,25 @@ class OrbOutcome(Base):
     essence_slug = Column(String, ForeignKey("essence_definitions.consumable_slug"), primary_key=True, index=True)
     ability_id = Column(UUID(as_uuid=True), ForeignKey("abilities.id"), nullable=False, index=True)
     ability = relationship("Ability", lazy="joined")
+
+
+class AuctionListing(Base):
+    __tablename__ = 'auction_listings'
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    seller_id = Column(UUID(as_uuid=True), ForeignKey('adventurers.id'), nullable=False, index=True)
+    bidder_id = Column(UUID(as_uuid=True), ForeignKey('adventurers.id'), nullable=True)
+    buyer_id = Column(UUID(as_uuid=True), ForeignKey('adventurers.id'), nullable=True)
+    mode = Column(String, nullable=False)
+    status = Column(String, nullable=False, default='open', index=True)
+    item = Column(JSON, nullable=False)
+    quantity = Column(Integer, nullable=False)
+    price = Column(Integer, nullable=False)
+    bid = Column(Integer, nullable=False, default=0)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    expires_at = Column(DateTime, nullable=False, index=True)
+    closed_at = Column(DateTime, nullable=True)
+    __table_args__ = (
+        CheckConstraint("mode IN ('fixed', 'auction')"),
+        CheckConstraint("status IN ('open', 'sold', 'cancelled', 'expired')"),
+        CheckConstraint('quantity > 0 AND price > 0 AND bid >= 0'),
+    )

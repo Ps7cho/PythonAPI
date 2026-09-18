@@ -54,3 +54,8 @@ def migrate(engine):
         if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='021_orb_essence_pool'")).first():
             orb_essence_pool_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('021_orb_essence_pool')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='022_auction_house'")).first():
+            from app.migrations.v022_auction_house import upgrade as auction_upgrade
+            auction_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('022_auction_house')"))

@@ -29,6 +29,10 @@ def grant_starter_weapon(db, hero):
     """Grant only to characters with no weapon inventory; never re-equip an existing weapon."""
     if db.scalar(select(Weapon.id).where(Weapon.adventurer_id == hero.id).limit(1)):
         return
+    from app.models import AuctionListing
+    if db.scalar(select(AuctionListing.id).where(AuctionListing.seller_id == hero.id,
+            AuctionListing.item['item_type'].as_string() == 'weapon').limit(1)):
+        return
     weapon = Weapon(adventurer_id=hero.id, weapon_type_slug="sword", name="Training Sword", base_damage=10)
     db.add(weapon)
     db.flush()

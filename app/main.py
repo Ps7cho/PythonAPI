@@ -36,6 +36,7 @@ from app.quest_templates import router as quest_template_router, seed_quest_temp
 from app.enemies import router as enemy_router, seed_enemies, link_legacy_enemies
 from app.loot_types import router as loot_type_router, seed_loot_types
 from app.shop import router as shop_router
+from app.auction_house import router as auction_router
 from app.auth import router as auth_router, current_user, own_adventurer, own_state
 from app.live import router as live_router, lifespan
 from app.catalog_editor import router as catalog_editor_router, editor_catalog
@@ -120,6 +121,7 @@ app.include_router(quest_template_router)
 app.include_router(enemy_router)
 app.include_router(loot_type_router)
 app.include_router(shop_router)
+app.include_router(auction_router)
 app.include_router(auth_router)
 app.include_router(weapon_router)
 app.include_router(party_router)

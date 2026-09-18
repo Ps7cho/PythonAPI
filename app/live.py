@@ -92,15 +92,21 @@ hub = Hub()
 @asynccontextmanager
 async def lifespan(app):
     hub.stop.clear()
+    auction_thread = None
     if engine.dialect.name == 'postgresql':
         hub.thread = threading.Thread(target=hub.listen, daemon=True)
         hub.thread.start()
+        from app.auction_house import expiry_worker
+        auction_thread = threading.Thread(target=expiry_worker, args=(hub.stop,), daemon=True)
+        auction_thread.start()
     else:
         hub.ready.set()
     try:
         yield
     finally:
         hub.stop.set()
+        if auction_thread:
+            await asyncio.to_thread(auction_thread.join, 7)
         if hub.thread:
             await asyncio.to_thread(hub.thread.join, 7)
         hub.ready.clear()
