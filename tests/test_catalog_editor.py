@@ -6,15 +6,15 @@ from fastapi.testclient import TestClient
 from sqlalchemy import select, func
 
 from app.main import app
-from app.config import get_settings
 from app.database import SessionLocal
-from app.models import Ability, GameEvent, QuestTemplate, WeaponDefinition
+from app.models import Ability, GameEvent, QuestTemplate, User, WeaponDefinition
 
 
 @pytest.fixture
-def editor(client, monkeypatch):
-    monkeypatch.setattr(get_settings(), 'catalog_editor_enabled', True)
-    monkeypatch.setattr(get_settings(), 'catalog_editor_usernames', [client.get('/api/auth/me').json()['username']])
+def editor(client):
+    username = client.get('/api/auth/me').json()['username']
+    with SessionLocal.begin() as db:
+        db.scalar(select(User).where(User.username == username)).account_type = 'developer'
     return client
 
 
@@ -26,17 +26,16 @@ def draft(catalog_name, record, **changes):
     return dict(catalog=catalog_name, key=record['key'], values={**deepcopy(record['values']), **changes}, expected_revision=record['revision'])
 
 
-def test_editor_authentication_enable_switch_and_allowlist(editor, monkeypatch):
+def test_editor_requires_developer_account(editor):
     record = catalog(editor)['abilities']['records'][0]
     payload = draft('abilities', record)
     with TestClient(app) as anonymous:
         assert anonymous.post('/api/catalog-editor', json=payload).status_code == 401
-    monkeypatch.setattr(get_settings(), 'catalog_editor_usernames', ['another_designer'])
+    username = editor.get('/api/auth/me').json()['username']
+    with SessionLocal.begin() as db:
+        db.scalar(select(User).where(User.username == username)).account_type = 'player'
     assert editor.post('/api/catalog-editor', json=payload).status_code == 403
     assert editor.get('/api/abilities?inspect=true').json()['editor'] == {'can_edit': False}
-    monkeypatch.setattr(get_settings(), 'catalog_editor_usernames', [])
-    monkeypatch.setattr(get_settings(), 'catalog_editor_enabled', False)
-    assert editor.post('/api/catalog-editor', json=payload).status_code == 403
 
 
 def test_all_seed_definitions_can_be_reviewed_without_mutation(editor):

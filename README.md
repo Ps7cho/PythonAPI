@@ -22,8 +22,7 @@ environment remains one directory above and can also be used with
 - Health Check Path: `/health`.
 - Environment: set `DATABASE_URL` to your Neon connection string with SSL enabled.
   Set `PUBLIC_CLIENT_ORIGINS` to a JSON array of your frontend origins, for example
-  `["https://your-frontend.example"]`. Leave `CATALOG_EDITOR_ENABLED=false` unless
-  you intend to enable catalog authoring.
+  `["https://your-frontend.example"]`.
 
 `.env.example` contains placeholders. Create a local `.env` when needed; on Render,
 configure environment variables in the service dashboard. Startup applies existing
@@ -563,11 +562,9 @@ before/after values without saving. **Save to database** commits the reviewed ed
 New source definitions can be created by copying an existing one and changing its
 key/name; deletion is not offered. **Export JSON** downloads the inspected catalog.
 
-This workspace enables the authoring build with `CATALOG_EDITOR_ENABLED=true` in
-`.env`. Signed-in accounts may edit. Set it to `false` for the player build (the
-code default is disabled). Optionally restrict editing with
-`CATALOG_EDITOR_USERNAMES=["your_username"]`. Restart the server after config changes.
-The API enforces these settings on every save; hiding the menu is not access control.
+Catalog authoring is available only to users whose database `account_type` is
+`developer`. The API enforces this role on every save; hiding the menu is not access
+control. Changing an account's role takes effect on its next request.
 Saved edits create `catalog_edited` events with the author and before/after values.
 Stale edits are rejected; refresh the catalog before reopening the editor.
 

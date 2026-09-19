@@ -1,25 +1,19 @@
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 from app.main import app
+from app.config import get_settings
 from app.database import SessionLocal
 from app.models import User
-from app.config import get_settings
 from app.request_limits import limiter
 
 
-def test_editor_roles_and_global_switch(client, monkeypatch):
-    settings = get_settings()
-    monkeypatch.setattr(settings, 'catalog_editor_enabled', True)
-    monkeypatch.setattr(settings, 'catalog_editor_usernames', [])
+def test_editor_requires_developer_role(client):
     assert client.get('/api/abilities?inspect=true').json()['editor'] == {'can_edit': False}
     assert client.post('/api/catalog-editor', json={'catalog':'abilities','key':{},'values':{}}).status_code == 403
     username = client.get('/api/auth/me').json()['username']
     with SessionLocal.begin() as db:
         db.scalar(select(User).where(User.username == username)).account_type = 'developer'
     assert client.get('/api/abilities?inspect=true').json()['editor']['can_edit']
-    monkeypatch.setattr(settings, 'catalog_editor_enabled', False)
-    assert client.get('/api/abilities?inspect=true').json()['editor'] == {'can_edit': False}
-    assert client.post('/api/catalog-editor', json={'catalog':'abilities','key':{},'values':{}}).status_code == 403
 
 
 def test_login_throttle_does_not_lock_other_source(client):

@@ -14,7 +14,6 @@ from sqlalchemy.orm import Session
 
 from app import models as m
 from app.auth import current_user
-from app.config import get_settings
 from app.database import get_db
 
 CATALOGS = {
@@ -36,14 +35,7 @@ ENUMS = {
 
 
 def allowed(db, user):
-    # The global switch precedes both explicit authorization paths.
-    if not get_settings().catalog_editor_enabled:
-        return False
-    if getattr(user, 'account_type', 'player') == 'developer':
-        return True
-    username = db.scalar(select(m.LoginAccount.username).where(m.LoginAccount.user_id == user.id))
-    names = {s.lower() for s in get_settings().catalog_editor_usernames}
-    return bool(username and username.lower() in names)
+    return getattr(user, 'account_type', 'player') == 'developer'
 
 
 def columns(model):
