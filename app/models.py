@@ -14,6 +14,7 @@ class User(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     email = Column(String, unique=True, nullable=False, index=True)
     username = Column(String, nullable=False, index=True)
+    account_type = Column(String(20), nullable=False, default="player", server_default="player")
     account_info = Column(JSON, nullable=False, default=dict)
     statistics = Column(JSON, nullable=False, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)

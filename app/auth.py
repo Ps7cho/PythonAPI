@@ -80,7 +80,8 @@ def issue_session(db, user, response, request):
         response.set_cookie(COOKIE, token, max_age=SESSION_SECONDS, httponly=True,
                             secure=request.url.scheme == "https", samesite="strict")
     response.headers["Cache-Control"] = "no-store"
-    return {"user": {"id": str(user.id), "username": user.username, "statistics": user.statistics or {}},
+    return {"user": {"id": str(user.id), "username": user.username, "account_type": user.account_type,
+                      "statistics": user.statistics or {}},
             "access_token": token, "token_type": "bearer", "expires_in": SESSION_SECONDS}
 
 
@@ -88,7 +89,8 @@ def issue_session(db, user, response, request):
 def register(payload: Credentials, response: Response, request: Request, db: Session = Depends(get_db)):
     same_origin(request, public_login=True)
     user_id = uuid4()
-    user = User(id=user_id, username=payload.username, email=f"{user_id}@accounts.invalid")
+    user = User(id=user_id, username=payload.username, email=f"{user_id}@accounts.invalid",
+                account_type="player")
     password_hash = hasher.hash(payload.password)
     try:
         db.add(user)
@@ -130,13 +132,15 @@ def login(payload: Credentials, response: Response, request: Request, db: Sessio
 @router.get("/me")
 def me(response: Response, user: User = Depends(current_user)):
     response.headers["Cache-Control"] = "no-store"
-    return {"id": str(user.id), "username": user.username, "statistics": user.statistics or {}}
+    return {"id": str(user.id), "username": user.username, "account_type": user.account_type,
+            "statistics": user.statistics or {}}
 
 
 @router.get("/account")
 def account(response: Response, user: User = Depends(current_user)):
     response.headers["Cache-Control"] = "no-store"
-    return {"id": str(user.id), "username": user.username, "statistics": user.statistics or {}}
+    return {"id": str(user.id), "username": user.username, "account_type": user.account_type,
+            "statistics": user.statistics or {}}
 
 
 @router.post("/logout", status_code=204)

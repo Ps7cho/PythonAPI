@@ -35,11 +35,16 @@ ENUMS = {
 
 
 def allowed(db, user):
+    # Developer accounts are explicitly authorized by the database role. The
+    # environment switch remains available as a global kill switch for all
+    # other accounts and legacy username allowlists.
+    if getattr(user, 'account_type', 'player') == 'developer':
+        return True
     if not get_settings().catalog_editor_enabled:
         return False
     username = db.scalar(select(m.LoginAccount.username).where(m.LoginAccount.user_id == user.id))
     names = {s.lower() for s in get_settings().catalog_editor_usernames}
-    return bool(username and (not names or username.lower() in names))
+    return bool(username and (getattr(user, 'account_type', 'player') == 'developer' or not names or username.lower() in names))
 
 
 def columns(model):
