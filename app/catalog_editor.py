@@ -20,10 +20,11 @@ from app.database import get_db
 CATALOGS = {
     'abilities': m.Ability, 'quests': m.QuestTemplate, 'enemies': m.Enemy,
     'enemy_abilities': m.EnemyAbility, 'enemy_weapons': m.EnemyWeapon,
-    'weapon_types': m.WeaponType, 'consumables': m.Consumable,
+    'weapon_types': m.WeaponType, 'weapon_definitions': m.WeaponDefinition, 'consumables': m.Consumable,
     'essences': m.EssenceDefinition, 'orb_outcomes': m.OrbOutcome,
     'afflictions': m.StatusEffect, 'entity_types': m.EntityType,
     'ranks': m.RankDefinition, 'rest_policies': m.RestPolicy, 'loot_types': m.LootType,
+    'gear_definitions': m.GearDefinition,
 }
 ENUMS = {
     ('abilities', 'effect_type'): ['damage', 'guard', 'heal', 'buff', 'shield', 'cleanse', 'evade', 'affliction'],
@@ -179,6 +180,8 @@ def validate_definition(db, row):
         number('weight', 1, 10000); number('priority', 0, 10000)
     elif isinstance(row, m.WeaponType):
         strings(row.tags, 'tags')
+    elif isinstance(row, m.WeaponDefinition):
+        number('base_damage', 1, 1000)
     elif isinstance(row, m.EntityType):
         require(isinstance(row.status_resistances, dict), 'Resistances must be an object.')
         for slug, value in row.status_resistances.items():

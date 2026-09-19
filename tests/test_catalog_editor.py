@@ -8,7 +8,7 @@ from sqlalchemy import select, func
 from app.main import app
 from app.config import get_settings
 from app.database import SessionLocal
-from app.models import Ability, GameEvent
+from app.models import Ability, GameEvent, QuestTemplate, WeaponDefinition
 
 
 @pytest.fixture
@@ -111,3 +111,33 @@ def test_create_copy_conflict_and_new_reference(editor):
         with SessionLocal.begin() as db:
             row = db.get(Ability, ability_id)
             if row: db.delete(row)
+
+
+def test_weapon_blueprint_can_be_created_and_deployed_to_quest(editor):
+    catalogs = catalog(editor)
+    weapon = dict(slug='designer-test-blade', name='Designer Test Blade', weapon_type_slug='sword',
+                  base_damage=17, required_rank='iron')
+    create = dict(catalog='weapon_definitions', key={'slug': weapon['slug']}, values=weapon,
+                  create=True, expected_revision=None)
+    quest = next(r for r in catalogs['quests']['records']
+                 if r['values'].get('journey', {}).get('encounter_groups', {}).get('loot_tiers'))
+    original = deepcopy(quest['values'])
+    paired = deepcopy(original)
+    paired['journey']['encounter_groups']['loot_tiers'][0]['drops'].append(
+        {'name': weapon['name'], 'weapon_type_slug': weapon['weapon_type_slug'],
+         'base_damage': weapon['base_damage'], 'weight': 1})
+    try:
+        assert editor.post('/api/catalog-editor', json={**create, 'validate_only': True}).status_code == 200
+        assert editor.post('/api/catalog-editor', json=create).status_code == 200
+        deploy = draft('quests', quest, journey=paired['journey'])
+        assert editor.post('/api/catalog-editor', json={**deploy, 'validate_only': True}).status_code == 200
+        assert editor.post('/api/catalog-editor', json=deploy).status_code == 200
+        with SessionLocal() as db:
+            assert db.get(WeaponDefinition, weapon['slug']).base_damage == 17
+            stored = db.get(QuestTemplate, quest['key']['slug']).journey
+            assert any(d.get('name') == weapon['name'] for d in stored['encounter_groups']['loot_tiers'][0]['drops'])
+    finally:
+        with SessionLocal.begin() as db:
+            row = db.get(WeaponDefinition, weapon['slug'])
+            if row: db.delete(row)
+            db.get(QuestTemplate, quest['key']['slug']).journey = original['journey']

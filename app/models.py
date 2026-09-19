@@ -358,6 +358,17 @@ class WeaponType(Base):
     tags = Column(JSON, nullable=False, default=list)
 
 
+class WeaponDefinition(Base):
+    """Reusable weapon blueprint which can be assigned to quest loot tables."""
+    __tablename__ = "weapon_definitions"
+    slug = Column(String, primary_key=True)
+    name = Column(String, nullable=False, unique=True)
+    weapon_type_slug = Column(String, ForeignKey("weapon_types.slug"), nullable=False)
+    base_damage = Column(Integer, nullable=False)
+    required_rank = Column(String, ForeignKey("rank_definitions.slug"), nullable=False, default="iron")
+    weapon_type = relationship("WeaponType")
+
+
 class Weapon(Base):
     required_rank = Column(String, ForeignKey("rank_definitions.slug"), nullable=False, default="iron")
     __tablename__ = "weapons"
