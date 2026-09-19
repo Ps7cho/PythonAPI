@@ -229,6 +229,20 @@ rosters cannot grow during active adventures.
 
 ## API Conventions
 
+Request bodies are capped before JSON parsing: 4 KiB for login, registration,
+and character creation; 1 MiB for other writes. Authentication throttles run
+before password hashing: five registration attempts per source per hour,
+30 login attempts per source per minute, and five per source/username pair per
+minute. Throttles return 429 with Retry-After; failed passwords no longer lock
+the username globally. These bounded counters are process-local and reset on
+restart; multi-worker deployments need shared proxy/gateway limits and trusted
+proxy configuration for client addresses. Forwarded headers are not read by the
+application limiter. Character creation allows ten attempts per account per
+minute and defaults to 20 total characters per account (including fallen heroes),
+configurable with MAX_CHARACTERS_PER_ACCOUNT. PostgreSQL locks the owning user
+while checking the quota and creating the character and starter inventory in
+one transaction.
+
 The deployment folder contains the Python backend only. Frontend assets are hosted
 separately; bundled page/asset routes return 404 when those files are absent.
 Cross-origin clients use the configured `PUBLIC_CLIENT_ORIGINS` allowlist.
@@ -245,7 +259,9 @@ The settings designer exposes source records through authenticated catalog inspe
 `POST /api/catalog-editor` validates edits using gameplay schemas and references,
 locks existing records, rejects stale revisions, and commits an audit GameEvent
 with each change. Validation-only requests roll back. A server configuration flag
-enables authoring (disabled by default), with an optional username allowlist.
+enables authoring (disabled by default) for developer accounts or explicitly
+allowlisted usernames. An empty allowlist grants no access, and the disable
+switch applies to developers too.
 Edits change live catalog definitions; existing encounter/raid snapshots remain saved.
 
 Combat commands include `actor_id`, `expected_turn`, and `ability_id`. Legacy

@@ -14,6 +14,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.config import get_settings
 from app.models import Adventurer, LoginAccount, LoginSession, User
+from app.request_limits import limiter, source
 
 
 router = APIRouter(prefix="/api/auth", tags=["authentication"])
@@ -88,6 +89,7 @@ def issue_session(db, user, response, request):
 @router.post("/register", status_code=201)
 def register(payload: Credentials, response: Response, request: Request, db: Session = Depends(get_db)):
     same_origin(request, public_login=True)
+    limiter.hit(('register', source(request)), 5, 3600)
     user_id = uuid4()
     user = User(id=user_id, username=payload.username, email=f"{user_id}@accounts.invalid",
                 account_type="player")
@@ -106,19 +108,12 @@ def register(payload: Credentials, response: Response, request: Request, db: Ses
 @router.post("/login")
 def login(payload: Credentials, response: Response, request: Request, db: Session = Depends(get_db)):
     same_origin(request, public_login=True)
+    limiter.hit(('login-source', source(request)), 30, 60)
+    limiter.hit(('login-account-source', source(request), payload.username), 5, 60)
     account = db.scalar(select(LoginAccount).where(LoginAccount.username == payload.username).with_for_update())
-    now = datetime.utcnow()
-    if account and account.locked_until and account.locked_until > now:
-        raise HTTPException(429, "Too many attempts. Try again in five minutes.")
     try:
         hasher.verify(account.password_hash if account else dummy_hash, payload.password)
     except VerificationError:
-        if account:
-            account.failed_attempts += 1
-            if account.failed_attempts >= 5:
-                account.locked_until = now + timedelta(minutes=5)
-                account.failed_attempts = 0
-            db.commit()
         raise HTTPException(401, "Invalid username or password.")
     if account is None:
         raise HTTPException(401, "Invalid username or password.")

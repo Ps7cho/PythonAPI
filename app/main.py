@@ -16,7 +16,8 @@ from app.database import Base, engine, ensure_ability_columns, ensure_adventurer
 from app.game_service import GameService, InvalidStateVersionError
 from app.models import Ability, Adventurer, AdventurerAbility, Encounter, QuestRun, GameEvent, GameState, Inventory, PartyMember, User  # noqa: F401
 from app.journeys import village_rest, active_adventure
-from sqlalchemy import select
+from sqlalchemy import select, func
+from app.request_limits import limiter, RequestLimits
 from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from app.migrations import migrate
 from app.contracts import router as contract_router, soul_inventory
@@ -113,6 +114,7 @@ app = FastAPI(
     description="Server-side game logic with event sourcing patterns and Postgres persistence.",
 )
 
+app.add_middleware(RequestLimits)
 app.add_middleware(CORSMiddleware, allow_origins=get_settings().public_client_origins,
                    allow_credentials=False, allow_methods=["GET", "POST"],
                    allow_headers=["Authorization", "Content-Type", "X-Client-Auth"])
@@ -182,8 +184,13 @@ def list_abilities(request: Request, inspect: bool = False, db: Session = Depend
 
 @app.post("/api/adventurers")
 def create_adventurer(payload: dict, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    limiter.hit(('characters', str(user.id)), 10, 60)
+    db.scalar(select(User).where(User.id == user.id).with_for_update())
+    count = db.scalar(select(func.count()).select_from(Adventurer).where(Adventurer.owner == user.id))
+    if count >= get_settings().max_characters_per_account:
+        raise HTTPException(409, 'Character limit reached for this account.')
     name = str(payload.get("name", "")).strip()
-    if not name:
+    if not name or len(name) > 80:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Adventurer name is required.")
 
     attributes = generate_attribute_budget()
@@ -198,13 +205,13 @@ def create_adventurer(payload: dict, db: Session = Depends(get_db), user: User =
         owner=user.id,
     )
     db.add(adventurer)
-    db.commit()
+    db.flush()
     db.refresh(adventurer)
 
     inventory = Inventory(adventurer_id=adventurer.id, items=[])
     db.add(inventory)
     grant_starter_weapon(db, adventurer)
-    db.commit()
+    db.flush()
 
     default_abilities = db.query(Ability).filter(Ability.starter.is_(True)).order_by(Ability.name.asc()).all()
     for ability in default_abilities:

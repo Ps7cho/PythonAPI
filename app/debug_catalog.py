@@ -31,7 +31,9 @@ def gameplay_catalog(db, abilities):
     starter_ids = {str(value) for value in db.scalars(select(models.Ability.id).where(models.Ability.starter.is_(True)))}
     abilities = [dict(ability, starter=ability['id'] in starter_ids) for ability in abilities]
     quests = read_templates(db, db.scalars(select(models.QuestTemplate).order_by(models.QuestTemplate.name)).all())
-    regions = sorted({q['region'] for q in quests if q.get('region')})
+    villages = [dict(row) for row in db.execute(select(models.Village.__table__.columns).order_by(models.Village.slug)).mappings()]
+    shops = [dict(row) for row in db.execute(select(models.Shop.__table__.columns).order_by(models.Shop.slug)).mappings()]
+    shop_tables = [dict(row) for row in db.execute(select(models.ShopTable.__table__.columns).order_by(models.ShopTable.slug)).mappings()]
     from app.shop import catalog as shop_catalog
     stock = shop_catalog(db)
     result.update(
@@ -40,9 +42,9 @@ def gameplay_catalog(db, abilities):
         orb_outcomes=options(db),
         afflictions=[definition(row) for row in db.scalars(select(models.StatusEffect).order_by(models.StatusEffect.slug))],
         quests=quests,
-        villages=[{'slug': r.lower().replace(' ', '-'), 'name': r, 'region': r, 'quest_count': sum(q.get('region') == r for q in quests)} for r in regions],
-        shops=[{'slug': r.lower().replace(' ', '-') + '-market', 'name': r + ' Market', 'village_slug': r.lower().replace(' ', '-'), 'categories': list(stock)} for r in regions],
-        shop_tables=[{'slug': c + '-stock', 'name': c.title() + ' Stock', 'shop_category': c, 'items': items} for c, items in stock.items()],
+        villages=villages,
+        shops=shops,
+        shop_tables=shop_tables,
         # Preserve source rules separately: raid previews may use saved rotation loot.
         quest_definitions=[dict(slug=row.slug, name=row.name, journey=row.journey)
                            for row in db.scalars(select(models.QuestTemplate).order_by(models.QuestTemplate.name))],

@@ -69,3 +69,8 @@ def migrate(engine):
             from app.migrations.v024_developer_accounts import upgrade as developer_account_upgrade
             developer_account_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('024_developer_accounts')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='025_world_shops'")).first():
+            from app.migrations.v025_world_shops import upgrade as world_shops_upgrade
+            world_shops_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('025_world_shops')"))

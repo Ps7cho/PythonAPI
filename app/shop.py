@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from app.auth import current_user, own_adventurer
 from app.consumables import DEFINITIONS, grant
 from app.database import get_db
-from app.models import Gear, GearDefinition
+from app.models import Gear, GearDefinition, ShopTable, Shop, Village
 from app.models import Adventurer, Consumable, RankDefinition, User, Weapon, WeaponType
 
 WEAPON_PRICES = {
@@ -39,6 +39,9 @@ router = APIRouter(prefix="/api/shop", tags=["shop"])
 
 
 def catalog(db: Session):
+    tables = list(db.scalars(select(ShopTable).where(ShopTable.shop_slug == 'mosswood-market').order_by(ShopTable.category)))
+    if tables:
+        return {table.category: table.items for table in tables}
     return {
         "gear": [{"item_type": "gear", "slug": g.slug, "name": g.name, "slot": g.slot,
                   "bonuses": g.bonuses, "price": g.price, "required_rank": g.required_rank}
@@ -56,6 +59,20 @@ def catalog(db: Session):
 @router.get("")
 def shop_catalog(db: Session = Depends(get_db), user: User = Depends(current_user)):
     return catalog(db)
+
+
+@router.get("/villages")
+def village_catalog(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    villages = []
+    for village in db.scalars(select(Village).order_by(Village.name)):
+        shops = []
+        for shop in db.scalars(select(Shop).where(Shop.village_slug == village.slug).order_by(Shop.name)):
+            tables = db.scalars(select(ShopTable).where(ShopTable.shop_slug == shop.slug).order_by(ShopTable.category))
+            shops.append({'slug': shop.slug, 'name': shop.name, 'description': shop.description,
+                          'tables': [{'slug': table.slug, 'category': table.category, 'items': table.items} for table in tables]})
+        villages.append({'slug': village.slug, 'name': village.name, 'region': village.region,
+                         'description': village.description, 'shops': shops})
+    return villages
 
 
 @router.post("/purchase")

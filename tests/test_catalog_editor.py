@@ -14,7 +14,7 @@ from app.models import Ability, GameEvent, QuestTemplate, WeaponDefinition
 @pytest.fixture
 def editor(client, monkeypatch):
     monkeypatch.setattr(get_settings(), 'catalog_editor_enabled', True)
-    monkeypatch.setattr(get_settings(), 'catalog_editor_usernames', [])
+    monkeypatch.setattr(get_settings(), 'catalog_editor_usernames', [client.get('/api/auth/me').json()['username']])
     return client
 
 

@@ -370,6 +370,32 @@ class WeaponDefinition(Base):
     weapon_type = relationship("WeaponType")
 
 
+class Village(Base):
+    __tablename__ = "villages"
+    slug = Column(String, primary_key=True)
+    name = Column(String, nullable=False, unique=True)
+    region = Column(String, nullable=False)
+    description = Column(String, nullable=False, default="")
+
+
+class Shop(Base):
+    __tablename__ = "shops"
+    slug = Column(String, primary_key=True)
+    village_slug = Column(String, ForeignKey("villages.slug"), nullable=False, index=True)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=False, default="")
+    village = relationship("Village")
+
+
+class ShopTable(Base):
+    __tablename__ = "shop_tables"
+    slug = Column(String, primary_key=True)
+    shop_slug = Column(String, ForeignKey("shops.slug"), nullable=False, index=True)
+    category = Column(String, nullable=False)
+    items = Column(JSON, nullable=False, default=list)
+    shop = relationship("Shop")
+
+
 class Weapon(Base):
     required_rank = Column(String, ForeignKey("rank_definitions.slug"), nullable=False, default="iron")
     __tablename__ = "weapons"

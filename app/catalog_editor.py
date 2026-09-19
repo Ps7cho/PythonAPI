@@ -21,6 +21,7 @@ CATALOGS = {
     'abilities': m.Ability, 'quests': m.QuestTemplate, 'enemies': m.Enemy,
     'enemy_abilities': m.EnemyAbility, 'enemy_weapons': m.EnemyWeapon,
     'weapon_types': m.WeaponType, 'weapon_definitions': m.WeaponDefinition, 'consumables': m.Consumable,
+    'villages': m.Village, 'shops': m.Shop, 'shop_tables': m.ShopTable,
     'essences': m.EssenceDefinition, 'orb_outcomes': m.OrbOutcome,
     'afflictions': m.StatusEffect, 'entity_types': m.EntityType,
     'ranks': m.RankDefinition, 'rest_policies': m.RestPolicy, 'loot_types': m.LootType,
@@ -35,16 +36,14 @@ ENUMS = {
 
 
 def allowed(db, user):
-    # Developer accounts are explicitly authorized by the database role. The
-    # environment switch remains available as a global kill switch for all
-    # other accounts and legacy username allowlists.
-    if getattr(user, 'account_type', 'player') == 'developer':
-        return True
+    # The global switch precedes both explicit authorization paths.
     if not get_settings().catalog_editor_enabled:
         return False
+    if getattr(user, 'account_type', 'player') == 'developer':
+        return True
     username = db.scalar(select(m.LoginAccount.username).where(m.LoginAccount.user_id == user.id))
     names = {s.lower() for s in get_settings().catalog_editor_usernames}
-    return bool(username and (getattr(user, 'account_type', 'player') == 'developer' or not names or username.lower() in names))
+    return bool(username and username.lower() in names)
 
 
 def columns(model):

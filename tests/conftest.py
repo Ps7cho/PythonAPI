@@ -25,6 +25,19 @@ with SessionLocal.begin() as db:
 
 
 @pytest.fixture
+def reset_limits():
+    from app.request_limits import limiter
+    limiter.clear()
+    yield
+    limiter.clear()
+
+
+@pytest.fixture(autouse=True)
+def isolated_request_limits(reset_limits):
+    pass
+
+
+@pytest.fixture
 def client(monkeypatch):
     # Neutral attributes keep existing fixed-damage regression scenarios meaningful.
     # Attribute integration tests replace this generator with explicit real builds.
