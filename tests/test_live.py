@@ -111,6 +111,7 @@ def test_village_updates_are_private_and_follow_party_changes(client, monkeypatc
         for stream in (first, second):
             data = stream.receive_json()['data']
             assert len(data['parties'][0]['members']) == 2
+            assert all(member['is_online'] for member in data['parties'][0]['members'])
             assert 'invite' not in data['parties'][0]
         selected = client.post(path + '/selection', headers=leader, json={'encounter_count': 3}).json()
         for stream in (first, second):

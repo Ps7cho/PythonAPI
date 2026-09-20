@@ -54,6 +54,10 @@ class Hub:
             except RuntimeError:
                 pass  # A disconnected subscriber's loop may already be closed.
 
+    def has_subscribers(self, topic):
+        with self.lock:
+            return bool(self.clients.get(topic))
+
     def listen(self):
         url = make_url(get_settings().database_url)
         host = url.host or ''
@@ -87,6 +91,20 @@ class Hub:
 
 
 hub = Hub()
+
+
+def publish_presence(user_id):
+    """Refresh village snapshots for players who share a party with this user."""
+    with SessionLocal() as db:
+        party_ids = select(PartyMember.party_id).join(
+            Adventurer, Adventurer.id == PartyMember.adventurer_id
+        ).where(Adventurer.owner == user_id)
+        owners = set(db.scalars(select(Adventurer.owner).join(
+            PartyMember, PartyMember.adventurer_id == Adventurer.id
+        ).where(PartyMember.party_id.in_(party_ids))))
+    owners.add(user_id)
+    for owner in owners:
+        hub.publish('village:' + str(owner))
 
 
 @asynccontextmanager
@@ -254,6 +272,8 @@ async def stream_state(ws, snapshot_for, message_type, identify=None):
             raise PermissionError()
         topic, _ = await asyncio.to_thread(identify or snapshot_for, token)
         subscriber = hub.subscribe(topic)
+        if message_type == 'village' and topic.startswith('village:'):
+            await asyncio.to_thread(publish_presence, UUID(topic.split(':', 1)[1]))
         if not await asyncio.to_thread(hub.ready.wait, 8):
             await ws.close(code=1013)
             return
@@ -280,3 +300,5 @@ async def stream_state(ws, snapshot_for, message_type, identify=None):
     finally:
         if subscriber:
             hub.unsubscribe(topic, subscriber)
+            if message_type == 'village' and topic and topic.startswith('village:'):
+                await asyncio.to_thread(publish_presence, UUID(topic.split(':', 1)[1]))

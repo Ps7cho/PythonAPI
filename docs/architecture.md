@@ -226,6 +226,10 @@ Village long rests require no active adventure and restore living characters onl
 Party invite codes authorize joining a saved roster; leaders start and continue runs,
 and accounts control only their own characters. Invite digests/expiry are persisted;
 rosters cannot grow during active adventures.
+Shared-party relationships form the player-facing friends directory. Party snapshots
+include each member's player identity and whether that account currently has an
+authenticated village WebSocket connection. Presence is ephemeral and process-local;
+connect and disconnect events refresh the village snapshots of shared party members.
 
 ## API Conventions
 

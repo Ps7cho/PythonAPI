@@ -96,6 +96,9 @@ def test_roster_readiness_and_targeted_character_changes(client):
     assert not joined['all_ready']
     members = {m['id']: m for m in joined['members']}
     assert members[other]['is_yours'] and not members[hero]['is_yours']
+    assert members[other]['player'].startswith('party_')
+    assert members[other]['owner_id'] != members[hero]['owner_id']
+    assert members[other]['is_online'] is False
     assert members[hero]['is_ready'] and members[other]['is_alive']
     assert members[other]['health'] > 0
     assert client.post(url + '/encounters', headers=leader, json={}).status_code == 409

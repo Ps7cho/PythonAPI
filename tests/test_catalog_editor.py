@@ -7,7 +7,7 @@ from sqlalchemy import select, func
 
 from app.main import app
 from app.database import SessionLocal
-from app.models import Ability, GameEvent, QuestTemplate, User, WeaponDefinition
+from app.models import Ability, EnemyAbility, GameEvent, QuestTemplate, User, WeaponDefinition
 
 
 @pytest.fixture
@@ -110,6 +110,28 @@ def test_create_copy_conflict_and_new_reference(editor):
         with SessionLocal.begin() as db:
             row = db.get(Ability, ability_id)
             if row: db.delete(row)
+
+
+def test_associations_can_be_reviewed_and_removed(editor):
+    assignment = catalog(editor)['enemy_abilities']['records'][0]
+    payload = {**draft('enemy_abilities', assignment), 'remove': True}
+    enemy_slug = assignment['values']['enemy_slug']
+    ability_id = UUID(assignment['values']['ability_id'])
+    try:
+        assert editor.post('/api/catalog-editor', json={**payload, 'validate_only': True}).status_code == 200
+        with SessionLocal() as db:
+            assert db.get(EnemyAbility, (enemy_slug, ability_id)) is not None
+        response = editor.post('/api/catalog-editor', json=payload)
+        assert response.status_code == 200 and response.json()['removed']
+        with SessionLocal() as db:
+            assert db.get(EnemyAbility, (enemy_slug, ability_id)) is None
+        ability = catalog(editor)['abilities']['records'][0]
+        assert editor.post('/api/catalog-editor', json={**draft('abilities', ability), 'remove': True}).status_code == 422
+    finally:
+        with SessionLocal.begin() as db:
+            if db.get(EnemyAbility, (enemy_slug, ability_id)) is None:
+                db.add(EnemyAbility(enemy_slug=enemy_slug, ability_id=ability_id,
+                                    weight=assignment['values']['weight'], priority=assignment['values']['priority']))
 
 
 def test_weapon_blueprint_can_be_created_and_deployed_to_quest(editor):

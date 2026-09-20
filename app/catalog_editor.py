@@ -32,6 +32,7 @@ ENUMS = {
     ('abilities', 'cooldown_type'): ['turn', 'minutes', 'hours'],
     ('consumables', 'effect'): ['heal', 'buff', 'cleanse', 'essence', 'orb'],
 }
+REMOVABLE_ASSOCIATIONS = {'enemy_abilities', 'enemy_weapons', 'orb_outcomes'}
 
 
 def allowed(db, user):
@@ -77,6 +78,7 @@ class Edit(BaseModel):
     values: dict
     expected_revision: str | None = None
     create: bool = False
+    remove: bool = False
     validate_only: bool = False
 
 
@@ -222,6 +224,19 @@ def edit_catalog(edit: Edit, db: Session = Depends(get_db), user: m.User = Depen
         keys = {c.name: parsed[c.name] for c in model.__table__.primary_key}
         require(jsonable_encoder(keys) == edit.key, 'Definition keys cannot change while editing. Use Create a copy instead.')
         row = db.scalar(select(model).where(*(getattr(model, key) == value for key, value in keys.items())).with_for_update().execution_options(populate_existing=True))
+        if edit.remove:
+            require(not edit.create and edit.catalog in REMOVABLE_ASSOCIATIONS, 'Only gameplay associations can be removed.')
+            if row is None: raise HTTPException(404, 'Association no longer exists.')
+            before = values(row)
+            if edit.expected_revision != revision(before):
+                raise HTTPException(409, 'This association changed since you loaded it. Reload before removing it.')
+            if edit.validate_only:
+                db.rollback()
+                return dict(valid=True, record=descriptor(row))
+            db.delete(row)
+            db.add(m.GameEvent(event_type='catalog_edited', payload=dict(user_id=str(user.id), catalog=edit.catalog, key=edit.key, before=before, after=None)))
+            db.commit()
+            return dict(saved=True, removed=True, key=edit.key)
         if edit.create:
             if row is not None: raise HTTPException(409, 'A definition with this key already exists.')
             row = model(**parsed); before = None; db.add(row)

@@ -66,6 +66,7 @@ def require_idle(db, party):
 
 
 def view(db, party, user, runs=None, plans=None):
+    from app.live import hub
     plan = plans.get(party.id) if plans is not None else db.get(PartyPlan, party.id)
     run = runs.get(party.id) if runs is not None else db.scalar(select(QuestRun).where(QuestRun.party_id == party.id,
                                          QuestRun.status.in_(["active", "awaiting_continue"])).limit(1))
@@ -76,6 +77,8 @@ def view(db, party, user, runs=None, plans=None):
         "members": [{"id": str(m.adventurer_id), "name": m.adventurer.name,
              "is_ready": bool(plan and m.is_ready), "is_leader": m.adventurer_id == party.leader,
              "is_yours": m.adventurer.owner == user.id,
+             "owner_id": str(m.adventurer.owner), "player": m.adventurer.owner_user.username,
+             "is_online": hub.has_subscribers('village:' + str(m.adventurer.owner)),
              "health": m.adventurer.health, "is_alive": m.adventurer.is_alive}
                     for m in party.members], "max_members": MAX_MEMBERS,
         "selection": plan.selection if plan else None,
@@ -103,7 +106,8 @@ def my_parties(response: Response, db: Session = Depends(get_db), user: User = D
     rows = db.scalars(select(Party).join(PartyMember).join(Adventurer, Adventurer.id == PartyMember.adventurer_id)
                       .where(Adventurer.owner == user.id).distinct().order_by(Party.created_at.desc())
                       .options(selectinload(Party.leader_adventurer),
-                               selectinload(Party.members).joinedload(PartyMember.adventurer))).all()
+                               selectinload(Party.members).joinedload(PartyMember.adventurer)
+                               .joinedload(Adventurer.owner_user))).all()
     runs = {run.party_id: run for run in db.scalars(select(QuestRun).where(
         QuestRun.party_id.in_([party.id for party in rows]),
         QuestRun.status.in_(['active', 'awaiting_continue'])))} if rows else {}
