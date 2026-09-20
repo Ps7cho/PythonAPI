@@ -33,14 +33,15 @@ def test_custom_enemy_uses_database_priority_cooldown_and_snapshot(client, reque
     encounter = client.post('/api/encounters', json={'adventurer_ids': [h['id'] for h in heroes], 'enemy_slug': slug}).json()
     with SessionLocal.begin() as db:
         db.get(Ability, heavy_id).damage_multiplier = 9
-    for turn, expected_slug, damage in [(1, slug + '-heavy', 12), (2, slug + '-basic', 4)]:
+    for turn, expected_slug, damage in [(1, slug + '-heavy', 6), (2, slug + '-basic', 3)]:
         for hero in heroes:
             response = client.post('/api/encounters/' + encounter['id'] + '/actions', json={
                 'actor_id': hero['id'], 'expected_turn': turn, 'action': 'guard'})
             assert response.status_code == 200, response.text
         results = response.json()['action_results'][1:]
         assert len(results) == 2
-        assert all(r['ability'] == expected_slug and r['amount'] == damage for r in results)
+        assert [r['ability'] for r in results] == [expected_slug, expected_slug]
+        assert [r['amount'] for r in results] == [damage, damage]
 
 
 def test_renamed_player_ability_uses_stable_alias_and_scaled_power(client):

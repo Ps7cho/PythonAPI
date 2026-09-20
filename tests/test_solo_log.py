@@ -25,6 +25,6 @@ def test_log_survives_reads_and_includes_guard_and_enemy_damage(client):
     result = client.post(url+'/actions', json={'actor_id': hero['id'], 'expected_turn': 1, 'action': 'guard'}).json()
     log = result['combat_log']
     assert len(log) == 1 and log[0]['turn'] == 1
-    assert any('blocking the next 4' in message for message in log[0]['messages'])
-    assert any('Guard blocks 4' in message for message in log[0]['messages'])
+    assert any('reducing incoming direct damage by 60%' in message for message in log[0]['messages'])
+    assert any('Guard reduces damage by 60%' in message for message in log[0]['messages'])
     assert client.get(url).json()['combat_log'] == log

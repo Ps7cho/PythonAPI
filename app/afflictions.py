@@ -42,14 +42,14 @@ def definition(row):
             **deepcopy(row.rules or {})}
 
 
-def resolve_operations(ability):
+def resolve_operations(ability, db=None):
     from sqlalchemy.orm import object_session
     from app.models import StatusEffect
     from app.combat import InvalidCombatAction
     operations = deepcopy(ability.affliction_ops or [])
     if len(operations) > 32:
         raise InvalidCombatAction('An ability supports at most 32 affliction instructions.')
-    db = object_session(ability)
+    db = db if db is not None else object_session(ability)
     for operation in operations:
         slug = operation.get('into') if operation.get('op') == 'convert' else operation.get('affliction') if operation.get('op') == 'apply' else None
         if slug:

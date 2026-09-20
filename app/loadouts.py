@@ -24,16 +24,21 @@ class AbilityUseRequest(BaseModel):
     target_ids: list[UUID] | None = Field(default=None, min_length=1, max_length=100)
 
 
-def executable(ability):
+def executable(ability, ladder=(), level=1):
+    from app.ability_design import rank_values
+    values = rank_values(ability, ladder, level)
     return CombatAbility(slug=str(ability.id), name=ability.name, effect=ability.effect_type,
+                         effect_chain=values['effect_chain'], duration_turns=values['duration_turns'],
+                         guard_percent=values['guard_percent'],
+                         cooldown_unit_seconds={'minutes': 60, 'hours': 3600}.get(ability.cooldown_type, 1),
                          status_effect=definition(ability.status_effect) if ability.status_effect else None,
                          affliction_ops=resolve_operations(ability),
-                         damage=ability.power, catalog_slug=ability.slug, description=ability.description,
-                         damage_multiplier=ability.damage_multiplier,
+                         damage=values['power'], catalog_slug=ability.slug, description=ability.description,
+                         damage_multiplier=values['damage_multiplier'],
                          requires_weapon=ability.requires_weapon, allowed_weapon_tags=list(ability.allowed_weapon_tags or []),
-                         cooldown_turns=ability.cooldown_value if ability.cooldown_type == 'turn' else 0,
-                         cooldown_seconds=ability.cooldown_value * {'minutes': 60, 'hours': 3600}.get(ability.cooldown_type, 0),
-                         target_type=ability.target_type, max_targets=ability.max_targets)
+                         cooldown_turns=values['cooldown_value'] if ability.cooldown_type == 'turn' else 0,
+                         cooldown_seconds=values['cooldown_value'] * {'minutes': 60, 'hours': 3600}.get(ability.cooldown_type, 0),
+                         target_type=ability.target_type, max_targets=values['max_targets'])
 
 
 def equipped(db, hero):
@@ -46,8 +51,9 @@ def equipped(db, hero):
 
 
 def combat_loadout(db, hero):
+    from app.progression import ranks
     known = [entry.ability for entry in hero.ability_inventory if entry.unlocked]
-    return [asdict(executable(a)) for a in sorted(known, key=lambda a: (
+    return [asdict(executable(a, ranks(db), hero.level)) for a in sorted(known, key=lambda a: (
         a.loadout_order if a.loadout_order is not None else 99, a.name))]
 
 

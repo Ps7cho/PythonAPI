@@ -83,6 +83,15 @@ class EntityType(Base):
     status_resistances = Column(JSON, nullable=False, default=dict)
 
 
+class AbilityArchetype(Base):
+    __tablename__ = 'ability_archetypes'
+
+    slug = Column(String, primary_key=True)
+    name = Column(String, nullable=False, unique=True)
+    description = Column(String, nullable=False, default='')
+    definition = Column(JSON, nullable=False, default=dict)
+
+
 class Ability(Base):
     __tablename__ = "abilities"
 
@@ -92,6 +101,11 @@ class Ability(Base):
     status_effect_slug = Column(String, ForeignKey("status_effects.slug"), nullable=True, index=True)
     status_effect = relationship("StatusEffect", lazy="joined")
     affliction_ops = Column(JSON, nullable=False, default=list)
+    archetype_slug = Column(String, ForeignKey('ability_archetypes.slug'), nullable=True)
+    effect_chain = Column(JSON, nullable=False, default=list)
+    rank_upgrades = Column(JSON, nullable=False, default=dict)
+    duration_turns = Column(Integer, nullable=False, default=lambda context: 2 if context.get_current_parameters().get('effect_type') == 'evade' else 3)
+    guard_percent = Column(Integer, nullable=False, default=60)
     damage_multiplier = Column(Float, nullable=True)
     requires_weapon = Column(Boolean, nullable=False, default=False)
     allowed_weapon_tags = Column(JSON, nullable=False, default=list)

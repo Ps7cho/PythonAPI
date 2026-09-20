@@ -30,6 +30,8 @@ from app.schemas import ApplyEventRequest, GameStateCreate, GameStateRead, GameE
 from app.orbs import use as use_orb, options as orb_options
 from app.essences import describe as describe_essences, absorb as absorb_essence, catalog as essence_catalog
 from app.attributes import derived_stats, DESCRIPTIONS as ATTRIBUTE_DESCRIPTIONS
+from app.ability_design import rank_values
+from app.progression import ranks
 from app.consumables import inventory as consumable_inventory
 from app.seed_abilities import seed_abilities, seed_enemy_abilities, seed_status_abilities
 from app import encounter_service
@@ -104,6 +106,11 @@ def serialize_ability(ability: Ability) -> Dict[str, Any]:
         "max_targets": ability.max_targets,
         "effect_type": ability.effect_type,
         "power": ability.power,
+        "archetype_slug": ability.archetype_slug,
+        "effect_chain": ability.effect_chain,
+        "rank_upgrades": ability.rank_upgrades,
+        "duration_turns": ability.duration_turns,
+        "guard_percent": ability.guard_percent,
     }
 
 
@@ -348,7 +355,8 @@ def adventurer_details(adventurer_id: uuid.UUID, db: Session = Depends(get_db), 
             "essences": describe_essences(db, hero.id), "essence_limit": 3, "essence_catalog": essence_catalog(db), "orb_options": orb_options(db),
             "skills": [],
             "equipped_ability_ids": [str(a.id) for a in equipped(db, hero)],
-            "abilities": [{**serialize_ability(entry.ability), "unlocked": entry.unlocked}
+            "abilities": [{**serialize_ability(entry.ability), "unlocked": entry.unlocked,
+                           "rank_values": rank_values(entry.ability, ranks(db), hero.level)}
                           for entry in hero.ability_inventory],
             "quest_history": quest_history,
             "active_encounter_id": str(current.id) if current else None}

@@ -125,6 +125,7 @@ def apply_rest(actor, rules):
     before = actor["hp"]
     actor["hp"] = min(actor["max_hp"], before + round(actor["max_hp"] * rules.heal_percent / 100))
     actor["guarding"] = False
+    actor.pop('ability_modifiers', None)
     actor.pop("buff", None)
     actor.pop("shield", None)
     actor.pop("evasion", None)

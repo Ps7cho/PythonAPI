@@ -28,7 +28,7 @@ def plan_moves(participants, enemies, turn, rng_for, now):
                 ability = replace(ability, max_targets=None)
             try:
                 validate_weapon(enemy, ability)
-                targets = select_targets(enemy, ability, participants + enemies)
+                targets = select_targets(enemy, ability, participants + enemies, turn=turn)
                 if any(op.get('op') == 'spread' for op in ability.affliction_ops) and len(targets) < 2:
                     continue
                 if ability.effect == 'heal' and not any(t['hp'] < t['max_hp'] for t in targets):
@@ -56,8 +56,12 @@ def execute_planned(enemy, participants, enemies, turn, rng):
             return []
     if not ids:
         return []
-    targets = select_targets(enemy, ability, participants + enemies, ids)
-    return execute_cast(enemy, ability, targets, turn=turn, rng=rng)
+    from app.ability_design import effective_ability
+    current = effective_ability(enemy, ability, turn)
+    # A mid-round debuff can reduce the announced target count, never add targets.
+    ids = ids[:current.max_targets] if current.max_targets is not None else ids
+    targets = select_targets(enemy, current, participants + enemies, ids)
+    return execute_cast(enemy, ability, targets, turn=turn, rng=rng, combatants=participants + enemies)
 
 
 def preview_moves(participants, enemies, turn, rng_for):

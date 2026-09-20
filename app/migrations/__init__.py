@@ -74,3 +74,13 @@ def migrate(engine):
             from app.migrations.v025_world_shops import upgrade as world_shops_upgrade
             world_shops_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('025_world_shops')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='026_guard_percentage'")).first():
+            from app.migrations.v026_guard_percentage import upgrade as guard_percentage_upgrade
+            guard_percentage_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('026_guard_percentage')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='027_ability_design'")).first():
+            from app.migrations.v027_ability_design import upgrade as ability_design_upgrade
+            ability_design_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('027_ability_design')"))

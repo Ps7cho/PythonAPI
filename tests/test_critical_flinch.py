@@ -26,10 +26,10 @@ def test_formulas_caps_and_probability_boundaries():
 
 def test_critical_and_flinch_shared_damage_mitigation():
     actor, target = fighter('p','a'), fighter('e','b')
-    target.update(guarding=True, guard_power=4)
+    target.update(guarding=True, guard_reduction_percent=60, guard_turn=1)
     target['derived_stats']['damage_reduction_percent'] = 20
     result = execute_action(actor, CombatAbility('hit','Hit',damage=20), target, turn=1, rng=Rolls(0,0))
-    assert result['amount'] == 20  # 20 * 1.5 * .8 - 4
+    assert result['amount'] == 10  # 20 * 1.5 * .8 * .4
     assert result['critical'] and result['flinch'] and target['flinched']
     assert consume_flinch(target,1)['effect'] == 'flinch'
     assert consume_flinch(target,1) is None

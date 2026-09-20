@@ -5,7 +5,8 @@ from app.models import OwnedConsumable
 from app.progression import award_experience, rank_for, validate_rank_entry
 from app.statistics import increment, increment_account, record_kill
 from copy import deepcopy
-from dataclasses import replace
+from dataclasses import replace, asdict
+from app.ability_design import effective_ability
 from random import Random
 from time import time
 from datetime import datetime, timedelta
@@ -69,6 +70,9 @@ def enemy_states(encounter: Encounter) -> list[dict]:
 
 def snapshot(encounter: Encounter) -> dict:
     participants, enemies = prepared_combatants(encounter)
+    for actor in participants:
+        actor['effective_abilities'] = [asdict(effective_ability(actor, CombatAbility(**spec), encounter.turn))
+                                        for spec in actor.get('equipped_abilities', [])]
     intents = preview_moves(participants, enemies, encounter.turn, lambda enemy: combat_rng(encounter, enemy)) if encounter.state == 'player_turn' else {}
     living = [p for p in encounter.participants if p["hp"] > 0]
     plan = encounter.quest_run.quest.encounter_pool or []
@@ -280,6 +284,7 @@ def continue_quest(db: Session, encounter_id: UUID, return_to_village: bool = Fa
             rest_results.append({"actor_id": actor["id"], "healed": healed})
         actor["acted"] = False
         actor["guarding"] = False
+        actor.pop('ability_modifiers', None)
     # Keep the round clock and cooldown deadlines continuous across fights.
     encounter = Encounter(id=UUID(entry["encounter_id"]), quest_run_id=run.id,
                           state="player_turn", turn=previous.turn + 1,
@@ -357,7 +362,7 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
                 raise InvalidCombatAction('That target is already at full health.')
             if item.effect == 'cleanse' and not target.get('statuses'):
                 raise InvalidCombatAction('That target has no statuses to cleanse.')
-            results = execute_cast(actor, ability, targets, turn=encounter.turn, rng=combat_rng(encounter, actor))
+            results = execute_cast(actor, ability, targets, turn=encounter.turn, rng=combat_rng(encounter, actor), combatants=participants + enemies)
         except InvalidCombatAction as exc:
             raise HTTPException(400, str(exc)) from exc
         owned.quantity -= 1
@@ -407,19 +412,20 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
             ability = replace(ability, max_targets=None)
         try:
             ids = [str(i) for i in request.target_ids] if request.target_ids is not None else None
-            targets = select_targets(actor, ability, [*participants, *enemies], ids)
+            targeting = effective_ability(actor, ability, encounter.turn)
+            targets = select_targets(actor, targeting, [*participants, *enemies], ids)
             if request.target_id is not None:
                 # Legacy target_id selects the first target; remaining area targets
                 # are selected by the server from the same legal pool.
-                primary = select_targets(actor, ability, [*participants, *enemies], [str(request.target_id)])[0]
-                pool = select_targets(actor, replace(ability, max_targets=None), [*participants, *enemies])
+                primary = select_targets(actor, targeting, [*participants, *enemies], [str(request.target_id)])[0]
+                pool = select_targets(actor, replace(targeting, max_targets=None), [*participants, *enemies])
                 targets = [primary, *(t for t in pool if t is not primary)]
-                if ability.max_targets is not None:
-                    targets = targets[:ability.max_targets]
+                if targeting.max_targets is not None:
+                    targets = targets[:targeting.max_targets]
         except InvalidCombatAction as exc:
             raise HTTPException(400, str(exc)) from exc
         try:
-            results = execute_cast(actor, ability, targets, turn=encounter.turn, rng=combat_rng(encounter, actor))
+            results = execute_cast(actor, ability, targets, turn=encounter.turn, rng=combat_rng(encounter, actor), combatants=participants + enemies)
         except InvalidCombatAction as exc:
             raise HTTPException(409, str(exc)) from exc
     events = [result["message"] for result in results]

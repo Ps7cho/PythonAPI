@@ -45,16 +45,16 @@ def test_rejections_do_not_mutate_state_and_old_cooldowns_survive():
         execute_action(player, DIRTY_STAB, player, turn=5)
 
 
-def test_guard_is_a_round_pool_and_can_fully_block_a_hit():
+def test_guard_reduces_every_direct_hit_by_sixty_percent_for_the_round():
     player, enemy = fighter('Player', 'adventurers'), fighter('Enemy', 'monsters')
     execute_action(player, GUARD, player, turn=1)
-    first = execute_action(enemy, CombatAbility('small', 'Small hit', damage=2), player, turn=1)
-    second = execute_action(enemy, CombatAbility('large', 'Large hit', damage=3), player, turn=1)
-    assert [first['amount'], second['amount']] == [0, 1]
-    assert player['hp'] == 99
-    assert 'Guard blocks 2' in first['message']
+    first = execute_action(enemy, CombatAbility('first', 'First hit', damage=10), player, turn=1)
+    second = execute_action(enemy, CombatAbility('second', 'Second hit', damage=10), player, turn=1)
+    assert [first['amount'], second['amount']] == [4, 4]
+    assert player['hp'] == 92
+    assert 'Guard reduces damage by 60%' in first['message']
     execute_action(player, GUARD, player, turn=2)
-    assert execute_action(enemy, CombatAbility('small', 'Small hit', damage=2), player, turn=3)['amount'] == 2
+    assert execute_action(enemy, CombatAbility('hit', 'Hit', damage=10), player, turn=3)['amount'] == 10
 
 
 def test_damage_result_reports_actual_hp_loss_and_rejects_dead_target():

@@ -80,11 +80,10 @@ action yet. Migration 017 adds contract and soul tables without changing existin
 inventory. Bulletin changes broadcast to connected village clients after commit;
 there is no bulletin polling timer.
 
-Guard creates a pool of direct-damage block for the current round: 4 plus the
-adventurer's attribute bonus. Hits consume that pool and can be fully blocked;
-damage-over-time bypasses it. Enemy projections use this same remaining pool.
+Guard reduces every direct hit by 60% for the current round. The reduction is not
+consumed by hits; damage-over-time bypasses it. Enemy projections use the same rule.
 `combat_log` in encounter snapshots contains saved turn-numbered messages,
-including guard use, blocked damage and status ticks, shared over WebSockets.
+including guard use, reduced damage and status ticks, shared over WebSockets.
 The combat view shows that history beneath the actions, including after reconnect.
 
 Choose **Play Solo** to stop proposing quests to a selected party; this preference
@@ -240,7 +239,7 @@ Duplicate actions within a round and stale turn numbers return HTTP 409.
 PostgreSQL row locks serialize actions for the same encounter.
 
 Damage and cooldown values come from the equipped database abilities. Enemy HP
-scales with party size. Guard reduces incoming damage by 4 (minimum 1).
+scales with party size. Guard reduces incoming direct damage by 60% (minimum 1).
 Survivors receive 10 gold on victory, once. Health and defeat persist.
 
 Open `/` for the development combat console. It supports selecting a party,
@@ -345,7 +344,7 @@ attack power for nonweapon attacks; otherwise damage uses the absolute `power` v
 attack seeds use multipliers; existing database balance is preserved. Player
 natural attack power currently starts at 10. Weapon attacks use equipped weapon
 damage instead; attribute and proficiency scaling are not implemented.
-Guard's `power` controls damage reduction. Effect interpretation stays in
+Guard applies a fixed 60% direct-damage reduction for its round. Effect interpretation stays in
 `app/combat.py`; the supported effects are damage, guard, heal, buff, and shield.
 Structured multi-effect JSON and additional status rules are future extensions.
 

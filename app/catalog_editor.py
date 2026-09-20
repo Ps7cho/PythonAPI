@@ -17,6 +17,7 @@ from app.auth import current_user
 from app.database import get_db
 
 CATALOGS = {
+    'ability_archetypes': m.AbilityArchetype,
     'abilities': m.Ability, 'quests': m.QuestTemplate, 'enemies': m.Enemy,
     'enemy_abilities': m.EnemyAbility, 'enemy_weapons': m.EnemyWeapon,
     'weapon_types': m.WeaponType, 'weapon_definitions': m.WeaponDefinition, 'consumables': m.Consumable,
@@ -136,6 +137,15 @@ def validate_definition(db, row):
                 require(db.scalar(select(fk.column).where(fk.column == value)) is not None,
                         f'{column.name} references a missing {fk.column.table.name} definition.')
     if isinstance(row, m.Ability):
+        from app.ability_design import validate_chain, validate_upgrades
+        number('duration_turns', 1, 100); number('guard_percent', 0, 100)
+        row.effect_chain = validate_chain(row.effect_chain, row.target_type)
+        row.rank_upgrades = validate_upgrades(row.rank_upgrades, row.effect_chain)
+        for slug in row.rank_upgrades:
+            require(db.get(m.RankDefinition, slug) is not None, 'Unknown upgrade rank.')
+        for step in row.effect_chain:
+            if step.get('ability_slug'):
+                require(db.scalar(select(m.Ability.id).where(m.Ability.slug == step['ability_slug'])) is not None, 'Modifier references an unknown ability slug.')
         number('power', 0, 10000); number('cooldown_value', 0, 10000); number('cost_value', 0, 10000)
         if row.damage_multiplier is not None: number('damage_multiplier', 0, 100)
         if row.max_targets is not None: number('max_targets', 1, 100)
@@ -144,6 +154,20 @@ def validate_definition(db, row):
         for op in row.affliction_ops:
             require(isinstance(op, dict) and db.get(m.StatusEffect, op.get('affliction')) is not None, 'Each operation must reference an existing affliction.')
         resolve_operations(row)
+    elif isinstance(row, m.AbilityArchetype):
+        from app.ability_design import validate_template
+        row.definition = validate_template(row.definition)
+        status_slug = row.definition.get('status_effect_slug')
+        if status_slug:
+            require(isinstance(status_slug, str) and db.get(m.StatusEffect, status_slug) is not None, 'Unknown affliction definition.')
+        for op in row.definition.get('affliction_ops', []):
+            require(isinstance(op, dict) and db.get(m.StatusEffect, op.get('affliction')) is not None, 'Each operation must reference an existing affliction.')
+        resolve_operations(m.Ability(affliction_ops=row.definition.get('affliction_ops', [])), db=db)
+        for slug in row.definition['rank_upgrades']:
+            require(db.get(m.RankDefinition, slug) is not None, 'Unknown upgrade rank.')
+        for step in row.definition['effect_chain']:
+            if step.get('ability_slug'):
+                require(db.scalar(select(m.Ability.id).where(m.Ability.slug == step['ability_slug'])) is not None, 'Modifier references an unknown ability slug.')
     elif isinstance(row, m.Enemy):
         EnemyRead.model_validate(row)
         require(all(type(v) is int and 0 <= v <= 10000 for v in row.attributes.values()), 'Enemy attributes must be nonnegative integers.')

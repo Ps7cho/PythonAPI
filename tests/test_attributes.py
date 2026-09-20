@@ -49,8 +49,8 @@ def test_defense_agility_and_guard_share_mitigation():
     hit = CombatAbility('hit', 'Hit', damage=40)
     assert execute_action(attacker, hit, defender, turn=1)['amount'] == 34
     execute_action(defender, CombatAbility('guard', 'Guard', effect='guard', target_type='self', damage=4), defender, turn=2)
-    assert defender['guard_power'] == 9
-    assert execute_action(attacker, hit, defender, turn=2)['amount'] == 25
+    assert defender['guard_reduction_percent'] == 60
+    assert execute_action(attacker, hit, defender, turn=2)['amount'] == 14
 
 
 def test_luck_vitality_status_ward_combines_with_type_resistance():

@@ -4,9 +4,9 @@ from app.database import SessionLocal
 from app.models import Ability, Enemy, EnemyAbility
 
 STARTER_ABILITIES = [
-    {"name": "Guard", "description": "Reduce incoming damage by 4 this round.",
+    {"name": "Guard", "description": "Reduce incoming direct damage by 60% this round.",
      "ability_type": "defense", "cooldown_type": "turn", "cooldown_value": 0,
-     "cost_type": "None", "cost_value": 0, "target_type": "self", "effect_type": "guard", "power": 4},
+     "cost_type": "None", "cost_value": 0, "target_type": "self", "effect_type": "guard", "power": 60},
     {
         "name": "Strike",
         "description": "A straightforward melee attack that deals reliable damage.",

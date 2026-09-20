@@ -45,7 +45,7 @@ Stats snapshot at departure and carry through the run. Legacy snapshots without
 derived stats keep their old balance; enemy rolled stats remain unchanged.
 Creation starts at derived max HP; allocation increases capacity without healing.
 Village/camp healing uses the applicable max HP. Consumables keep catalog potency.
-Direct mitigation runs before Guard in the shared resolver. DOT wards combine
+Direct mitigation runs before Guard's 60% reduction in the shared resolver. DOT wards combine
 multiplicatively with entity resistances; immunity remains absolute. Passive slot capacities are recorded, but
 passive execution and advanced party roles remain planned, explicitly labeled in UI.
 
@@ -95,6 +95,33 @@ weapon requirements, targeting limits, and turn or timed cooldown settings.
 Learned relationships determine combat skills; equipped slots remain saved favorites. Enemy assignments
 provide priorities and selection weights. `app/loadouts.py` translates definitions
 into executable encounter snapshots.
+
+Worldsmith persists reusable `ability_archetypes` as starting definitions. Applying
+an archetype copies its values into an independent Ability; later template edits
+do not rewrite variants. Abilities store duration, Guard percentage, ordered
+`effect_chain` steps, and sparse `rank_upgrades` keyed by rank slug. Upgrades are
+absolute dial overrides accumulated through the character's rank ladder and
+resolved at departure; active adventure snapshots retain their saved values.
+
+After the primary effect and affliction operations, bounded follow-up steps can
+deal damage, restore HP, grant a named encounter resource, or modify ability
+values. Amounts use a fixed value or a percentage of actual primary damage/results
+or the previous step's result. Triggers test the primary hit, damage, or kill.
+Recipients are self, selected targets, living party, or opponents; split amounts
+divide a single integer budget, with remainder assigned in roster order. Overheal
+is discarded, overkill cannot create extra resources, and dead targets are skipped.
+Follow-up damage goes through the same damage resolver, without reapplying damage
+bonuses or critical multipliers to already-derived amounts. Named resources are
+encounter pools capped at one million; this does not add resource spending rules.
+
+Temporary `ability_modifiers` change primary dials or individual follow-up values
+for subsequent casts, optionally restricted to a stable ability slug. Flat changes
+apply before summed percentage changes and validated bounds. Reapplying the same
+caster/ability/step refreshes it; distinct sources combine. Expiry is an exclusive
+round deadline; transitions and rest clear modifiers. The server exposes effective
+ability values and previews enemy actions using the same modified executor. All
+recipients are part of the atomic cast copy, and only the primary cast charges a
+cooldown. Definitions accept validated data, never executable expressions or loops.
 
 Enemy catalogs include undead, cultists, vermin, amphibians, giants, orcs, eldritch
 creatures, possessed, dragons, plants, beasts, and humanoid roles. Their assigned
