@@ -162,7 +162,8 @@ def issue_session(db, user, response, request):
                             secure=request.url.scheme == "https", samesite="strict")
     response.headers["Cache-Control"] = "no-store"
     return {"user": {"id": str(user.id), "username": user.username, "account_type": user.account_type,
-                      "statistics": user.statistics or {}},
+                      "statistics": user.statistics or {},
+                      "discord_linked": db.scalar(select(DiscordIdentity).where(DiscordIdentity.user_id == user.id)) is not None},
             "access_token": token, "token_type": "bearer", "expires_in": SESSION_SECONDS}
 
 
@@ -177,6 +178,10 @@ def frontend_discord_redirect(settings, token: str, expires_in: int = SESSION_SE
     target = settings.discord_frontend_redirect_uri
     fragment = {"discord_access_token": token, "expires_in": str(expires_in), **values}
     return RedirectResponse(target + "#" + urlencode(fragment), status_code=303)
+
+
+def frontend_discord_status(settings, **values):
+    return RedirectResponse(settings.discord_frontend_redirect_uri + "#" + urlencode(values), status_code=303)
 
 
 @router.post("/register", status_code=201)
@@ -251,6 +256,8 @@ def discord_callback(code: str | None = None, state: str | None = None, error: s
     identity.email = profile.get("email")
     identity.updated_at = datetime.utcnow()
     db.commit()
+    if getattr(settings, "discord_frontend_redirect_uri", None):
+        return frontend_discord_status(settings, discord_linked="1")
     return {"linked": True, "discord_id": identity.discord_id}
 
 
@@ -310,17 +317,19 @@ def unlink_discord(db: Session = Depends(get_db), user: User = Depends(current_u
 
 
 @router.get("/me")
-def me(response: Response, user: User = Depends(current_user)):
+def me(response: Response, db: Session = Depends(get_db), user: User = Depends(current_user)):
     response.headers["Cache-Control"] = "no-store"
     return {"id": str(user.id), "username": user.username, "account_type": user.account_type,
-            "statistics": user.statistics or {}}
+            "statistics": user.statistics or {},
+            "discord_linked": db.scalar(select(DiscordIdentity).where(DiscordIdentity.user_id == user.id)) is not None}
 
 
 @router.get("/account")
-def account(response: Response, user: User = Depends(current_user)):
+def account(response: Response, db: Session = Depends(get_db), user: User = Depends(current_user)):
     response.headers["Cache-Control"] = "no-store"
     return {"id": str(user.id), "username": user.username, "account_type": user.account_type,
-            "statistics": user.statistics or {}}
+            "statistics": user.statistics or {},
+            "discord_linked": db.scalar(select(DiscordIdentity).where(DiscordIdentity.user_id == user.id)) is not None}
 
 
 @router.post("/logout", status_code=204)
