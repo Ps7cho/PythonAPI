@@ -23,6 +23,13 @@ Schema changes use ordered migrations in `app/migrations`, tracked in
 performs the legacy schema bootstrap, pending migrations, and catalog seeding.
 Seeds supply initial content while preserving existing definitions.
 
+## Client Access
+
+The `/api/*` surface supports bearer-token clients from arbitrary origins through
+credentialless CORS. Cookie sessions remain same-origin for mutations; cross-origin
+clients must explicitly request token authentication and never receive a session
+cookie. Non-API routes do not opt into community-client CORS.
+
 ## Progression
 
 XP is lifetime experience. `app/progression.py` computes each level cost as

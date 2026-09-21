@@ -48,12 +48,12 @@ configuration is `config.js` (`apiBaseUrl`, currently `http://127.0.0.1:8001/api
 Serve that folder alone on port 5173; see `D:\Game Assets\FrontEndJS\README.md` for usage and
 request examples. No backend configuration or bundled credentials are included.
 
-For separately hosted sites, set server-side `PUBLIC_CLIENT_ORIGINS` to a JSON
-array of exact allowed origins. Local defaults are `http://127.0.0.1:5173` and
-`http://localhost:5173`. The public client uses user-specific bearer sessions;
-existing same-origin browser sessions remain supported. Cross-origin cookie
-mutations are still rejected. `verify_public_client.py` checks the separate-site
-browser flow against the local API and creates a test account.
+The API accepts bearer-client requests from separately hosted sites regardless of
+their origin. Community clients must send `X-Client-Auth: bearer` when registering
+or logging in; the response is token-only and does not set a browser cookie.
+`PUBLIC_CLIENT_ORIGINS` remains available for explicitly trusted legacy login
+origins. Same-origin browser sessions remain supported, and cross-origin cookie
+mutations are still rejected. CORS headers are emitted only for `/api/*` routes.
 
 A FastAPI application that keeps all game rules and state mutation on the server. The client can submit events, while the server enforces state transitions and stores versioned snapshots in PostgreSQL.
 

@@ -77,9 +77,10 @@ def test_push_both_players_and_reconnect_snapshot(client, monkeypatch):
 
 
 def test_live_rejects_cross_origin_cookie_access(client):
-    with pytest.raises(WebSocketDisconnect):
-        with client.websocket_connect('/api/encounters/' + str(uuid4()) + '/live', headers={'origin': 'https://untrusted.example'}):
-            pass
+    with client.websocket_connect('/api/encounters/' + str(uuid4()) + '/live',
+                                  headers={'origin': 'https://untrusted.example'}) as stream:
+        with pytest.raises(WebSocketDisconnect):
+            stream.receive_json()
 
 
 def test_village_updates_are_private_and_follow_party_changes(client, monkeypatch):

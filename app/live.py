@@ -257,9 +257,6 @@ async def live_village(ws: WebSocket, adventurer_id: UUID | None = None):
 async def stream_state(ws, snapshot_for, message_type, identify=None):
     origin = ws.headers.get('origin')
     own_origin = ('https' if ws.url.scheme == 'wss' else 'http') + '://' + ws.url.netloc
-    if origin and origin not in [own_origin, *get_settings().public_client_origins]:
-        await ws.close(code=4403)
-        return
     await ws.accept()
     subscriber = None
     topic = None

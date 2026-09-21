@@ -119,9 +119,18 @@ app = FastAPI(
     description="Server-side game logic with event sourcing patterns and Postgres persistence.",
 )
 
+class APICORSMiddleware(CORSMiddleware):
+    """Apply community-client CORS headers to the intended API surface only."""
+
+    async def __call__(self, scope, receive, send):
+        if scope.get("type") == "http" and scope.get("path", "").startswith("/api/"):
+            return await super().__call__(scope, receive, send)
+        return await self.app(scope, receive, send)
+
+
 app.add_middleware(RequestLimits)
-app.add_middleware(CORSMiddleware, allow_origins=get_settings().public_client_origins,
-                   allow_credentials=False, allow_methods=["GET", "POST"],
+app.add_middleware(APICORSMiddleware, allow_origins=["*"],
+                   allow_credentials=False, allow_methods=["GET", "POST", "OPTIONS"],
                    allow_headers=["Authorization", "Content-Type", "X-Client-Auth"])
 
 

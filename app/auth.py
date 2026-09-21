@@ -36,6 +36,11 @@ class Credentials(BaseModel):
 
 def same_origin(request: Request, public_login: bool = False):
     origin = request.headers.get("origin")
+    # Community clients authenticate with an explicit bearer-client marker and
+    # receive a token instead of a browser cookie. Their hosting origin is not
+    # part of the server's trust boundary.
+    if public_login and request.headers.get("x-client-auth", "").lower() == "bearer":
+        return
     if public_login and origin in get_settings().public_client_origins:
         return
     if origin and origin != str(request.base_url).rstrip("/"):
