@@ -41,6 +41,29 @@ class LoginSession(Base):
     expires_at = Column(DateTime, nullable=False)
 
 
+class DiscordIdentity(Base):
+    __tablename__ = "discord_identities"
+
+    discord_id = Column(String(32), primary_key=True)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False, unique=True, index=True)
+    username = Column(String(120), nullable=True)
+    email = Column(String(320), nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+
+    user = relationship("User")
+
+
+class DiscordOAuthState(Base):
+    __tablename__ = "discord_oauth_states"
+
+    state = Column(String(128), primary_key=True)
+    purpose = Column(String(20), nullable=False)
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True, index=True)
+    expires_at = Column(DateTime, nullable=False, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+
+
 class Adventurer(Base):
     __tablename__ = "adventurers"
 

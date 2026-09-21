@@ -135,6 +135,11 @@ lock that username for five minutes.
 
 - `POST /api/auth/register` and `/api/auth/login` accept `username` and `password`.
 - `GET /api/auth/me` returns the signed-in user; `POST /api/auth/logout` logs out.
+- Discord account linking and sign-in use `/api/auth/discord/link`,
+  `/api/auth/discord/callback`, `/api/auth/discord/login`, and
+  `/api/auth/discord/login/callback`. Password recovery accepts a verified Discord
+  access token at `POST /api/auth/password/reset-with-discord`; unlinking requires
+  the authenticated account via `DELETE /api/auth/discord/link`.
 - Browser sessions use HttpOnly, SameSite=Strict cookies, Secure when served over HTTPS.
 - API clients can send the returned `access_token` as `Authorization: Bearer <token>`.
 - `GET /api/adventurers` lists your characters. Character creation and encounter actions

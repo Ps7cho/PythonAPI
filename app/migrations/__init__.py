@@ -89,3 +89,8 @@ def migrate(engine):
             from app.migrations.v028_remove_legacy_states import upgrade as remove_legacy_states_upgrade
             remove_legacy_states_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('028_remove_legacy_states')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='029_discord_auth'")).first():
+            from app.migrations.v029_discord_auth import upgrade as discord_auth_upgrade
+            discord_auth_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('029_discord_auth')"))

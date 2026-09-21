@@ -282,7 +282,8 @@ one transaction.
 
 The deployment folder contains the Python backend only. Frontend assets are hosted
 separately; bundled page/asset routes return 404 when those files are absent.
-Cross-origin clients use the configured `PUBLIC_CLIENT_ORIGINS` allowlist.
+Bearer community clients may use the `/api/*` surface from arbitrary origins;
+cookie sessions remain same-origin for mutations.
 
 Player-facing naming uses **Quests** for the overall selection page and **Journeys**
 for the short 2-3 battle category; Epics and Raids retain their names. API paths,
@@ -290,7 +291,9 @@ JSON keys, and the internal `quest` kind remain stable.
 
 Gameplay endpoints use `/api`, JSON, and UUID resource identifiers; catalogs also
 use stable slugs. Authentication accepts session cookies or bearer tokens, and the
-server checks character ownership. Party members can read their shared encounters.
+server checks character ownership. Discord OAuth identities are linked to existing
+accounts and use short-lived, database-backed state records; password recovery
+requires a verified Discord access token. Party members can read their shared encounters.
 
 The settings designer exposes source records through authenticated catalog inspection.
 `POST /api/catalog-editor` validates edits using gameplay schemas and references,
