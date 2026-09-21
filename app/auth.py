@@ -79,6 +79,8 @@ def discord_authorize_url(settings, state: str, redirect_uri: str) -> str:
 def discord_request(url: str, data=None, token: str | None = None):
     body = urlencode(data).encode() if data is not None else None
     headers = {"Accept": "application/json"}
+    if data is not None:
+        headers["Content-Type"] = "application/x-www-form-urlencoded"
     if token:
         headers["Authorization"] = "Bearer " + token
     request = URLRequest(url, data=body, headers=headers, method="POST" if data is not None else "GET")
