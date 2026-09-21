@@ -336,25 +336,10 @@ class Inventory(Base):
     adventurer = relationship("Adventurer", back_populates="inventory")
 
 
-class GameState(Base):
-    __tablename__ = "game_states"
-
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(String, nullable=False, index=True)
-    version = Column(Integer, nullable=False, default=1)
-    payload = Column(JSON, nullable=False, default=dict)
-    updated_at = Column(DateTime, default=datetime.utcnow, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
-
-    events = relationship("GameEvent", back_populates="state", cascade="all, delete-orphan")
-    __table_args__ = (UniqueConstraint("user_id", "version", name="uq_game_state_user_version"),)
-
-
 class GameEvent(Base):
     __tablename__ = "game_events"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    state_id = Column(UUID(as_uuid=True), ForeignKey("game_states.id"), nullable=True, index=True)
     quest_run_id = Column(UUID(as_uuid=True), ForeignKey("quest_runs.id"), nullable=True, index=True)
     event_type = Column(String, nullable=False, index=True)
     payload = Column(JSON, nullable=False, default=dict)
@@ -362,7 +347,6 @@ class GameEvent(Base):
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     applied = Column(Boolean, default=True, nullable=False)
 
-    state = relationship("GameState", back_populates="events")
     quest_run = relationship("QuestRun", back_populates="events")
 
 

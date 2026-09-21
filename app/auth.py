@@ -67,11 +67,6 @@ def own_adventurer(db: Session, adventurer_id: UUID, user: User):
     return hero
 
 
-def own_state(user_id: str, user: User):
-    if user_id != str(user.id):
-        raise HTTPException(403, "This state belongs to another account.")
-
-
 def issue_session(db, user, response, request):
     token = secrets.token_urlsafe(32)
     db.add(LoginSession(token_hash=hashlib.sha256(token.encode()).hexdigest(), user_id=user.id,

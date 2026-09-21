@@ -4,17 +4,16 @@ from app.progression import describe as describe_progression
 import random
 import uuid
 from pathlib import Path
-from typing import Annotated, Any, Dict, List
+from typing import Any, Dict, List
 
-from fastapi import Body, Depends, FastAPI, HTTPException, Query, Request, status
+from fastapi import Body, Depends, FastAPI, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
 from sqlalchemy.orm import Session
 
 from app.database import Base, engine, ensure_ability_columns, ensure_adventurer_columns, ensure_game_event_columns, get_db
-from app.game_service import GameService, InvalidStateVersionError
-from app.models import Ability, Adventurer, AdventurerAbility, Encounter, QuestRun, GameEvent, GameState, Inventory, PartyMember, User  # noqa: F401
+from app.models import Ability, Adventurer, AdventurerAbility, Encounter, QuestRun, Inventory, PartyMember, User  # noqa: F401
 from app.journeys import village_rest, active_adventure
 from sqlalchemy import select, func
 from app.request_limits import limiter, RequestLimits
@@ -26,7 +25,6 @@ from app.parties import router as party_router, require_leader
 from app.weapons import router as weapon_router, seed_weapons, grant_starter_weapon, equipped_weapon, serialize_weapon
 from app.models import Weapon
 from app.loadouts import AbilityUseRequest, LoadoutRequest, equipped, save_loadout
-from app.schemas import ApplyEventRequest, GameStateCreate, GameStateRead, GameEventRead, StateVersionResult
 from app.orbs import use as use_orb, options as orb_options
 from app.essences import describe as describe_essences, absorb as absorb_essence, catalog as essence_catalog
 from app.attributes import derived_stats, DESCRIPTIONS as ATTRIBUTE_DESCRIPTIONS
@@ -41,7 +39,7 @@ from app.loot_types import router as loot_type_router, seed_loot_types
 from app import gear
 from app.shop import router as shop_router
 from app.auction_house import router as auction_router
-from app.auth import router as auth_router, current_user, own_adventurer, own_state
+from app.auth import router as auth_router, current_user, own_adventurer
 from app.live import router as live_router, lifespan
 from app.catalog_editor import router as catalog_editor_router, editor_catalog
 
@@ -116,7 +114,7 @@ def serialize_ability(ability: Ability) -> Dict[str, Any]:
 
 app = FastAPI(
     lifespan=lifespan,
-    title="Game Events and State Version API",
+    title="Game API",
     version="1.0.0",
     description="Server-side game logic with event sourcing patterns and Postgres persistence.",
 )
@@ -385,91 +383,6 @@ def use_ability(adventurer_id: uuid.UUID, payload: AbilityUseRequest, db: Sessio
 @app.get("/health")
 def healthcheck() -> dict:
     return {"status": "ok"}
-
-
-@app.post("/states", response_model=GameStateRead, status_code=status.HTTP_201_CREATED)
-def create_state(payload: GameStateCreate, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    own_state(payload.user_id, user)
-    service = GameService(db)
-    state = service.get_or_create_state(payload.user_id)
-    if state.payload != payload.payload:
-        state.payload = payload.payload
-        state.updated_at = state.updated_at
-        db.commit()
-        db.refresh(state)
-    return state
-
-
-@app.get("/states/{user_id}", response_model=GameStateRead)
-def get_state(user_id: str, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    own_state(user_id, user)
-    service = GameService(db)
-    try:
-        return service.get_state(user_id)
-    except ValueError as exc:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
-
-
-@app.get("/states/{user_id}/history", response_model=list[GameEventRead])
-def get_event_history(user_id: str, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    own_state(user_id, user)
-    service = GameService(db)
-    try:
-        history = service.get_event_history(user_id)
-    except ValueError as exc:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
-    return history
-
-
-@app.post("/states/{user_id}/events", response_model=GameStateRead)
-def apply_event(
-    user_id: str,
-    request: ApplyEventRequest,
-    expected_version: Annotated[int | None, Query()] = None,
-    db: Session = Depends(get_db),
-    user: User = Depends(current_user),
-):
-    own_state(user_id, user)
-    service = GameService(db)
-    try:
-        state = service.apply_event(
-            user_id=user_id,
-            event_type=request.event_type,
-            payload=request.payload,
-            expected_version=expected_version,
-        )
-    except InvalidStateVersionError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail={
-                "message": "State version mismatch.",
-                "expected_version": exc.expected,
-                "actual_version": exc.actual,
-            },
-        ) from exc
-
-    return state
-
-
-@app.get("/states/{user_id}/version", response_model=StateVersionResult)
-def get_state_version(user_id: str, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    own_state(user_id, user)
-    service = GameService(db)
-    try:
-        state = service.get_state(user_id)
-    except ValueError as exc:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
-
-    events = service.get_event_history(user_id)
-    return StateVersionResult(
-        state_id=state.id,
-        user_id=state.user_id,
-        version=state.version,
-        payload=state.payload,
-        event_count=len(events),
-        last_event_type=events[-1].event_type if events else None,
-        updated_at=state.updated_at,
-    )
 
 
 class AttributeAllocation(BaseModel):

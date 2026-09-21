@@ -63,8 +63,6 @@ def test_ownership_and_bearer_access():
         assert second.post('/api/encounters/' + encounter['id'] + '/actions', json={
             'actor_id': hero['id'], 'expected_turn': 1, 'action': 'attack',
         }).status_code == 404
-        assert second.post('/states', json={'user_id': account['user']['id'], 'payload': {}}).status_code == 403
-        assert first.post('/states', json={'user_id': account['user']['id'], 'payload': {}}).status_code == 201
 
 
 def test_failed_login_throttle():

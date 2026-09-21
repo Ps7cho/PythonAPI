@@ -137,8 +137,8 @@ lock that username for five minutes.
 - `GET /api/auth/me` returns the signed-in user; `POST /api/auth/logout` logs out.
 - Browser sessions use HttpOnly, SameSite=Strict cookies, Secure when served over HTTPS.
 - API clients can send the returned `access_token` as `Authorization: Bearer <token>`.
-- `GET /api/adventurers` lists your characters. Character creation, encounter actions,
-  and state endpoints require login. For `/states`, use your account UUID as `user_id`.
+- `GET /api/adventurers` lists your characters. Character creation and encounter actions
+  require login.
 
 Use HTTPS outside local development. Existing test characters remain with their
 original accounts and are not automatically claimable. Encounter creation currently
@@ -244,7 +244,7 @@ Survivors receive 10 gold on victory, once. Health and defeat persist.
 
 Open `/` for the development combat console. It supports selecting a party,
 submitting actions, and loading a saved encounter by ID. Reloading the page resumes
-the last encounter. Generic `/states` endpoints do not drive encounter combat.
+the last encounter.
 
 Run isolated in-memory tests with `.venv\Scripts\python -m pytest` after installing
 `requirements-dev.txt`. Tests create no database files and do not access Neon;
@@ -253,14 +253,6 @@ PostgreSQL concurrency behavior requires a separate integration test.
 Optional browser check: install `playwright` and run
 `.venv\Scripts\python verify_encounter_ui.py --base-url http://127.0.0.1:8001`.
 This uses installed Microsoft Edge and creates one test adventurer in the target database.
-
-## Existing State API
-
-- FastAPI service layer for gameplay endpoints
-- PostgreSQL persistence through SQLAlchemy
-- State version tracking per user
-- Event history stored alongside the latest state
-- Server-side game logic for movement, combat, loot, and XP updates
 
 ## Local setup
 
@@ -293,47 +285,11 @@ This uses installed Microsoft Edge and creates one test adventurer in the target
 
    - http://127.0.0.1:8000/docs
 
-## Example flow
-
-### Create or fetch a state
-
-```http
-POST /states
-{
-  "user_id": "<your-account-uuid>",
-  "payload": {
-    "hp": 100,
-    "inventory": [],
-    "location": "spawn",
-    "xp": 0
-  }
-}
-```
-
-### Apply an event
-
-```http
-POST /states/<your-account-uuid>/events?expected_version=1
-{
-  "event_type": "move",
-  "payload": {
-    "location": "forest"
-  }
-}
-```
-
-### Check the latest version
-
-```http
-GET /states/<your-account-uuid>/version
-```
-
 ## Why this design fits a game backend
 
 - Front ends are thin and can send events instead of owning rules.
 - The server is the source of truth for game logic and validation.
-- Game state can be reconstituted from the latest snapshot and event history.
-- Postgres stores durable state and event data with version checks to prevent stale client updates.
+- Postgres stores durable encounter, quest, and event data.
 
 
 ## Ability catalog and combat

@@ -29,8 +29,6 @@ class UserRead(BaseModel):
 
     class Config:
         from_attributes = True
-
-
 class AdventurerCreate(BaseModel):
     name: str
     level: int = 1
@@ -240,47 +238,3 @@ class InventoryRead(BaseModel):
         from_attributes = True
 
 
-class GameStateCreate(BaseModel):
-    user_id: str
-    payload: Dict[str, Any] = Field(default_factory=dict)
-
-
-class GameStateRead(BaseModel):
-    id: UUID
-    user_id: str
-    version: int
-    payload: Dict[str, Any]
-    created_at: datetime
-    updated_at: datetime
-
-    class Config:
-        from_attributes = True
-
-
-class GameEventRead(BaseModel):
-    id: UUID
-    state_id: Optional[UUID] = None
-    quest_run_id: Optional[UUID] = None
-    event_type: str
-    payload: Dict[str, Any]
-    timestamp: datetime
-    created_at: datetime
-    applied: bool
-
-    class Config:
-        from_attributes = True
-
-
-class ApplyEventRequest(BaseModel):
-    event_type: str
-    payload: Dict[str, Any] = Field(default_factory=dict)
-
-
-class StateVersionResult(BaseModel):
-    state_id: UUID
-    user_id: str
-    version: int
-    payload: Dict[str, Any]
-    event_count: int
-    last_event_type: Optional[str] = None
-    updated_at: datetime

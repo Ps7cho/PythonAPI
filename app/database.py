@@ -92,10 +92,6 @@ def ensure_game_event_columns() -> None:
             conn.execute(text("UPDATE game_events SET timestamp = created_at WHERE timestamp IS NULL"))
             if conn.dialect.name == "postgresql":
                 conn.execute(text("ALTER TABLE game_events ALTER COLUMN timestamp SET NOT NULL"))
-        if not columns["state_id"]["nullable"]:
-            if conn.dialect.name != "postgresql":
-                raise RuntimeError("Legacy SQLite game_events requires migration to allow nullable state_id.")
-            conn.execute(text("ALTER TABLE game_events ALTER COLUMN state_id DROP NOT NULL"))
 
 
 def get_db():

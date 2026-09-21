@@ -84,3 +84,8 @@ def migrate(engine):
             from app.migrations.v027_ability_design import upgrade as ability_design_upgrade
             ability_design_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('027_ability_design')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='028_remove_legacy_states'")).first():
+            from app.migrations.v028_remove_legacy_states import upgrade as remove_legacy_states_upgrade
+            remove_legacy_states_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('028_remove_legacy_states')"))
