@@ -1,9 +1,10 @@
 import hashlib
+import logging
 import secrets
 from datetime import datetime, timedelta
 from uuid import UUID, uuid4
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode
 from urllib.request import Request as URLRequest, urlopen
 
 from argon2 import PasswordHasher
@@ -30,6 +31,7 @@ DISCORD_AUTHORIZE_URL = "https://discord.com/oauth2/authorize"
 DISCORD_TOKEN_URL = "https://discord.com/api/oauth2/token"
 DISCORD_ME_URL = "https://discord.com/api/users/@me"
 DISCORD_STATE_SECONDS = 600
+logger = logging.getLogger(__name__)
 
 
 class Credentials(BaseModel):
@@ -84,7 +86,15 @@ def discord_request(url: str, data=None, token: str | None = None):
         with urlopen(request, timeout=8) as response:
             import json
             return json.loads(response.read())
-    except (HTTPError, URLError, TimeoutError, ValueError) as exc:
+    except HTTPError as exc:
+        try:
+            detail = exc.read(4096).decode("utf-8", "replace")
+        except Exception:
+            detail = "<response body unavailable>"
+        logger.error("Discord request failed: HTTP %s %s", exc.code, detail)
+        raise HTTPException(502, "Discord authentication could not be completed.") from exc
+    except (URLError, TimeoutError, ValueError) as exc:
+        logger.error("Discord request failed: %s: %s", type(exc).__name__, exc)
         raise HTTPException(502, "Discord authentication could not be completed.") from exc
 
 
