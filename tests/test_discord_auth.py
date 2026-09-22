@@ -11,7 +11,7 @@ def test_discord_http_errors_are_logged_without_changing_public_error(monkeypatc
                         __import__("io").BytesIO(b'{"error":"invalid_grant"}'))
 
     monkeypatch.setattr(auth, "urlopen", fail)
-    with caplog.at_level("ERROR", logger="app.auth"):
+    with caplog.at_level("ERROR", logger="uvicorn.error"):
         try:
             auth.discord_request("https://discord.test/token", {"client_secret": "never-log-this"})
         except auth.HTTPException as error:

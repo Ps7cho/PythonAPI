@@ -31,7 +31,9 @@ DISCORD_AUTHORIZE_URL = "https://discord.com/oauth2/authorize"
 DISCORD_TOKEN_URL = "https://discord.com/api/oauth2/token"
 DISCORD_ME_URL = "https://discord.com/api/users/@me"
 DISCORD_STATE_SECONDS = 600
-logger = logging.getLogger(__name__)
+# Uvicorn does not attach a handler to arbitrary application loggers by default.
+# Use its error logger so OAuth diagnostics reach the same stream as server errors.
+logger = logging.getLogger("uvicorn.error")
 
 
 class Credentials(BaseModel):
