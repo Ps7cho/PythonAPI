@@ -163,6 +163,21 @@ def validate_values(model, data, catalog):
     return parsed
 
 
+def parse_key(model, key):
+    """Parse only a record identity for operations that do not edit values."""
+    primary_keys = list(model.__table__.primary_key)
+    require(set(key) == {column.name for column in primary_keys}, 'Supply exactly the record key shown in this definition.')
+    parsed = {}
+    for column in primary_keys:
+        value = key[column.name]
+        if column.type.python_type is UUID:
+            parsed[column.name] = UUID(str(value))
+        else:
+            require(type(value) is column.type.python_type, f'{column.name} must be {column.type.python_type.__name__}.')
+            parsed[column.name] = value
+    return parsed
+
+
 def validate_definition(db, row):
     from app.afflictions import resolve_operations
     from app.enemies import EnemyRead
@@ -291,9 +306,14 @@ def edit_catalog(edit: Edit, db: Session = Depends(get_db), user: m.User = Depen
     if model is None:
         raise HTTPException(422, 'Unknown editable catalog.')
     try:
-        parsed = validate_values(model, edit.values, edit.catalog)
-        keys = {c.name: parsed[c.name] for c in model.__table__.primary_key}
-        require(jsonable_encoder(keys) == edit.key, 'Definition keys cannot change while editing. Use Create a copy instead.')
+        # A delete is based on the immutable key and revision of the stored
+        # row. Do not reject it because a legacy value no longer matches the
+        # current editor schema (for example, an old affliction_ops payload).
+        keys = parse_key(model, edit.key) if edit.remove else None
+        parsed = None if edit.remove else validate_values(model, edit.values, edit.catalog)
+        if not edit.remove:
+            keys = {c.name: parsed[c.name] for c in model.__table__.primary_key}
+            require(jsonable_encoder(keys) == edit.key, 'Definition keys cannot change while editing. Use Create a copy instead.')
         row = db.scalar(select(model).where(*(getattr(model, key) == value for key, value in keys.items())).with_for_update().execution_options(populate_existing=True))
         if edit.remove:
             require(not edit.create, 'A new definition cannot be removed before it is created.')

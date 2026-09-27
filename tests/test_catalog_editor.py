@@ -142,6 +142,17 @@ def test_associations_can_be_reviewed_and_removed(editor):
                                     weight=assignment['values']['weight'], priority=assignment['values']['priority']))
 
 
+def test_delete_uses_the_stored_record_not_an_outdated_editor_payload(editor):
+    """Deletion must still be possible to review when legacy JSON is malformed."""
+    assignment = catalog(editor)['enemy_abilities']['records'][0]
+    ability = next(record for record in catalog(editor)['abilities']['records']
+                   if record['values']['id'] == assignment['values']['ability_id'])
+    payload = draft('abilities', ability, affliction_ops={})
+    response = editor.post('/api/catalog-editor', json={**payload, 'remove': True, 'validate_only': True})
+    assert response.status_code == 409
+    assert 'linked records' in response.json()['detail']
+
+
 def test_weapon_blueprint_can_be_created_and_deployed_to_quest(editor):
     catalogs = catalog(editor)
     weapon = dict(slug='designer-test-blade', name='Designer Test Blade', weapon_type_slug='sword',
