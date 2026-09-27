@@ -108,6 +108,8 @@ def test_create_copy_conflict_and_new_reference(editor):
         assert editor.post('/api/catalog-editor', json=linked).status_code == 200
         created = response.json()['record']
         assert editor.post('/api/catalog-editor', json={**draft('abilities', created), 'remove': True}).status_code == 200
+        with SessionLocal() as db:
+            assert db.get(Ability, ability_id) is None
     finally:
         with SessionLocal.begin() as db:
             row = db.get(Ability, ability_id)
