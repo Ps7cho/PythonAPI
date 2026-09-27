@@ -94,13 +94,15 @@ def test_create_copy_conflict_and_new_reference(editor):
     catalogs = catalog(editor)
     source = catalogs['abilities']['records'][0]
     ability_id = uuid4()
-    payload = draft('abilities', source, id=str(ability_id), slug='designer-' + ability_id.hex, name='Designer ' + ability_id.hex)
+    payload = draft('abilities', source, id=str(ability_id), slug='designer-' + ability_id.hex,
+                    name='Designer ' + ability_id.hex, affliction_ops={})
     payload.update(create=True, key={'id': str(ability_id)}, expected_revision=None)
     try:
         assert editor.post('/api/catalog-editor', json={**payload, 'validate_only': True}).status_code == 200
         with SessionLocal() as db: assert db.get(Ability, ability_id) is None
         response = editor.post('/api/catalog-editor', json=payload)
         assert response.status_code == 200, response.text
+        assert response.json()['record']['values']['affliction_ops'] == []
         assert editor.post('/api/catalog-editor', json=payload).status_code == 409
         assignment = catalogs['enemy_abilities']['records'][0]
         linked = draft('enemy_abilities', assignment, ability_id=str(ability_id))

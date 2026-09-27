@@ -312,6 +312,14 @@ def edit_catalog(edit: Edit, db: Session = Depends(get_db), user: m.User = Depen
         keys = parse_key(model, edit.key) if edit.remove else None
         parsed = None if edit.remove else validate_values(model, edit.values, edit.catalog)
         if not edit.remove:
+            # Copies often originate from older catalog records. Repair the
+            # historical object-shaped affliction payload while creating a new
+            # definition; ordinary edits remain strictly validated below.
+            if edit.create and model is m.Ability and not isinstance(parsed.get('affliction_ops'), list):
+                parsed['affliction_ops'] = []
+            if edit.create and model is m.AbilityArchetype and isinstance(parsed.get('definition'), dict):
+                if not isinstance(parsed['definition'].get('affliction_ops', []), list):
+                    parsed['definition']['affliction_ops'] = []
             keys = {c.name: parsed[c.name] for c in model.__table__.primary_key}
             require(jsonable_encoder(keys) == edit.key, 'Definition keys cannot change while editing. Use Create a copy instead.')
         row = db.scalar(select(model).where(*(getattr(model, key) == value for key, value in keys.items())).with_for_update().execution_options(populate_existing=True))
