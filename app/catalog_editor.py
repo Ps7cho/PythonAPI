@@ -8,7 +8,7 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, ConfigDict
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -33,7 +33,7 @@ ENUMS = {
     ('abilities', 'cooldown_type'): ['turn', 'minutes', 'hours'],
     ('consumables', 'effect'): ['heal', 'buff', 'cleanse', 'essence', 'orb'],
 }
-REMOVABLE_ASSOCIATIONS = {'enemy_abilities', 'enemy_weapons', 'orb_outcomes'}
+
 
 
 def allowed(db, user):
@@ -55,6 +55,53 @@ def revision(value):
 def descriptor(row):
     value = values(row)
     return dict(key={c.name: value[c.name] for c in row.__table__.primary_key}, values=value, revision=revision(value))
+
+
+def deletion_references(db, model, row):
+    """Return persisted records which would be left pointing at ``row``.
+
+    Database foreign keys cover saved player state as well as catalog relations.
+    Catalog JSON rules contain a few intentional, schema-less links, so inspect
+    those too before allowing a definition to disappear.
+    """
+    result = []
+    table = model.__table__
+    for source in m.Base.metadata.tables.values():
+        for column in source.columns:
+            for foreign_key in column.foreign_keys:
+                if foreign_key.column.table is not table:
+                    continue
+                value = getattr(row, foreign_key.column.name)
+                count = db.scalar(select(func.count()).select_from(source).where(column == value))
+                if count:
+                    result.append({'table': source.name, 'count': count})
+
+    # A catalog's primary key is the stable value used in embedded gameplay
+    # rules. Only scan JSON fields, avoiding unrelated text such as names.
+    primary_keys = list(table.primary_key)
+    if len(primary_keys) == 1:
+        key = getattr(row, primary_keys[0].name)
+
+        def contains(value):
+            if isinstance(value, dict):
+                return any(contains(part) for part in value.values())
+            if isinstance(value, list):
+                return any(contains(part) for part in value)
+            return str(value) == str(key) if value is not None else False
+
+        for name, catalog_model in CATALOGS.items():
+            json_columns = [column for column in columns(catalog_model) if column.type.python_type in (dict, list)]
+            if not json_columns:
+                continue
+            count = 0
+            for candidate in db.scalars(select(catalog_model)):
+                if candidate is row:
+                    continue
+                if any(contains(getattr(candidate, column.name)) for column in json_columns):
+                    count += 1
+            if count:
+                result.append({'table': CATALOGS[name].__tablename__ + ' (embedded rule)', 'count': count})
+    return result
 
 
 def editor_catalog(db, user):
@@ -249,14 +296,18 @@ def edit_catalog(edit: Edit, db: Session = Depends(get_db), user: m.User = Depen
         require(jsonable_encoder(keys) == edit.key, 'Definition keys cannot change while editing. Use Create a copy instead.')
         row = db.scalar(select(model).where(*(getattr(model, key) == value for key, value in keys.items())).with_for_update().execution_options(populate_existing=True))
         if edit.remove:
-            require(not edit.create and edit.catalog in REMOVABLE_ASSOCIATIONS, 'Only gameplay associations can be removed.')
+            require(not edit.create, 'A new definition cannot be removed before it is created.')
             if row is None: raise HTTPException(404, 'Association no longer exists.')
             before = values(row)
             if edit.expected_revision != revision(before):
-                raise HTTPException(409, 'This association changed since you loaded it. Reload before removing it.')
+                raise HTTPException(409, 'This definition changed since you loaded it. Reload before removing it.')
+            references = deletion_references(db, model, row)
+            if references:
+                detail = ', '.join(f"{item['count']} {item['table']}" for item in references)
+                raise HTTPException(409, 'Remove or update linked records first: ' + detail + '.')
             if edit.validate_only:
                 db.rollback()
-                return dict(valid=True, record=descriptor(row))
+                return dict(valid=True, record=descriptor(row), removable=True)
             db.delete(row)
             db.add(m.GameEvent(event_type='catalog_edited', payload=dict(user_id=str(user.id), catalog=edit.catalog, key=edit.key, before=before, after=None)))
             db.commit()

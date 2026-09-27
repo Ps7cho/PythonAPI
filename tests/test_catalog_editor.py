@@ -106,6 +106,8 @@ def test_create_copy_conflict_and_new_reference(editor):
         linked = draft('enemy_abilities', assignment, ability_id=str(ability_id))
         linked.update(create=True, key={**assignment['key'], 'ability_id':str(ability_id)}, expected_revision=None, validate_only=True)
         assert editor.post('/api/catalog-editor', json=linked).status_code == 200
+        created = response.json()['record']
+        assert editor.post('/api/catalog-editor', json={**draft('abilities', created), 'remove': True}).status_code == 200
     finally:
         with SessionLocal.begin() as db:
             row = db.get(Ability, ability_id)
@@ -125,8 +127,14 @@ def test_associations_can_be_reviewed_and_removed(editor):
         assert response.status_code == 200 and response.json()['removed']
         with SessionLocal() as db:
             assert db.get(EnemyAbility, (enemy_slug, ability_id)) is None
-        ability = catalog(editor)['abilities']['records'][0]
-        assert editor.post('/api/catalog-editor', json={**draft('abilities', ability), 'remove': True}).status_code == 422
+        # Definitions can now be deleted, but never while a saved relation
+        # still points at them.
+        remaining = catalog(editor)['enemy_abilities']['records'][0]
+        ability = next(record for record in catalog(editor)['abilities']['records']
+                       if record['values']['id'] == remaining['values']['ability_id'])
+        blocked = editor.post('/api/catalog-editor', json={**draft('abilities', ability), 'remove': True})
+        assert blocked.status_code == 409
+        assert 'linked records' in blocked.json()['detail']
     finally:
         with SessionLocal.begin() as db:
             if db.get(EnemyAbility, (enemy_slug, ability_id)) is None:
