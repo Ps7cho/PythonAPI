@@ -9,6 +9,7 @@ from app.afflictions import definition
 from app.orbs import options
 from app.progression import level_cost, level_floor
 from app.quest_templates import read_templates
+from app.relationship_layout import essence_orb_ability_layout
 
 
 def gameplay_catalog(db, abilities):
@@ -52,4 +53,6 @@ def gameplay_catalog(db, abilities):
         levels=[dict(level=level, lifetime_xp=level_floor(level), next_level_cost=level_cost(level))
                 for level in range(1, 81)],
     )
+    result['essence_orb_ability_layout'] = essence_orb_ability_layout(
+        result['essences'], result['consumables'], result['abilities'], result['orb_outcomes'])
     return result
