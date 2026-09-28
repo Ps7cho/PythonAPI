@@ -354,3 +354,8 @@ defeat ends the run; players can also retire after a victory. Characters then
 become available unchanged. Results are server-authoritative. History aggregates
 personal and order-independent composition high-water marks, while encounter logs
 provide existing battle telemetry. There is no separate combat engine or leaderboard.
+
+`scripts/gauntlet_batch.py` is an optional unattended API client for comparing party,
+definition and ability-priority configurations. It submits normal combat commands,
+persists local comparison reports, and uses bounded sequential runs. It does not
+edit character/catalog state or introduce a server worker or alternate combat path.

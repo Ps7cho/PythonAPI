@@ -1,0 +1,21 @@
+{
+  "cases": [
+    {
+      "name": "Solo basic attacks",
+      "adventurer_ids": ["00000000-0000-0000-0000-000000000001"],
+      "definition_slug": "endless-road",
+      "ability_priority": ["attack"],
+      "repeats": 3,
+      "max_stages": 50,
+      "max_actions": 5000,
+      "max_seconds": 600
+    },
+    {
+      "name": "Pair with power strikes",
+      "adventurer_ids": ["00000000-0000-0000-0000-000000000001", "00000000-0000-0000-0000-000000000002"],
+      "definition_slug": "endless-road",
+      "ability_priority": ["power_strike", "attack"],
+      "repeats": 3
+    }
+  ]
+}
