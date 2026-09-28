@@ -275,6 +275,36 @@ class QuestRun(Base):
     quest = relationship("Quest", foreign_keys=[quest_id])
     encounters = relationship("Encounter", back_populates="quest_run", cascade="all, delete-orphan")
     events = relationship("GameEvent", back_populates="quest_run", cascade="all, delete-orphan")
+    gauntlet = relationship('GauntletRun', back_populates='quest_run', uselist=False)
+
+
+class GauntletDefinition(Base):
+    __tablename__ = 'gauntlet_definitions'
+    slug = Column(String, primary_key=True)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=False, default='')
+    settings = Column(JSON, nullable=False)
+
+
+class GauntletRun(Base):
+    __tablename__ = 'gauntlet_runs'
+    id = Column(UUID(as_uuid=True), ForeignKey('quest_runs.id'), primary_key=True)
+    owner_id = Column(UUID(as_uuid=True), ForeignKey('users.id'), nullable=False, index=True)
+    definition_slug = Column(String, ForeignKey('gauntlet_definitions.slug'), nullable=False)
+    party_key = Column(String(250), nullable=False, index=True)
+    participant_ids = Column(JSON, nullable=False)
+    party_snapshot = Column(JSON, nullable=False)
+    config_snapshot = Column(JSON, nullable=False)
+    current_stage = Column(Integer, nullable=False, default=1)
+    highest_stage_reached = Column(Integer, nullable=False, default=1)
+    highest_stage_completed = Column(Integer, nullable=False, default=0)
+    encounters_completed = Column(Integer, nullable=False, default=0)
+    status = Column(String, nullable=False, default='active')
+    started_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    ended_at = Column(DateTime, nullable=True)
+    termination_reason = Column(String, nullable=True)
+    quest_run = relationship('QuestRun', back_populates='gauntlet')
+    __table_args__ = (CheckConstraint('highest_stage_completed >= 0 AND highest_stage_reached >= highest_stage_completed'),)
 
 
 class Enemy(Base):

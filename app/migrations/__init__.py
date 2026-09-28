@@ -94,3 +94,8 @@ def migrate(engine):
             from app.migrations.v029_discord_auth import upgrade as discord_auth_upgrade
             discord_auth_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('029_discord_auth')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='030_gauntlets'")).first():
+            from app.migrations.v030_gauntlets import upgrade as gauntlets_upgrade
+            gauntlets_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('030_gauntlets')"))

@@ -17,6 +17,7 @@ from app.auth import current_user
 from app.database import get_db
 
 CATALOGS = {
+    'gauntlets': m.GauntletDefinition,
     'ability_archetypes': m.AbilityArchetype,
     'abilities': m.Ability, 'quests': m.QuestTemplate, 'enemies': m.Enemy,
     'enemy_abilities': m.EnemyAbility, 'enemy_weapons': m.EnemyWeapon,
@@ -198,7 +199,10 @@ def validate_definition(db, row):
             if value is not None:
                 require(db.scalar(select(fk.column).where(fk.column == value)) is not None,
                         f'{column.name} references a missing {fk.column.table.name} definition.')
-    if isinstance(row, m.Ability):
+    if isinstance(row, m.GauntletDefinition):
+        from app.gauntlets import validate_rules
+        row.settings = validate_rules(db, row.settings)
+    elif isinstance(row, m.Ability):
         from app.ability_design import validate_chain, validate_upgrades
         number('duration_turns', 1, 100); number('guard_percent', 0, 100)
         row.effect_chain = validate_chain(row.effect_chain, row.target_type)

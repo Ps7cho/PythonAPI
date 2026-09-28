@@ -336,3 +336,21 @@ adventures. Base attributes remain permanent; equipped bonuses feed the existing
 stat formulas and snapshot at departure. Gear changes never heal; reducing maximum
 HP clamps current HP. Village rest uses the equipped maximum. Gear is currently
 acquired from the shop or other players, not quest loot tables.
+
+## Gauntlets
+
+Gauntlets orchestrate the existing QuestRun, Encounter, action, continuation, and
+combat-log systems. `gauntlet_definitions` holds Worldsmith-editable enemy pools,
+linear health/power scaling, and an optional party limit within the existing
+six-member cap. Migration 030 seeds Endless Road. `gauntlet_runs` shares its ID
+with QuestRun and stores owner, sorted character-ID composition, initial combat
+and rule/enemy snapshots, timestamps, status, and separate reached/completed depths.
+Enemy definitions and loadouts are frozen at departure; later edits affect new runs.
+
+Only owned, living, available adventurers can enter. Combat state carries between
+stages, but Gauntlets never settle health, cooldowns, death, rewards, or progression
+onto the persistent characters. Consumables and rests are disabled. All-party
+defeat ends the run; players can also retire after a victory. Characters then
+become available unchanged. Results are server-authoritative. History aggregates
+personal and order-independent composition high-water marks, while encounter logs
+provide existing battle telemetry. There is no separate combat engine or leaderboard.

@@ -83,7 +83,11 @@ def snapshot(encounter: Encounter) -> dict:
     boundary = group is None or group['boundary']
     limited = journey.get("max_rests") is not None
     rests_left = max(0, journey["max_rests"] - progress.get("rests_used", 0)) if limited else None
+    gauntlet = encounter.quest_run.gauntlet if journey.get('gauntlet') else None
     return {
+        'gauntlet': {'id': str(gauntlet.id), 'stage': gauntlet.current_stage,
+                     'reached': gauntlet.highest_stage_reached, 'completed': gauntlet.highest_stage_completed,
+                     'status': gauntlet.status} if gauntlet else None,
         "id": str(encounter.id), "state": encounter.state, "turn": encounter.turn,
         "revision": encounter.updated_at.isoformat(),
         "combat_log": encounter_log(encounter),
@@ -111,11 +115,17 @@ def snapshot(encounter: Encounter) -> dict:
     }
 
 
-def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-bandit", encounter_count: int = 1, *, party: Party | None = None, template_slug: str | None = None, accept_rank_risk: bool = False, contract_id: UUID | None = None) -> dict:
+def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-bandit", encounter_count: int = 1, *, party: Party | None = None, template_slug: str | None = None, accept_rank_risk: bool = False, contract_id: UUID | None = None, gauntlet=None) -> dict:
     journey = {}
     plan = [{"encounter_id": str(uuid4()), "enemy_slug": enemy_slug} for _ in range(encounter_count)]
     contract = None
-    if contract_id:
+    if gauntlet is not None:
+        from app.gauntlets import stage_entry
+        _, definition, config = gauntlet
+        plan = [stage_entry(config, 1)]
+        journey = {'gauntlet': True, 'kind': 'gauntlet', 'title': definition.name,
+                   'gold': 0, 'experience': 0}
+    elif contract_id:
         from app.models import RecoveryContract
         contract = db.get(RecoveryContract, contract_id)
         if contract is None:
@@ -162,8 +172,9 @@ def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-ba
     owners = list(db.scalars(select(User).where(User.id.in_({h.owner for h in heroes})).order_by(User.id).with_for_update()))
     owner_map = {user.id: user for user in owners}
     for hero in heroes:
-        increment(hero, adventures_started=1, encounters_started=1)
-        increment_account(owner_map[hero.owner], adventures_started=1, encounters_started=1)
+        if gauntlet is None:
+            increment(hero, adventures_started=1, encounters_started=1)
+            increment_account(owner_map[hero.owner], adventures_started=1, encounters_started=1)
 
     new_party = party is None
     if new_party:
@@ -200,6 +211,11 @@ def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-ba
                        "power_ready_turn": 1, "equipped_abilities": combat_loadout(db, h)} for h in heroes],
     )
     db.add(encounter)
+    if gauntlet is not None:
+        from app.gauntlets import attach_run
+        for actor in encounter.participants:
+            actor['consumables'] = []
+        attach_run(db, run, encounter, *gauntlet)
     db.flush()
     save_enemy_plans(encounter)
     db.add(GameEvent(quest_run_id=run.id, event_type="encounter_started",
@@ -222,6 +238,9 @@ def continue_quest(db: Session, encounter_id: UUID, return_to_village: bool = Fa
     if return_to_village and choice is not None:
         raise HTTPException(422, "Choose return or a continuation action, not both.")
     journey = run.quest.rewards.get("journey", {})
+    if journey.get('gauntlet'):
+        from app.gauntlets import advance
+        advance(previous, return_to_village, choice)
     grouped = bool(journey.get('encounter_groups'))
     plan = run.quest.encounter_pool
     previous_index = next(i for i, entry in enumerate(plan) if entry['encounter_id'] == str(previous.id))
@@ -235,8 +254,9 @@ def continue_quest(db: Session, encounter_id: UUID, return_to_village: bool = Fa
         owners = list(db.scalars(select(User).where(User.id.in_({hero.owner for hero in heroes})).order_by(User.id).with_for_update()))
         owner_map = {user.id: user for user in owners}
         for hero in heroes:
-            increment(hero, adventures_completed=1)
-            increment_account(owner_map[hero.owner], adventures_completed=1)
+            if not journey.get('gauntlet'):
+                increment(hero, adventures_completed=1)
+                increment_account(owner_map[hero.owner], adventures_completed=1)
         run.status = "returned"
         run.current_stage = "complete"
         from app.contracts import settle_contract
@@ -296,8 +316,9 @@ def continue_quest(db: Session, encounter_id: UUID, return_to_village: bool = Fa
     owners = list(db.scalars(select(User).where(User.id.in_({hero.owner for hero in heroes})).order_by(User.id).with_for_update()))
     owner_map = {user.id: user for user in owners}
     for hero in heroes:
-        increment(hero, encounters_started=1)
-        increment_account(owner_map[hero.owner], encounters_started=1)
+        if not journey.get('gauntlet'):
+            increment(hero, encounters_started=1)
+            increment_account(owner_map[hero.owner], encounters_started=1)
     if rest_results:
         for actor in participants:
             hero = db.get(Adventurer, UUID(actor["id"]))
@@ -318,6 +339,9 @@ def continue_quest(db: Session, encounter_id: UUID, return_to_village: bool = Fa
 
 def apply_action(db: Session, encounter_id: UUID, request: EncounterActionRequest) -> dict:
     encounter = get_encounter(db, encounter_id, lock=True)
+    is_gauntlet = encounter.quest_run.quest.rewards.get('journey', {}).get('gauntlet', False)
+    if is_gauntlet and request.consumable_slug is not None:
+        raise HTTPException(409, 'Consumables are disabled in Gauntlet trials.')
     if encounter.state != "player_turn":
         raise HTTPException(409, "Encounter is complete.")
     if encounter.turn != request.expected_turn:
@@ -472,6 +496,16 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
         encounter.enemies = enemies
     if encounter.state == 'player_turn':
         save_enemy_plans(encounter)
+    if is_gauntlet:
+        # Trial health, status and cooldown changes stay in encounter snapshots.
+        # Reuse combat results and logs without rewards or permanent casualties.
+        from app.gauntlets import record_result
+        record_result(encounter)
+        if encounter.state == 'defeat':
+            events.append('Gauntlet ended. Your adventurers retain their pre-run health and cooldowns.')
+        elif encounter.state == 'victory':
+            events.append('Gauntlet stage completed. Continue without resting, or end this run.')
+        return finish_action(db, encounter, request, events, results)
     journey = encounter.quest_run.quest.rewards.get("journey", {})
     progress = snapshot(encounter)["quest"]
     grouped = bool(journey.get('encounter_groups'))
@@ -563,6 +597,10 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
     elif encounter.state == 'victory' and encounter.quest_run.status == 'victory':
         from app.contracts import settle_contract
         events.extend(settle_contract(db, encounter.quest_run, participants, completed=True))
+    return finish_action(db, encounter, request, events, results)
+
+
+def finish_action(db, encounter, request, events, results):
     db.add(GameEvent(quest_run_id=encounter.quest_run_id, event_type="combat_action",
                      payload={"encounter_id": str(encounter.id), "turn": request.expected_turn,
                               "actor_id": str(request.actor_id), "action": request.action or str(request.ability_id),
