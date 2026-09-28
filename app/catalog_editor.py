@@ -8,7 +8,7 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, ConfigDict
-from sqlalchemy import func, select
+from sqlalchemy import JSON, func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -90,7 +90,7 @@ def deletion_references(db, model, row):
             return str(value) == str(key) if value is not None else False
 
         for name, catalog_model in CATALOGS.items():
-            json_columns = [column for column in columns(catalog_model) if column.type.python_type in (dict, list)]
+            json_columns = [column for column in columns(catalog_model) if isinstance(column.type, JSON)]
             if not json_columns:
                 continue
             count = 0
@@ -112,7 +112,7 @@ def editor_catalog(db, user):
         fields = []
         for column in columns(model):
             pytype = column.type.python_type
-            kind = 'json' if pytype in (dict, list) else 'boolean' if pytype is bool else 'integer' if pytype is int else 'number' if pytype is float else 'text'
+            kind = 'json' if isinstance(column.type, JSON) else 'boolean' if pytype is bool else 'integer' if pytype is int else 'number' if pytype is float else 'text'
             fields.append(dict(name=column.name, type=kind, nullable=column.nullable,
                                primary_key=column.primary_key, immutable=column.primary_key or column.name == 'slug', choices=ENUMS.get((name, column.name))))
         catalogs[name] = dict(fields=fields, records=[descriptor(row) for row in db.scalars(select(model).order_by(*model.__table__.primary_key))])
@@ -150,7 +150,7 @@ def validate_values(model, data, catalog):
             parsed[name] = UUID(str(value))
         elif kind is float:
             require(type(value) in (int, float) and math.isfinite(value), f'{name} must be a finite number.')
-        elif kind in (dict, list):
+        elif isinstance(c.type, JSON):
             require(type(value) in (dict, list), f'{name} must be JSON object or array.')
         else:
             require(type(value) is kind, f'{name} must be {kind.__name__}.')
@@ -322,7 +322,9 @@ def edit_catalog(edit: Edit, db: Session = Depends(get_db), user: m.User = Depen
                     parsed['definition']['affliction_ops'] = []
             keys = {c.name: parsed[c.name] for c in model.__table__.primary_key}
             require(jsonable_encoder(keys) == edit.key, 'Definition keys cannot change while editing. Use Create a copy instead.')
-        row = db.scalar(select(model).where(*(getattr(model, key) == value for key, value in keys.items())).with_for_update().execution_options(populate_existing=True))
+        # Eager relationships may add nullable outer joins. PostgreSQL cannot
+        # lock their nullable side; only the edited table needs a row lock.
+        row = db.scalar(select(model).where(*(getattr(model, key) == value for key, value in keys.items())).with_for_update(of=model).execution_options(populate_existing=True))
         if edit.remove:
             require(not edit.create, 'A new definition cannot be removed before it is created.')
             if row is None: raise HTTPException(404, 'Association no longer exists.')
