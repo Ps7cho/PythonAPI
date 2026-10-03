@@ -328,6 +328,26 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         expect(page.locator("#battlefield-glance .battlefield-glance-card").first).to_be_visible()
         expect(page.locator("#player-glance")).to_contain_text(f"Menu tester {width}")
         expect(page.locator("#player-glance")).to_contain_text("HP")
+        if width == 390:
+            forecast = page.evaluate("""() => {
+              const actor=actionActor(),saved=actor.statuses;
+              actor.statuses=[
+                {slug:'poison',name:'Poison',damage:3,stacks:2,resistance:0,remaining_rounds:2},
+                {slug:'bleed',name:'Bleed',damage:2,stacks:1,resistance:0,remaining_rounds:3},
+                {slug:'holy',name:'Holy',damage:1,stacks:1,resistance:0,periodic:'none',remaining_rounds:2}
+              ];
+              renderPlayerGlance();
+              const bar=document.querySelector('.player-health-track');
+              const result={damage:bar.dataset.projectedDamage,
+                segments:[...bar.querySelectorAll('.player-health-effect')].map(el=>({type:el.dataset.effect,damage:el.dataset.damage,color:el.style.getPropertyValue('--effect-color')})),
+                markers:bar.querySelectorAll('.player-health-marker').length,
+                text:document.getElementById('player-glance').textContent};
+              actor.statuses=saved;renderPlayerGlance();return result;
+            }""")
+            assert forecast["damage"] == "8"
+            assert [(part["type"], part["damage"]) for part in forecast["segments"]] == [("poison", "6"), ("bleed", "2")]
+            assert forecast["segments"][0]["color"] != forecast["segments"][1]["color"]
+            assert forecast["markers"] == 1 and "Poison" not in forecast["text"]
         expect(page.locator("#encounter-options")).to_be_visible()
         encounter_details = page.locator(".encounter-information")
         expect(encounter_details).not_to_have_attribute("open", "")
