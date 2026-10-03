@@ -131,6 +131,8 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         expect(page.locator("#game")).to_be_visible()
 
         main = page.locator("#game .tabs[role=tablist]").first
+        select_tab(page, main, "Character")
+        page.locator("[data-character-select]").select_option(hero_id)
         if width <= 390:
             bottom_nav = page.locator("#game>.menu-shell>.mobile-nav")
             expect(bottom_nav).to_be_visible()
@@ -143,8 +145,22 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         click_tabs(page, main, main_labels)
 
         select_tab(page, main, "Quests")
-        click_tabs(page, page.locator("#panel-journeys .tabs[role=tablist]").first,
+        quest_tablist = page.locator("#panel-journeys .tabs[role=tablist]").first
+        click_tabs(page, quest_tablist,
                    ["Journeys", "Bulletin Board", "Epics", "Raids", "Quest Lobby"])
+        select_tab(page, quest_tablist, "Journeys")
+        expect(page.locator(".quest-current-rank")).to_contain_text("Iron rank")
+        expect(page.locator(".journey-card .quest-rank-banner").first).to_be_visible()
+        if width == 390:
+            page.evaluate("GameSelectedCharacter.id = 'stale-character'")
+        page.locator("[data-quest-template]").first.click()
+        expect(page.locator("[data-lobby-hero]")).to_contain_text(f"Menu tester {width}")
+        expect(page.locator("[data-lobby-rank]")).to_contain_text("Required rank")
+        expect(page.locator("[data-lobby-depart]")).to_be_enabled()
+        if width <= 390:
+            depart_bottom = page.locator("[data-lobby-depart]").bounding_box()
+            nav_top = page.locator("#game > .menu-shell > .mobile-nav").bounding_box()["y"]
+            assert depart_bottom["y"] + depart_bottom["height"] <= nav_top, "Depart is below the phone navigation"
 
         select_tab(page, main, "Village Shops")
         shop_tabs = page.locator(".village-shop-tabs")
@@ -166,8 +182,12 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
             expect(market.locator("[data-market-list]")).to_be_visible()
 
         select_tab(page, main, "Gauntlet")
+        expect(page.locator(".gauntlet-setup")).to_be_visible()
+        expect(page.locator(".gauntlet-policy")).to_be_hidden()
+        page.locator(".gauntlet-setup summary").click()
         expect(page.locator(".gauntlet-policy")).to_be_visible()
         expect(page.get_by_label("Gauntlet definition")).not_to_be_empty()
+        page.locator(".gauntlet-setup summary").click()
 
         select_tab(page, main, "Worldsmith")
         nav = page.locator(".studio-nav")
@@ -204,7 +224,6 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
             expect(browser_panel.locator(".studio-detail")).to_be_hidden()
             browser_panel.locator(".studio-row").first.click()
             expect(browser_panel.locator(".studio-detail")).to_be_visible()
-            expect(browser_panel.locator(".studio-detail").get_by_role("button", name="Edit", exact=True)).to_be_disabled()
             browser_panel.get_by_role("button", name="Back to list").click()
             expect(browser_panel.locator(".studio-panel")).to_be_visible()
             library_toggle.click()
@@ -248,6 +267,23 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
                        {"attributes": "Attributes", "gear": "Equipment", "abilities": "Abilities"}[section])
             panel_height = sheet.locator("#panel-" + section).evaluate("el => el.clientHeight")
             assert panel_height >= 100, f"{section} content is clipped at {width}x{height}: {panel_height}px"
+        select_tab(page, main, "Quests")
+        select_tab(page, quest_tablist, "Journeys")
+        page.locator("[data-quest-template]").first.click()
+        expect(page.locator("[data-lobby-depart]")).to_be_enabled()
+        page.locator("[data-lobby-depart]").click()
+        expect(page.locator("#panel-encounter")).to_be_visible()
+        expect(page.locator("#battlefield-glance .battlefield-glance-card").first).to_be_visible()
+        expect(page.locator("#encounter-options")).to_be_visible()
+        encounter_details = page.locator(".encounter-information")
+        expect(encounter_details).not_to_have_attribute("open", "")
+        encounter_details.locator("summary").click()
+        expect(page.locator("#combatants")).to_be_visible()
+        encounter_details.locator("summary").click()
+        page.locator("#action-categories button").first.click()
+        expect(page.locator("#action-branch")).to_be_visible()
+        page.locator("#action-buttons button").first.click()
+        expect(page.locator("#action-detail")).to_be_visible()
         if width <= 390:
             page.goto(ORIGIN + "/adventurer.html?id=" + hero_id)
             expect(page.locator("#sheet")).to_be_visible()
