@@ -28,6 +28,7 @@ from sqlalchemy import JSON, select  # noqa: E402
 
 SIZES = [
     pytest.param(390, 844, id="mobile"),
+    pytest.param(375, 667, id="mobile-compact"),
     pytest.param(768, 1024, id="tablet"),
     pytest.param(1920, 1080, id="1080p"),
     pytest.param(2560, 1440, id="2k"),
@@ -156,6 +157,10 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         expect(page.locator("iframe[data-character-frame]")).to_be_visible()
         click_tabs(sheet, sheet.locator(".menu-shell .tabs[role=tablist]"),
                    ["Overview", "Attributes", "Equipment", "Abilities", "Friends"])
+        for section in ("attributes", "gear", "abilities"):
+            sheet.get_by_role("tab", name={"attributes": "Attributes", "gear": "Equipment", "abilities": "Abilities"}[section]).click()
+            panel_height = sheet.locator("#panel-" + section).evaluate("el => el.clientHeight")
+            assert panel_height >= 100, f"{section} content is clipped at {width}x{height}: {panel_height}px"
         assert not errors, f"JavaScript errors at {width}x{height}: {errors}"
     finally:
         page.close()
