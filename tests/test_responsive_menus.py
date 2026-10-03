@@ -4,6 +4,7 @@ From the PythonAPI backend directory, run:
 ../.venv/Scripts/python.exe -m pytest tests/test_responsive_menus.py -q
 """
 
+import json
 import os
 import sys
 from pathlib import Path
@@ -151,11 +152,14 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         select_tab(page, quest_tablist, "Journeys")
         expect(page.locator(".quest-current-rank")).to_contain_text("Iron rank")
         expect(page.locator(".journey-card .quest-rank-banner").first).to_be_visible()
+        expect(page.locator(".journey-card .quest-rank-emblem").first).to_be_visible()
+        expect(page.locator(".journey-card .quest-rank-banner").first).to_contain_text("Quest rank")
         if width == 390:
             page.evaluate("GameSelectedCharacter.id = 'stale-character'")
         page.locator("[data-quest-template]").first.click()
         expect(page.locator("[data-lobby-hero]")).to_contain_text(f"Menu tester {width}")
-        expect(page.locator("[data-lobby-rank]")).to_contain_text("Required rank")
+        expect(page.locator("[data-lobby-rank]")).to_contain_text("Quest rank")
+        expect(page.locator("[data-lobby-rank]")).to_contain_text("One rank below can enter")
         expect(page.locator("[data-lobby-depart]")).to_be_enabled()
         if width <= 390:
             depart_bottom = page.locator("[data-lobby-depart]").bounding_box()
@@ -271,8 +275,23 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         select_tab(page, quest_tablist, "Journeys")
         page.locator("[data-quest-template]").first.click()
         expect(page.locator("[data-lobby-depart]")).to_be_enabled()
+        lost_response = {"count": 0}
+        if width == 390:
+            def lose_departure_response(route):
+                payload = json.loads(route.request.post_data or "{}")
+                if not payload.get("accept_rank_risk"):
+                    route.fallback()
+                    return
+                response = client.post("/api/encounters", json=payload,
+                                       headers={"Authorization": "Bearer " + token})
+                assert response.status_code == 201, response.text
+                lost_response["count"] += 1
+                route.abort("failed")
+            page.route(ORIGIN + "/api/encounters", lose_departure_response)
         page.locator("[data-lobby-depart]").click()
         expect(page.locator("#panel-encounter")).to_be_visible()
+        if width == 390:
+            assert lost_response["count"] == 1, "Lost departure response was not exercised"
         expect(page.locator("#battlefield-glance .battlefield-glance-card").first).to_be_visible()
         expect(page.locator("#encounter-options")).to_be_visible()
         encounter_details = page.locator(".encounter-information")
@@ -284,6 +303,11 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         expect(page.locator("#action-branch")).to_be_visible()
         page.locator("#action-buttons button").first.click()
         expect(page.locator("#action-detail")).to_be_visible()
+        if width <= 390:
+            use_button = page.locator("#action-use")
+            use_bounds = use_button.bounding_box()
+            nav_top = page.locator("#game > .menu-shell > .mobile-nav").bounding_box()["y"]
+            assert use_bounds["y"] >= 0 and use_bounds["y"] + use_bounds["height"] <= nav_top, "Selected action needs scrolling to use"
         if width <= 390:
             page.goto(ORIGIN + "/adventurer.html?id=" + hero_id)
             expect(page.locator("#sheet")).to_be_visible()
