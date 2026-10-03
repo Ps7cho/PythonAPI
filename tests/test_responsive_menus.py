@@ -109,7 +109,7 @@ def click_tabs(page, tablist, expected):
 @pytest.mark.parametrize("width,height", SIZES)
 def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, height):
     browser, client, username, password = browser_backend
-    page = browser.new_page(viewport={"width": width, "height": height})
+    page = browser.new_page(viewport={"width": width, "height": height}, has_touch=width <= 390)
     page.set_default_timeout(15000)
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
@@ -293,6 +293,8 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         if width == 390:
             assert lost_response["count"] == 1, "Lost departure response was not exercised"
         expect(page.locator("#battlefield-glance .battlefield-glance-card").first).to_be_visible()
+        expect(page.locator("#player-glance")).to_contain_text(f"Menu tester {width}")
+        expect(page.locator("#player-glance")).to_contain_text("HP")
         expect(page.locator("#encounter-options")).to_be_visible()
         encounter_details = page.locator(".encounter-information")
         expect(encounter_details).not_to_have_attribute("open", "")
@@ -306,8 +308,23 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         if width <= 390:
             use_button = page.locator("#action-use")
             use_bounds = use_button.bounding_box()
+            back_bounds = page.locator("#action-back").bounding_box()
             nav_top = page.locator("#game > .menu-shell > .mobile-nav").bounding_box()["y"]
             assert use_bounds["y"] >= 0 and use_bounds["y"] + use_bounds["height"] <= nav_top, "Selected action needs scrolling to use"
+            assert abs(use_bounds["y"] - back_bounds["y"]) < 20, "Use action is not beside the action navigation"
+            expect(page.locator("#player-glance")).to_be_visible()
+            gesture = """distance => {
+              const panel=document.querySelector('#panel-encounter');panel.scrollTop=0;
+              const touch=y=>new Touch({identifier:1,target:panel,clientX:100,clientY:y});
+              panel.dispatchEvent(new TouchEvent('touchstart',{bubbles:true,cancelable:true,touches:[touch(100)],changedTouches:[touch(100)]}));
+              panel.dispatchEvent(new TouchEvent('touchmove',{bubbles:true,cancelable:true,touches:[touch(100+distance)],changedTouches:[touch(100+distance)]}));
+              panel.dispatchEvent(new TouchEvent('touchend',{bubbles:true,cancelable:true,touches:[],changedTouches:[touch(100+distance)]}));
+            }"""
+            page.evaluate(gesture, 40)
+            expect(page.locator('.pull-refresh-indicator')).to_be_hidden()
+            with page.expect_navigation(wait_until="domcontentloaded"):
+                page.evaluate(gesture, 110)
+            expect(page.locator('#game')).to_be_visible()
         if width <= 390:
             page.goto(ORIGIN + "/adventurer.html?id=" + hero_id)
             expect(page.locator("#sheet")).to_be_visible()
