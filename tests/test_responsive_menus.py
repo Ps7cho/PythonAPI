@@ -117,6 +117,10 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
     page.route(ORIGIN + "/**", lambda route: serve_frontend(route, client))
     try:
         page.goto(ORIGIN + "/")
+        expect(page.locator("#login-panel")).to_be_visible()
+        assert page.locator("#login-panel").bounding_box()["y"] < page.locator("#public-home").bounding_box()["y"]
+        login_bounds = page.get_by_role("button", name="Log In", exact=True).bounding_box()
+        assert login_bounds["y"] + login_bounds["height"] <= height, "Log In is below the first screen"
         page.locator("#username").fill(username)
         page.locator("#password").fill(password)
         page.get_by_role("button", name="Log In", exact=True).click()
@@ -152,8 +156,37 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         select_tab(page, quest_tablist, "Journeys")
         expect(page.locator(".quest-current-rank")).to_contain_text("Iron rank")
         expect(page.locator(".journey-card .quest-rank-banner").first).to_be_visible()
+        expect(page.locator(".journey-card .quest-rank-banner").first).to_have_attribute("data-rank", "iron")
         expect(page.locator(".journey-card .quest-rank-emblem").first).to_be_visible()
         expect(page.locator(".journey-card .quest-rank-banner").first).to_contain_text("Quest rank")
+        if width <= 390:
+            def swipe_quest(start_x, end_x):
+                page.evaluate("""({startX,endX}) => {
+                  const active=document.querySelector('#panel-journeys .tabs[role=tablist] > button[aria-selected=true]');
+                  const panel=document.getElementById(active.getAttribute('aria-controls'));
+                  const touch=x=>new Touch({identifier:1,target:panel,clientX:x,clientY:250});
+                  panel.dispatchEvent(new TouchEvent('touchstart',{bubbles:true,touches:[touch(startX)],changedTouches:[touch(startX)]}));
+                  panel.dispatchEvent(new TouchEvent('touchend',{bubbles:true,touches:[],changedTouches:[touch(endX)]}));
+                }""", {"startX": start_x, "endX": end_x})
+            swipe_quest(300, 100)
+            expect(quest_tablist.get_by_role("tab", name="Bulletin Board")).to_have_attribute("aria-selected", "true")
+            swipe_quest(300, 100)
+            expect(quest_tablist.get_by_role("tab", name="Epics")).to_have_attribute("aria-selected", "true")
+            swipe_quest(100, 300)
+            expect(quest_tablist.get_by_role("tab", name="Bulletin Board")).to_have_attribute("aria-selected", "true")
+            select_tab(page, quest_tablist, "Journeys")
+            scrolled = page.evaluate("""() => {
+              const outer=document.getElementById('panel-journeys');outer.scrollTop=80;
+              const panel=document.getElementById('panel-quest-list');
+              const touch=y=>new Touch({identifier:2,target:panel,clientX:150,clientY:y});
+              panel.dispatchEvent(new TouchEvent('touchstart',{bubbles:true,touches:[touch(150)],changedTouches:[touch(150)]}));
+              panel.dispatchEvent(new TouchEvent('touchmove',{bubbles:true,cancelable:true,touches:[touch(260)],changedTouches:[touch(260)]}));
+              const prompted=!document.querySelector('.pull-refresh-indicator').hidden;
+              panel.dispatchEvent(new TouchEvent('touchend',{bubbles:true,touches:[],changedTouches:[touch(260)]}));
+              return {scrollTop:outer.scrollTop,prompted};
+            }""")
+            assert scrolled["scrollTop"] > 1 and not scrolled["prompted"], "Pull refresh started below the top"
+            page.locator("#panel-journeys").evaluate("el => el.scrollTop = 0")
         if width == 390:
             page.evaluate("GameSelectedCharacter.id = 'stale-character'")
         page.locator("[data-quest-template]").first.click()
@@ -279,7 +312,7 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         if width == 390:
             def lose_departure_response(route):
                 payload = json.loads(route.request.post_data or "{}")
-                if not payload.get("accept_rank_risk"):
+                if lost_response["count"]:
                     route.fallback()
                     return
                 response = client.post("/api/encounters", json=payload,

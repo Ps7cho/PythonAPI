@@ -161,6 +161,7 @@ class QuestTemplateRead(BaseModel):
     enemy_pool: list[str]
     possible_rewards: list[str]
     journey: dict = Field(default_factory=dict)
+    rank_index: int | None = None
 
 
 def seed_quest_templates() -> None:
@@ -208,7 +209,11 @@ def read_template(template):
 def read_templates(db, templates):
     from random import Random
     from app.models import RaidRotation
+    from app.progression import ranks
     data = [read_template(t) for t in templates]
+    rank_positions = {rank.slug: i for i, rank in enumerate(ranks(db))}
+    for entry in data:
+        entry['rank_index'] = rank_positions.get(entry['journey'].get('required_rank', 'iron'))
     raids = [d['journey']['raid'] for d in data if d['journey'].get('raid')]
     from app.raids import rotation_completions
     completions = rotation_completions(db, [r['rotation']['seed'] for r in raids])

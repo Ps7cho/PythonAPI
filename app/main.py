@@ -286,6 +286,7 @@ def create_adventurer(payload: dict, db: Session = Depends(get_db), user: User =
 @app.get("/api/adventurers")
 def my_adventurers(db: Session = Depends(get_db), user: User = Depends(current_user)):
     heroes = list(db.scalars(select(Adventurer).where(Adventurer.owner == user.id).order_by(Adventurer.created_at)))
+    rank_catalog = ranks(db)
     hero_ids = {hero.id for hero in heroes}
     active_encounters = db.scalars(select(Encounter).join(QuestRun).where(
         QuestRun.status.in_(["active", "awaiting_continue"]),
@@ -298,6 +299,7 @@ def my_adventurers(db: Session = Depends(get_db), user: User = Depends(current_u
     }
     return [{"id": str(h.id), "name": h.name, "health": h.health, "is_alive": h.is_alive,
              "rank": describe_progression(db, h)["rank"], "rank_level": h.level,
+             "rank_index": max(i for i, rank in enumerate(rank_catalog) if h.level >= rank.min_level),
              "essence_types": [essence["name"] for essence in describe_essences(db, h.id)],
              "active_encounter_id": active_by_hero.get(str(h.id)),
              "statistics": h.statistics or {}}
