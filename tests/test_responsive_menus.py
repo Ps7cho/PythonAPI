@@ -171,15 +171,64 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
 
         select_tab(page, main, "Worldsmith")
         nav = page.locator(".studio-nav")
-        expect(nav.locator("button").first).to_be_visible()
+        library_toggle = page.get_by_role("button", name="Choose Worldsmith library")
+        if width <= 390:
+            library_toggle.click()
+            expect(nav.locator("button").first).to_be_visible()
+            library_filter = page.get_by_label("Find a Worldsmith library")
+            library_filter.fill("weapon")
+            assert nav.locator("button:visible").count() >= 3
+            assert all("weapon" in label.lower() for label in nav.locator("button:visible").all_text_contents())
+            library_filter.fill("")
+        else:
+            expect(nav.locator("button").first).to_be_visible()
         worldsmith_labels = [label.strip() for label in nav.locator("button span").all_text_contents()]
         assert len(worldsmith_labels) >= 20, "Worldsmith menu is incomplete"
         for label in worldsmith_labels:
+            if width <= 390 and library_toggle.get_attribute("aria-expanded") == "false":
+                library_toggle.click()
             button = nav.locator("button").filter(has=page.get_by_text(label, exact=True))
             button.click()
             expect(button).to_have_attribute("aria-current", "true")
             expect(page.locator(".studio-heading h2")).to_have_text(
                 "Manage saved data" if label == "Manage data" else label)
+            if width <= 390:
+                expect(library_toggle).to_have_attribute("aria-expanded", "false")
+
+        if width <= 390:
+            library_toggle.click()
+            nav.locator("button").filter(has=page.get_by_text("Weapons", exact=True)).click()
+            browser_panel = page.locator(".studio-browser")
+            expect(browser_panel.locator(".studio-panel")).to_be_visible()
+            assert browser_panel.locator(".studio-panel").evaluate("el => el.clientHeight") >= 200
+            expect(browser_panel.locator(".studio-detail")).to_be_hidden()
+            browser_panel.locator(".studio-row").first.click()
+            expect(browser_panel.locator(".studio-detail")).to_be_visible()
+            expect(browser_panel.locator(".studio-detail").get_by_role("button", name="Edit", exact=True)).to_be_disabled()
+            browser_panel.get_by_role("button", name="Back to list").click()
+            expect(browser_panel.locator(".studio-panel")).to_be_visible()
+            library_toggle.click()
+            nav.locator("button").filter(has=page.get_by_text("Armor Effects", exact=True)).click()
+            browser_panel.locator(".studio-row").first.click()
+            expect(browser_panel.locator(".studio-detail")).to_be_visible()
+            browser_panel.locator(".studio-detail").get_by_role("button", name="Edit", exact=True).click()
+            editor = page.locator("dialog.catalog-editor")
+            expect(editor).to_be_visible()
+            editor_bounds = editor.bounding_box()
+            assert editor_bounds["width"] <= width + 1
+            assert editor_bounds["height"] <= height + 1
+            editor.get_by_role("button", name="Cancel", exact=True).click()
+            expect(editor).to_be_hidden()
+            browser_panel.get_by_role("button", name="Back to list").click()
+            expect(browser_panel.locator(".studio-panel")).to_be_visible()
+            library_toggle.click()
+            nav.locator("button").filter(has=page.get_by_text("Manage data", exact=True)).click()
+            expect(page.locator(".studio-heading h2")).to_have_text("Manage saved data")
+            expect(browser_panel.locator(".studio-panel")).to_be_visible()
+            browser_panel.locator(".studio-row").first.click()
+            expect(browser_panel.locator(".studio-detail")).to_be_visible()
+            browser_panel.get_by_role("button", name="Back to list").click()
+            expect(browser_panel.locator(".studio-panel")).to_be_visible()
 
         select_tab(page, main, "Character")
         sheet = page.frame_locator("iframe[data-character-frame]")
