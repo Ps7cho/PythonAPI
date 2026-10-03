@@ -18,6 +18,8 @@ class ControlledRoll:
         self.weight_calls += 1
         assert weights == [e['weight'] for e in entries] and k == 1
         return [entries[self.selected]]
+    def randint(self, low, high):
+        return low
 
 
 def table(chance=60):

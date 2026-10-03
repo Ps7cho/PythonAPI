@@ -13,6 +13,8 @@ from app.models import Adventurer, Weapon, WeaponType, Consumable
 class LootDrop(BaseModel):
     name: str = Field(min_length=1, max_length=100)
     weapon_type_slug: str | None = None
+    weapon_definition_slug: str | None = None
+    effect_pool_slug: str | None = None
     base_damage: int | None = Field(default=None, ge=1, le=1000)
     consumable_slug: str | None = None
     quantity: int = Field(default=1, strict=True, ge=1, le=99)
@@ -20,7 +22,7 @@ class LootDrop(BaseModel):
     @model_validator(mode="after")
     def item_kind(self):
         if self.consumable_slug:
-            if self.weapon_type_slug or self.base_damage is not None:
+            if self.weapon_type_slug or self.base_damage is not None or self.weapon_definition_slug or self.effect_pool_slug:
                 raise ValueError("Loot must be a weapon or a consumable, not both")
         elif not self.weapon_type_slug or self.base_damage is None:
             raise ValueError("Weapon loot requires a type and damage")
@@ -65,6 +67,24 @@ def validate_group_catalog(db, settings):
         raise HTTPException(409, 'Group loot references an unavailable consumable.')
     if set(db.scalars(select(WeaponType.slug).where(WeaponType.slug.in_(types)))) != types:
         raise HTTPException(409, "Group loot references an unavailable weapon type.")
+    from app.models import WeaponDefinition, WeaponEffectPool
+    for tier in rules['loot_tiers']:
+        for drop in tier['drops']:
+            if drop.get('weapon_definition_slug'):
+                blueprint = db.get(WeaponDefinition, drop['weapon_definition_slug'])
+                if not blueprint or blueprint.weapon_type_slug != drop.get('weapon_type_slug'):
+                    raise HTTPException(409, 'Loot blueprint must match the weapon type.')
+            if drop.get('effect_pool_slug') and not db.get(WeaponEffectPool, drop['effect_pool_slug']):
+                raise HTTPException(409, 'Loot references an unavailable weapon effect pool.')
+
+
+def snapshot_loot_effects(db, journey):
+    from app.weapon_effects import pool_snapshot
+    for tier in (journey.get('encounter_groups') or {}).get('loot_tiers', []):
+        for drop in tier['drops']:
+            if drop.get('weapon_type_slug') and 'weapon_effect_pool' not in drop:
+                drop['weapon_effect_pool'] = pool_snapshot(db, drop['weapon_type_slug'],
+                    definition_slug=drop.get('weapon_definition_slug'), pool_slug=drop.get('effect_pool_slug'))
 
 
 def annotate_lengths(plan, lengths):
@@ -191,7 +211,8 @@ def claim_group_loot(db, quest, participants):
                     from app.consumables import grant
                     grant(db, hero.id, drop['consumable_slug'], drop.get('quantity', 1))
                 else:
-                    db.add(Weapon(adventurer_id=hero.id, **{k: drop[k] for k in ('name', 'weapon_type_slug', 'base_damage', 'required_rank')}))
+                    db.add(Weapon(adventurer_id=hero.id, effects=deepcopy(drop.get('effects', [])),
+                                  **{k: drop[k] for k in ('name', 'weapon_type_slug', 'base_damage', 'required_rank')}))
         elif journey.get('death_policy') == 'rescue_on_return':
             hero.health = 1
             hero.is_alive = True
@@ -218,4 +239,8 @@ def roll_loot(tier, rng):
     chance = tier.get('drop_chance_percent', 100)
     if chance < 100 and rng.randrange(100) >= chance:
         return None
-    return deepcopy(rng.choices(tier['drops'], weights=[d['weight'] for d in tier['drops']], k=1)[0])
+    drop = deepcopy(rng.choices(tier['drops'], weights=[d['weight'] for d in tier['drops']], k=1)[0])
+    if 'weapon_effect_pool' in drop:
+        from app.weapon_effects import roll_effects
+        drop['effects'] = roll_effects(drop.pop('weapon_effect_pool'), rng)
+    return drop

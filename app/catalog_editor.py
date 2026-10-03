@@ -17,6 +17,7 @@ from app.auth import current_user
 from app.database import get_db
 
 CATALOGS = {
+    'weapon_effects': m.WeaponEffect, 'weapon_effect_pools': m.WeaponEffectPool,
     'gauntlets': m.GauntletDefinition,
     'ability_archetypes': m.AbilityArchetype,
     'abilities': m.Ability, 'quests': m.QuestTemplate, 'enemies': m.Enemy,
@@ -29,6 +30,7 @@ CATALOGS = {
     'gear_definitions': m.GearDefinition,
 }
 ENUMS = {
+    ('weapon_effects', 'recipient'): ['targets', 'self'],
     ('abilities', 'effect_type'): ['damage', 'guard', 'heal', 'buff', 'shield', 'cleanse', 'evade', 'affliction'],
     ('abilities', 'target_type'): ['self', 'ally', 'enemy', 'party'],
     ('abilities', 'cooldown_type'): ['turn', 'minutes', 'hours'],
@@ -137,6 +139,10 @@ def require(condition, message):
 
 
 def validate_values(model, data, catalog):
+    if model in (m.WeaponType, m.WeaponDefinition):
+        data = {'effect_pool_slug': None, **data}
+    elif model is m.EnemyWeapon:
+        data = {'effect_slugs': [], **data}
     fields = {c.name: c for c in columns(model)}
     require(set(data) == set(fields), 'Supply exactly the editable fields shown in this definition.')
     require(len(json.dumps(data, allow_nan=False)) <= 200_000, 'Definition is too large (maximum 200 KB).')
@@ -219,6 +225,8 @@ def validate_definition(db, row):
         require(isinstance(row.affliction_ops, list), 'affliction_ops must be an array.')
         for op in row.affliction_ops:
             require(isinstance(op, dict) and db.get(m.StatusEffect, op.get('affliction')) is not None, 'Each operation must reference an existing affliction.')
+        from app.weapon_effects import validate_ability_role
+        validate_ability_role(row.status_effect_slug, row.affliction_ops)
         resolve_operations(row)
     elif isinstance(row, m.AbilityArchetype):
         from app.ability_design import validate_template
@@ -228,6 +236,8 @@ def validate_definition(db, row):
             require(isinstance(status_slug, str) and db.get(m.StatusEffect, status_slug) is not None, 'Unknown affliction definition.')
         for op in row.definition.get('affliction_ops', []):
             require(isinstance(op, dict) and db.get(m.StatusEffect, op.get('affliction')) is not None, 'Each operation must reference an existing affliction.')
+        from app.weapon_effects import validate_ability_role
+        validate_ability_role(status_slug, row.definition.get('affliction_ops', []))
         resolve_operations(m.Ability(affliction_ops=row.definition.get('affliction_ops', [])), db=db)
         for slug in row.definition['rank_upgrades']:
             require(db.get(m.RankDefinition, slug) is not None, 'Unknown upgrade rank.')
@@ -268,6 +278,16 @@ def validate_definition(db, row):
         number('weight', 1, 10000); number('priority', 0, 10000)
     elif isinstance(row, m.WeaponType):
         strings(row.tags, 'tags')
+    elif isinstance(row, m.WeaponEffect):
+        from app.weapon_effects import validate_effect
+        validate_effect(db, row)
+    elif isinstance(row, m.WeaponEffectPool):
+        from app.weapon_effects import validate_pool
+        validate_pool(db, row)
+    elif isinstance(row, m.EnemyWeapon):
+        strings(row.effect_slugs, 'effect_slugs')
+        require(len(row.effect_slugs) <= 4 and len(set(row.effect_slugs)) == len(row.effect_slugs), 'An enemy weapon supports up to four distinct effects.')
+        require(all(db.get(m.WeaponEffect, slug) for slug in row.effect_slugs), 'Enemy weapon references an unknown effect.')
     elif isinstance(row, m.WeaponDefinition):
         number('base_damage', 1, 1000)
     elif isinstance(row, m.EntityType):

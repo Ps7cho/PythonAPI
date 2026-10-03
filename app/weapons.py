@@ -33,8 +33,8 @@ def grant_starter_weapon(db, hero):
     if db.scalar(select(AuctionListing.id).where(AuctionListing.seller_id == hero.id,
             AuctionListing.item['item_type'].as_string() == 'weapon').limit(1)):
         return
-    weapon = Weapon(adventurer_id=hero.id, weapon_type_slug="sword", name="Training Sword", base_damage=10)
-    db.add(weapon)
+    from app.weapon_effects import create_weapon
+    weapon = create_weapon(db, adventurer_id=hero.id, weapon_type_slug="sword", name="Training Sword", base_damage=10)
     db.flush()
     db.add(EquippedWeapon(adventurer_id=hero.id, weapon_id=weapon.id))
 
@@ -60,7 +60,8 @@ def seed_weapons():
 
 def serialize_weapon(weapon):
     return {"id": str(weapon.id), "name": weapon.name, "weapon_type": weapon.weapon_type_slug,
-            "tags": list(weapon.weapon_type.tags), "base_damage": weapon.base_damage, "required_rank": weapon.required_rank}
+            "tags": list(weapon.weapon_type.tags), "base_damage": weapon.base_damage, "required_rank": weapon.required_rank,
+            "effects": weapon.effects or []}
 
 
 def equipped_weapon(db, hero):
@@ -82,8 +83,12 @@ def enemy_weapon(db, slug, power, assignments=None):
     entry = assignments.get(slug) if assignments is not None else (db.get(EnemyWeapon, slug) if slug else None)
     if entry is None:
         return None
+    from app.weapon_effects import snapshot_effect
+    from app.models import WeaponEffect
     return {"name": entry.weapon_type.name, "weapon_type": entry.weapon_type_slug,
-            "tags": list(entry.weapon_type.tags), "base_damage": power}
+            "tags": list(entry.weapon_type.tags), "base_damage": power,
+            "effects": [snapshot_effect(db, effect) for effect_slug in (entry.effect_slugs or [])
+                        if (effect := db.get(WeaponEffect, effect_slug)) is not None]}
 
 
 class EquipWeaponRequest(BaseModel):

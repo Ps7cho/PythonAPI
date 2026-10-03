@@ -99,3 +99,8 @@ def migrate(engine):
             from app.migrations.v030_gauntlets import upgrade as gauntlets_upgrade
             gauntlets_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('030_gauntlets')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='031_weapon_effects'")).first():
+            from app.migrations.v031_weapon_effects import upgrade as weapon_effects_upgrade
+            weapon_effects_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('031_weapon_effects')"))

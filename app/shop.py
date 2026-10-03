@@ -110,8 +110,9 @@ def purchase(payload: PurchaseRequest, db: Session = Depends(get_db), user: User
     else:
         rank = db.scalar(select(RankDefinition).where(RankDefinition.slug == "iron"))
         for _ in range(payload.quantity):
-            db.add(Weapon(adventurer_id=hero.id, weapon_type_slug=item.slug,
+            from app.weapon_effects import create_weapon
+            create_weapon(db, adventurer_id=hero.id, weapon_type_slug=item.slug,
                           name=item.name, base_damage=12 + list(WEAPON_PRICES).index(item.slug) * 2,
-                          required_rank=rank.slug if rank else "iron"))
+                          required_rank=rank.slug if rank else "iron")
     db.commit()
     return {"gold": hero.gold, "message": f"Bought {payload.quantity} x {item.name}."}

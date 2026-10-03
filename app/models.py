@@ -403,11 +403,35 @@ class GameEvent(Base):
     quest_run = relationship("QuestRun", back_populates="events")
 
 
+class WeaponEffect(Base):
+    __tablename__ = 'weapon_effects'
+    slug = Column(String, primary_key=True)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=False, default='')
+    proc_chance_percent = Column(Integer, nullable=False, default=100)
+    allowed_weapon_tags = Column(JSON, nullable=False, default=list)
+    recipient = Column(String, nullable=False, default='targets')
+    affliction_ops = Column(JSON, nullable=False, default=list)
+    effect_chain = Column(JSON, nullable=False, default=list)
+
+
+class WeaponEffectPool(Base):
+    __tablename__ = 'weapon_effect_pools'
+    slug = Column(String, primary_key=True)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=False, default='')
+    chance_percent = Column(Integer, nullable=False, default=35)
+    min_effects = Column(Integer, nullable=False, default=1)
+    max_effects = Column(Integer, nullable=False, default=1)
+    entries = Column(JSON, nullable=False, default=list)
+
+
 class WeaponType(Base):
     __tablename__ = "weapon_types"
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False, unique=True)
     tags = Column(JSON, nullable=False, default=list)
+    effect_pool_slug = Column(String, ForeignKey('weapon_effect_pools.slug'), nullable=True)
 
 
 class WeaponDefinition(Base):
@@ -417,6 +441,7 @@ class WeaponDefinition(Base):
     name = Column(String, nullable=False, unique=True)
     weapon_type_slug = Column(String, ForeignKey("weapon_types.slug"), nullable=False)
     base_damage = Column(Integer, nullable=False)
+    effect_pool_slug = Column(String, ForeignKey('weapon_effect_pools.slug'), nullable=True)
     required_rank = Column(String, ForeignKey("rank_definitions.slug"), nullable=False, default="iron")
     weapon_type = relationship("WeaponType")
 
@@ -455,6 +480,7 @@ class Weapon(Base):
     weapon_type_slug = Column(String, ForeignKey("weapon_types.slug"), nullable=False)
     name = Column(String, nullable=False)
     base_damage = Column(Integer, nullable=False)
+    effects = Column(JSON, nullable=False, default=list)
     weapon_type = relationship("WeaponType")
 
 
@@ -468,6 +494,7 @@ class EquippedWeapon(Base):
 class EnemyWeapon(Base):
     __tablename__ = "enemy_weapons"
     enemy_slug = Column(String, ForeignKey("enemies.slug"), primary_key=True)
+    effect_slugs = Column(JSON, nullable=False, default=list)
     weapon_type_slug = Column(String, ForeignKey("weapon_types.slug"), nullable=False)
     weapon_type = relationship("WeaponType")
 

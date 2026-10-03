@@ -75,8 +75,8 @@ raids substitute the saved rotation seed and stage, independent of loot and AI R
 Old derived-stat snapshots default missing chances to zero. Flinch state clears
 when moving to another encounter.
 
-Status-effect catalogs define tick damage, duration, and stack caps. Abilities link
-one optional status; entity-type profiles map status slugs to percentage resistance
+Status-effect catalogs define tick damage, duration, and stack caps. Weapon effects apply
+afflictions; abilities exploit, transform, or recover them. Entity-type profiles map status slugs to percentage resistance
 (100 means immunity). Definitions and profiles are eagerly loaded and snapshotted.
 Players use the humanoid profile. Reapplication adds a stack up to the cap and
 refreshes the shared duration; a cap of one gives refresh-only behavior.
@@ -192,6 +192,22 @@ equipped-weapon records select the character's default weapon. Enemy weapon assi
 pair a type with rolled encounter power. Weapon attacks require a compatible
 selected weapon and use its damage multiplied by the ability coefficient.
 Nonweapon attacks use their own damage or actor-power scaling.
+
+Worldsmith weapon effects reuse validated affliction applications and the ability
+follow-up/modifier interpreter. Effects proc once per landed weapon cast, before
+the attacking ability's affliction interactions. Dodged targets are excluded;
+nonweapon casts and follow-up damage cannot recursively proc weapon effects.
+All effects participate in the parent atomic cast and use its combat RNG.
+
+Weapon effect pools define an optional generation chance, a bounded effect count,
+and weighted entries chosen without replacement. Weapon types select a default
+pool; blueprint or loot rules can override it. Empty type pools or zero-chance pools
+produce plain weapons. Tags filter eligible effects. Creation, shops, and rank
+rewards roll once; departure snapshots loot pools and drops save their rolls before
+extraction. Each weapon stores resolved affliction and effect definitions, retained
+through trading and subsequent catalog edits. Enemy weapon assignments select fixed
+effects which are snapshotted at departure. Legacy application content is converted
+after bootstrap seeds by migration 032; existing encounter snapshots stay intact.
 
 Saved equipment and favorite slots are locked during adventures. All owned weapons
 and learned skills are snapshotted for combat, carried in a pocket dimension.

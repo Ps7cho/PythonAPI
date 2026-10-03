@@ -176,6 +176,8 @@ def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-ba
             increment(hero, adventures_started=1, encounters_started=1)
             increment_account(owner_map[hero.owner], adventures_started=1, encounters_started=1)
 
+    from app.group_journeys import snapshot_loot_effects
+    snapshot_loot_effects(db, journey)
     new_party = party is None
     if new_party:
         party = Party(name="Adventuring party", leader=heroes[0].id)

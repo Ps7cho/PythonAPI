@@ -16,7 +16,7 @@ def upgrade(conn):
     for row in conn.execute(select(GearDefinition)).mappings():
         gear.append({'item_type':'gear','slug':row['slug'],'name':row['name'],'slot':row['slot'],'bonuses':row['bonuses'],'price':row['price'],'required_rank':row['required_rank']})
     weapons = []
-    for row in conn.execute(select(WeaponType)).mappings():
+    for row in conn.execute(select(WeaponType.slug, WeaponType.name, WeaponType.tags)).mappings():
         if row['slug'] in WEAPON_PRICES:
             weapons.append({'item_type':'weapon','slug':row['slug'],'name':row['name'],'price':WEAPON_PRICES[row['slug']], 'tags':row['tags'],'base_damage':12 + list(WEAPON_PRICES).index(row['slug']) * 2})
     consumables = [{'item_type':'consumable','slug':item['slug'],'name':item['name'],'price':CONSUMABLE_PRICES[item['slug']], 'quantity':1,'description':item['description']} for item in DEFINITIONS if item['slug'] in CONSUMABLE_PRICES]

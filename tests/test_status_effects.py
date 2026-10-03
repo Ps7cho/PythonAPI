@@ -66,10 +66,13 @@ def test_database_definitions_profiles_and_snapshot_stability():
     with SessionLocal() as db:
         ability = db.scalar(select(Ability).where(Ability.slug == 'shadow_hex'))
         snapshot = executable(ability)
-        assert snapshot.status_effect['slug'] == 'necrosis'
-        original = ability.status_effect.damage
-        ability.status_effect.damage = 99
-        assert snapshot.status_effect['damage'] == original
+        assert snapshot.status_effect is None
+        from app.models import WeaponEffect, StatusEffect
+        from app.weapon_effects import snapshot_effect
+        weapon_effect = snapshot_effect(db, db.get(WeaponEffect, 'application-shadow_hex'))
+        original = db.get(StatusEffect, 'necrosis').damage
+        db.get(StatusEffect, 'necrosis').damage = 99
+        assert weapon_effect['affliction_ops'][0]['definition']['damage'] == original
         db.rollback()
         enemy = roll_enemy(db.get(Enemy, 'undead'), 1).state
         assert enemy['status_resistances']['bleed'] == 100
@@ -161,7 +164,13 @@ def test_player_can_equip_and_apply_database_status(client):
     hero = client.post('/api/adventurers', json={'name': 'Venom fighter'}).json()['id']
     abilities = client.get('/api/adventurers/' + hero).json()['abilities']
     venom = next(a for a in abilities if a['name'] == 'Venom Strike')
-    assert venom['status_effect']['max_stacks'] == 3
+    assert venom['status_effect'] is None
+    assert venom['affliction_ops'][0]['op'] == 'exploit'
+    from app.models import Weapon, WeaponEffect
+    from app.weapon_effects import snapshot_effect
+    with SessionLocal.begin() as db:
+        weapon = db.scalar(select(Weapon).where(Weapon.adventurer_id == UUID(hero)))
+        weapon.effects = [snapshot_effect(db, db.get(WeaponEffect, 'application-venom_strike'))]
     equipped = client.post('/api/adventurers/' + hero + '/loadout', json={'ability_ids': [venom['id']]})
     assert equipped.status_code == 200
     encounter = client.post('/api/encounters', json={'adventurer_ids': [hero]}).json()

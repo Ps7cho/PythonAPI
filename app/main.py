@@ -69,6 +69,8 @@ seed_status_abilities()
 from app.migrations.v018_affliction_grammar import seed_grammar
 seed_grammar(engine)
 seed_weapons()
+from app.migrations.v032_weapon_applications import migrate_seeded_content
+migrate_seeded_content(engine)
 seed_loot_types()
 link_legacy_enemies()
 

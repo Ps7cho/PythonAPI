@@ -43,7 +43,8 @@ def award_experience(db, hero, amount):
     for rank in ranks(db):
         if old_rank.min_level < rank.min_level <= hero.level:
             if rank.equipment_reward:
-                db.add(Weapon(adventurer_id=hero.id, required_rank=rank.slug, **rank.equipment_reward))
+                from app.weapon_effects import create_weapon
+                create_weapon(db, adventurer_id=hero.id, required_rank=rank.slug, **rank.equipment_reward)
             events.append(f"RANK UP: {hero.name} reached {rank.name}! " + "; ".join(rank.unlocks))
     return events
 

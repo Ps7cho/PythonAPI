@@ -153,6 +153,7 @@ def test_catalog_loadout_and_api_execution(client):
         'actor_id': hero, 'expected_turn': 1, 'ability_id': flash['id']})
     assert response.status_code == 200, response.text
     state = response.json()
-    assert state['enemies'][0]['statuses'][0]['slug'] == 'burn'
-    assert any(r.get('interaction') == 'apply' for r in state['action_results'])
+    assert not state['enemies'][0]['statuses']  # Flashpoint exploits weapon-applied Burn; it no longer applies it.
+    assert not any(r.get('interaction') == 'apply' for r in state['action_results'])
+    assert any(r.get('interaction') == 'exploit' for r in state['action_results'])
     assert client.get('/api/encounters/' + encounter['id']).json()['enemies'] == state['enemies']

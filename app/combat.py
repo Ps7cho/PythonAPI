@@ -221,6 +221,8 @@ def execute_cast(actor: dict, ability: CombatAbility, targets: list[dict], *, tu
     results = [_execute_action(copies[actor['id']], ability, copies[target['id']], turn=turn,
                                charge_cooldown=index == len(targets) - 1, rng=rng)
                for index, target in enumerate(targets)]
+    from app.weapon_effects import execute_weapon_effects
+    weapon_results = execute_weapon_effects(copies[actor['id']], ability, copies, results, turn, rng, before)
     if ability.affliction_ops:
         from app.afflictions import execute
         dodged = {r['target_id'] for r in results if r['dodged']}
@@ -229,6 +231,7 @@ def execute_cast(actor: dict, ability: CombatAbility, targets: list[dict], *, tu
     if chain:
         results.extend(execute_effect_chain(copies[actor['id']], ability, chain, copies,
                                             [t['id'] for t in targets], results, turn, rng))
+    results[len(targets):len(targets)] = weapon_results
     for key, original in originals.items():
         original.clear()
         original.update(copies[key])

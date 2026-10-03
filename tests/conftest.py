@@ -42,6 +42,10 @@ def client(monkeypatch):
     # Neutral attributes keep existing fixed-damage regression scenarios meaningful.
     # Attribute integration tests replace this generator with explicit real builds.
     from app import main
+    from random import Random
+    # Keep regression characters plain with the default optional pool. Tests of
+    # guaranteed/custom weapon effects still exercise normal generation.
+    monkeypatch.setattr('app.weapon_effects.SystemRandom', lambda: Random(0))
     monkeypatch.setattr(main, 'generate_attribute_budget', lambda: {name: 0 for name in main.ATTRIBUTE_NAMES})
     with TestClient(app) as client:
         response = client.post('/api/auth/register', json={
