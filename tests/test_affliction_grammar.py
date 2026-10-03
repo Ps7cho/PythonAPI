@@ -145,7 +145,7 @@ def test_catalog_loadout_and_api_execution(client):
     assert client.get('/api/afflictions/grammar').status_code == 200
     hero = client.post('/api/adventurers', json={'name': 'Grammar tester'}).json()['id']
     abilities = client.get('/api/adventurers/' + hero).json()['abilities']
-    flash = next(a for a in abilities if a['name'] == 'Flashpoint')
+    flash = next(a for a in abilities if a['name'] == 'Judgment')
     assert client.post('/api/adventurers/' + hero + '/loadout',
                        json={'ability_ids': [flash['id']]}).status_code == 200
     encounter = client.post('/api/encounters', json={'adventurer_ids': [hero]}).json()
@@ -153,7 +153,7 @@ def test_catalog_loadout_and_api_execution(client):
         'actor_id': hero, 'expected_turn': 1, 'ability_id': flash['id']})
     assert response.status_code == 200, response.text
     state = response.json()
-    assert not state['enemies'][0]['statuses']  # Flashpoint exploits weapon-applied Burn; it no longer applies it.
+    assert not state['enemies'][0]['statuses']  # Judgment exploits weapon-applied Holy; it no longer applies it.
     assert not any(r.get('interaction') == 'apply' for r in state['action_results'])
     assert any(r.get('interaction') == 'exploit' for r in state['action_results'])
     assert client.get('/api/encounters/' + encounter['id']).json()['enemies'] == state['enemies']

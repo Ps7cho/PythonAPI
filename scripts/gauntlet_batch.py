@@ -92,7 +92,7 @@ def commands(encounter, case):
         if slug == 'wait':
             break
         spec = next((a for a in actor.get('equipped_abilities', []) if slug in (a.get('catalog_slug'), a['slug'])), None)
-        if spec is None:
+        if spec is None or spec.get('trigger_mode') == 'on_hit':
             continue
         if encounter['turn'] < actor.get('ability_ready_turns', {}).get(spec['slug'], 1) or time.time() < actor.get('ability_ready_at', {}).get(spec['slug'], 0):
             continue

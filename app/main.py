@@ -71,6 +71,10 @@ seed_grammar(engine)
 seed_weapons()
 from app.migrations.v032_weapon_applications import migrate_seeded_content
 migrate_seeded_content(engine)
+from app.migrations.v034_remove_application_abilities import migrate_seeded_content as remove_application_abilities
+remove_application_abilities(engine)
+from app.migrations.v037_move_passives_to_armor import migrate_seeded_content as move_passives_to_armor
+move_passives_to_armor(engine)
 seed_loot_types()
 link_legacy_enemies()
 
@@ -111,6 +115,7 @@ def serialize_ability(ability: Ability) -> Dict[str, Any]:
         "rank_upgrades": ability.rank_upgrades,
         "duration_turns": ability.duration_turns,
         "guard_percent": ability.guard_percent,
+        **{key: getattr(ability, key) for key in ("strike_count", "extra_strike_chance", "max_extra_strikes", "trigger_mode", "proc_chance_percent")},
     }
 
 

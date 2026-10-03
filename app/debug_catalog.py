@@ -15,6 +15,7 @@ from app.relationship_layout import essence_orb_ability_layout
 def gameplay_catalog(db, abilities):
     # Only content tables: no accounts, characters, inventory, or run state.
     catalogs = {
+        'armor_effects': models.ArmorEffect,
         'weapon_effects': models.WeaponEffect,
         'weapon_effect_pools': models.WeaponEffectPool,
         'enemies': models.Enemy,

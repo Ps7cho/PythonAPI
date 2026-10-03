@@ -52,8 +52,7 @@ derived stats keep their old balance; enemy rolled stats remain unchanged.
 Creation starts at derived max HP; allocation increases capacity without healing.
 Village/camp healing uses the applicable max HP. Consumables keep catalog potency.
 Direct mitigation runs before Guard's 60% reduction in the shared resolver. DOT wards combine
-multiplicatively with entity resistances; immunity remains absolute. Passive slot capacities are recorded, but
-passive execution and advanced party roles remain planned, explicitly labeled in UI.
+multiplicatively with entity resistances; immunity remains absolute. Passive reactions come from equipped armor effects; active favorites use rank-defined ability slots.
 
 ## Combat Resolution
 
@@ -62,7 +61,7 @@ and resolves any learned ability against legal living targets. The existing acti
 request accepts an optional owned weapon ID; switching weapons costs no extra action.
 `app/combat.py` uses a shared target selector and atomic cast executor for both teams.
 Effects resolve on copies; a failed cast changes no combatants. A successful cast
-charges one cooldown and returns one result per target.
+charges one cooldown and returns individual results for each strike, effect, and reaction.
 
 Direct damage rolls critical chance (0.4% Precision + 0.2% Luck, capped at 40%)
 and flinch chance (0.2% Might + 0.2% Speed, capped at 20%) from saved derived stats.
@@ -139,6 +138,41 @@ positive limit or NULL for all legal targets. Encounter snapshots hold cooldown
 deadlines; character cooldown state preserves remaining turns and absolute timed
 deadlines across new quests. Entering another fight advances one round.
 
+### Repeat strikes and passive reactions
+
+Abilities store `strike_count` (1-10), `extra_strike_chance` (0-100), and
+`max_extra_strikes` (0-10). Damage casts repeat their primary, weapon effects,
+affliction interactions, and follow-ups per strike. After the fixed strikes,
+extra strikes continue until the first failed chance roll or the cap. Each strike
+resolves evasion, criticals, and mitigation independently. Dead selected targets
+are skipped without retargeting; a dead caster stops. The full cast is atomic and
+charges one cooldown. These numeric dials also support rank upgrades/modifiers.
+
+Worldsmith stores reusable `armor_effects` with validated ability-style dials and
+follow-up chains. Armor definitions select up to four effects by slug. Only worn
+armor enters player combat snapshots; owned armor in inventory has no combat
+reaction. Enemy armor assignments use the same definitions. Direct landed hits
+can trigger each armor effect according to its proc chance and cooldown, including
+shielded hits. Dodges, DOT, and reaction-generated results never trigger reactions.
+Dead defenders cannot react. Enemy targeting retaliates against the attacker;
+self/ally/party targeting uses the shared selector. Reactions reuse the atomic
+cast executor and can deal damage, heal, grant resources, or apply modifiers.
+Legacy encounter snapshots that stored passive abilities keep their saved rules.
+New ability definitions must be active; browser and terminal automation select
+active abilities only.
+
+Migration 033 adds these fields. Post-bootstrap migration 034 removes abilities
+whose applications were migrated to weapon effects, cleans learned/equipped and
+recipe references, and gives affected enemies a normal weapon strike. Weapon
+effects and existing encounter snapshots remain. Legacy application seeds
+are disabled after removal. Migration 035 grants Double Strike, Riposte, and
+Recovery Reflex once to existing characters before conversion. Migration 036
+adds armor effects and armor references. Post-bootstrap migration 037 moves all
+passive ability definitions to armor effects, removes those abilities from
+loadouts and learned lists, creates purchasable armor blueprints, and grants the
+corresponding armor to characters who had equipped a passive. It leaves their
+current outfit untouched; they equip the new armor when ready.
+
 ## Consumables
 
 Database consumable definitions supply healing, attack boosts, or status cleansing.
@@ -177,7 +211,7 @@ Evasion resolves inside the shared atomic cast using the same server/raid RNG,
 charges the attacker's normal cooldown, and clears on rest or encounter transition.
 Strike variants use existing weapon or nonweapon damage scaling at 120% power.
 All learned abilities are available in combat and obey normal cooldowns.
-The original richer signature/passive designs remain planned.
+The original richer signature designs remain planned.
 
 Character ownership is required; village item use rejects dead/active characters.
 Combat actions reject essence/orb consumption. The village endpoints share character

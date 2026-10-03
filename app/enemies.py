@@ -116,6 +116,7 @@ def roll_enemy(enemy: Enemy, party_size: int, rng=None, loadouts=None) -> Encoun
     weapon = deepcopy(loadout['weapon']) if loadout is not None else enemy_weapon(object_session(enemy), enemy.slug, rolled['power'])
     if weapon:
         weapon['base_damage'] = rolled['power']
+    from app.armor_effects import enemy_armor_effects
     return EncounterEnemy(id=instance_id, enemy_slug=enemy.slug, position=0, state={
         "id": str(instance_id), "enemy_slug": enemy.slug, "name": enemy.name,
         "enemy_type": enemy.enemy_type, "attributes": deepcopy(enemy.attributes),
@@ -123,6 +124,7 @@ def roll_enemy(enemy: Enemy, party_size: int, rng=None, loadouts=None) -> Encoun
         "hp": hp, "max_hp": hp, **rolled,
         "abilities": deepcopy(loadout["abilities"]) if loadout is not None else enemy_loadout(object_session(enemy), enemy.slug),
         "equipped_weapon": weapon,
+        "armor_effects": enemy_armor_effects(object_session(enemy), enemy),
     })
 
 

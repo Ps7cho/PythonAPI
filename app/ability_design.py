@@ -12,6 +12,8 @@ DIALS = {
     'power': (0, 10000, True), 'damage_multiplier': (0, 100, False),
     'cooldown_value': (0, 10000, True), 'max_targets': (1, 100, True),
     'duration_turns': (1, 100, True), 'guard_percent': (0, 100, True),
+    'strike_count': (1, 10, True), 'extra_strike_chance': (0, 100, True),
+    'max_extra_strikes': (0, 10, True), 'proc_chance_percent': (0, 100, True),
 }
 
 
@@ -25,7 +27,7 @@ class EffectStep(BaseModel):
     split: bool = False
     when: Literal['always', 'on_hit', 'on_damage', 'on_kill'] = 'on_damage'
     resource: str = Field(default='mana', pattern=r'^[a-z][a-z0-9_]{0,39}$')
-    stat: str = Field(default='power', pattern=r'^(power|damage_multiplier|cooldown_value|max_targets|duration_turns|guard_percent|(step|modifier|duration):[a-z][a-z0-9_]{0,39})$')
+    stat: str = Field(default='power', pattern=r'^(power|damage_multiplier|cooldown_value|max_targets|duration_turns|guard_percent|strike_count|extra_strike_chance|max_extra_strikes|proc_chance_percent|(step|modifier|duration):[a-z][a-z0-9_]{0,39})$')
     operation: Literal['add', 'percent'] = 'percent'
     modifier: float = Field(default=25, ge=-10000, le=10000)
     duration: int = Field(default=1, ge=1, le=100)
@@ -141,12 +143,17 @@ def effective_ability(actor, ability, turn):
 TEMPLATE_FIELDS = {'effect_type', 'target_type', 'power', 'damage_multiplier', 'requires_weapon',
                    'allowed_weapon_tags', 'cooldown_type', 'cooldown_value', 'max_targets',
                    'duration_turns', 'guard_percent', 'effect_chain', 'rank_upgrades', 'ability_type',
-                   'status_effect_slug', 'affliction_ops'}
+                   'status_effect_slug', 'affliction_ops', 'strike_count', 'extra_strike_chance',
+                   'max_extra_strikes', 'trigger_mode', 'proc_chance_percent'}
 
 
-def validate_template(data):
+def validate_template(data, *, armor=False):
     if not isinstance(data, dict) or set(data) - TEMPLATE_FIELDS:
         raise ValueError('Archetype contains unsupported definition fields.')
+    if not armor and data.get('trigger_mode', 'active') != 'active':
+        raise ValueError('When-hit passives belong to armor effects, not abilities.')
+    if data.get('trigger_mode', 'active') not in ('active', 'on_hit'):
+        raise ValueError('Unknown ability trigger mode.')
     effect, target = data.get('effect_type', 'damage'), data.get('target_type', 'enemy')
     if effect not in EFFECTS or target not in ('enemy', 'self', 'ally', 'party'):
         raise ValueError('Unknown primary effect or target type.')

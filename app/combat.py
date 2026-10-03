@@ -34,6 +34,11 @@ class CombatAbility:
     duration_turns: int | None = None
     guard_percent: int = GUARD_REDUCTION_PERCENT
     cooldown_unit_seconds: int = 1
+    strike_count: int = 1
+    extra_strike_chance: int = 0
+    max_extra_strikes: int = 1
+    trigger_mode: str = 'active'
+    proc_chance_percent: int = 100
 
 
 
@@ -158,13 +163,8 @@ def _execute_action(actor: dict, ability: CombatAbility, target: dict, *, turn: 
         status_result = apply_status(target, ability.status_effect, actor['id'])
         message += ' ' + status_result
 
-    if charge_cooldown and ability.cooldown_turns:
-        ready_turns[ability.slug] = turn + ability.cooldown_turns
-        actor["ability_ready_turns"] = ready_turns
-        if (ability.catalog_slug or ability.slug) == "power_strike":
-            actor["power_ready_turn"] = ready_turns[ability.slug]
-    if charge_cooldown and ability.cooldown_seconds:
-        actor['ability_ready_at'] = {**actor.get('ability_ready_at', {}), ability.slug: time() + ability.cooldown_seconds}
+    if charge_cooldown:
+        charge_ability_cooldown(actor, ability, turn)
 
     return {"actor_id": actor["id"], "ability": ability.slug, "target_id": target["id"],
             "effect": ability.effect, "amount": amount, "target_hp": target["hp"],
@@ -202,36 +202,109 @@ def select_targets(actor, ability, combatants, target_ids=None, *, turn=None):
     return targets
 
 
-def execute_cast(actor: dict, ability: CombatAbility, targets: list[dict], *, turn: int, rng=None, combatants=None) -> list[dict]:
-    """Resolve the whole cast on copies, publishing state only if every effect succeeds."""
-    from app.ability_design import effective_ability, validate_chain
+def charge_ability_cooldown(actor, ability, turn):
+    if ability.cooldown_turns:
+        actor['ability_ready_turns'] = {**actor.get('ability_ready_turns', {}), ability.slug: turn + ability.cooldown_turns}
+        if (ability.catalog_slug or ability.slug) == 'power_strike':
+            actor['power_ready_turn'] = turn + ability.cooldown_turns
+    if ability.cooldown_seconds:
+        actor['ability_ready_at'] = {**actor.get('ability_ready_at', {}), ability.slug: time() + ability.cooldown_seconds}
+
+
+def execute_reactions(combatants, incoming, turn, rng):
+    """Each landed direct hit can trigger equipped passives. Reaction hits never recurse."""
+    results = []
+    for hit in incoming:
+        if hit['effect'] != 'damage' or hit.get('dodged'):
+            continue
+        defender = combatants[hit['target_id']]
+        attacker = combatants[hit['actor_id']]
+        if defender['team'] == attacker['team']:
+            continue
+        # Legacy encounters retain their saved passive definitions. New snapshots
+        # always have armor_effects, including an empty list when no armor is worn.
+        specs = defender.get('armor_effects')
+        if specs is None:
+            specs = defender.get('equipped_abilities', []) + [entry['ability'] for entry in defender.get('abilities', []) if entry.get('weight', 1) > 0]
+        for spec in specs:
+            if defender['hp'] <= 0:
+                break
+            if spec.get('trigger_mode') != 'on_hit':
+                continue
+            from app.ability_design import effective_ability
+            ability = effective_ability(defender, CombatAbility(**spec), turn)
+            if turn < defender.get('ability_ready_turns', {}).get(ability.slug, 1) or time() < defender.get('ability_ready_at', {}).get(ability.slug, 0):
+                continue
+            try:
+                validate_weapon(defender, ability)
+                # Enemy targeting retaliates against the actual attacker; support
+                # targeting uses the normal self/ally/party selector.
+                targets = select_targets(defender, ability, list(combatants.values()),
+                                         [attacker['id']] if ability.target_type == 'enemy' else None)
+            except InvalidCombatAction:
+                continue
+            if not roll_chance(ability.proc_chance_percent, rng):
+                continue
+            triggered = execute_cast(defender, CombatAbility(**spec), targets, turn=turn, rng=rng,
+                                     combatants=list(combatants.values()), _reaction=True)
+            for result in triggered:
+                result['reaction'] = True
+                result['message'] = 'When hit: ' + result['message']
+            results.extend(triggered)
+    return results
+
+
+def execute_cast(actor: dict, ability: CombatAbility, targets: list[dict], *, turn: int, rng=None, combatants=None, _reaction=False) -> list[dict]:
+    """Resolve bounded strikes and reactions atomically with one cooldown per cast."""
+    from app.ability_design import effective_ability, validate_chain, validate_upgrades
+    if ability.trigger_mode == 'on_hit' and not _reaction:
+        raise InvalidCombatAction('Passive reactions cannot be cast manually.')
     ability = effective_ability(actor, ability, turn)
     if not targets or len({t['id'] for t in targets}) != len(targets):
-        raise InvalidCombatAction("Targets must be nonempty and unique.")
+        raise InvalidCombatAction('Targets must be nonempty and unique.')
     if ability.max_targets is not None and (ability.max_targets < 1 or len(targets) > ability.max_targets):
-        raise InvalidCombatAction("Too many ability targets.")
+        raise InvalidCombatAction('Too many ability targets.')
     rng = rng if rng is not None else Random()
     try:
         chain = validate_chain(ability.effect_chain, ability.target_type)
+        validate_upgrades({'base': {key: getattr(ability, key) for key in
+                          ('strike_count', 'extra_strike_chance', 'max_extra_strikes', 'proc_chance_percent')}}, [])
     except ValueError as exc:
         raise InvalidCombatAction(str(exc)) from exc
     originals = {c['id']: c for c in [*(combatants or []), actor, *targets]}
     copies = deepcopy(originals)
-    before = {key: {s['slug']: s['stacks'] for s in value.get('statuses', [])} for key, value in copies.items()}
-    results = [_execute_action(copies[actor['id']], ability, copies[target['id']], turn=turn,
-                               charge_cooldown=index == len(targets) - 1, rng=rng)
-               for index, target in enumerate(targets)]
-    from app.weapon_effects import execute_weapon_effects
-    weapon_results = execute_weapon_effects(copies[actor['id']], ability, copies, results, turn, rng, before)
-    if ability.affliction_ops:
-        from app.afflictions import execute
-        dodged = {r['target_id'] for r in results if r['dodged']}
-        results.extend(execute(copies[actor['id']], ability, [copies[t['id']] for t in targets],
-                               turn=turn, before=before, dodged=dodged))
-    if chain:
-        results.extend(execute_effect_chain(copies[actor['id']], ability, chain, copies,
-                                            [t['id'] for t in targets], results, turn, rng))
-    results[len(targets):len(targets)] = weapon_results
+    if actor['hp'] <= 0 or any(t['hp'] <= 0 for t in targets):
+        raise InvalidCombatAction('Actor and targets must be alive.')
+    results = []
+    fixed = ability.strike_count if ability.effect == 'damage' else 1
+    extra = ability.max_extra_strikes if ability.effect == 'damage' else 0
+    for index in range(fixed + extra):
+        living = [copies[t['id']] for t in targets if copies[t['id']]['hp'] > 0]
+        caster = copies[actor['id']]
+        if not living or caster['hp'] <= 0:
+            break
+        if index >= fixed and not roll_chance(ability.extra_strike_chance, rng):
+            break
+        before = {key: {s['slug']: s['stacks'] for s in value.get('statuses', [])} for key, value in copies.items()}
+        primary = [_execute_action(caster, ability, target, turn=turn, charge_cooldown=False, rng=rng) for target in living]
+        for hit in primary:
+            hit['strike'] = index + 1
+        from app.weapon_effects import execute_weapon_effects
+        weapon_results = execute_weapon_effects(caster, ability, copies, primary, turn, rng, before)
+        interactions = []
+        if ability.affliction_ops:
+            from app.afflictions import execute
+            interactions = execute(caster, ability, living, turn=turn, before=before,
+                                   dodged={r['target_id'] for r in primary if r['dodged']})
+        followups = execute_effect_chain(caster, ability, chain, copies,
+                                        [t['id'] for t in living], primary + interactions, turn, rng) if chain else []
+        strike_results = primary + weapon_results + interactions + followups
+        results.extend(strike_results)
+        if not _reaction:
+            results.extend(execute_reactions(copies, strike_results, turn, rng))
+    if not results:
+        raise InvalidCombatAction('Actor and targets must be alive.')
+    charge_ability_cooldown(copies[actor['id']], ability, turn)
     for key, original in originals.items():
         original.clear()
         original.update(copies[key])

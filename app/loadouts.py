@@ -24,15 +24,18 @@ class AbilityUseRequest(BaseModel):
     target_ids: list[UUID] | None = Field(default=None, min_length=1, max_length=100)
 
 
-def executable(ability, ladder=(), level=1):
+def executable(ability, ladder=(), level=1, db=None):
     from app.ability_design import rank_values
     values = rank_values(ability, ladder, level)
     return CombatAbility(slug=str(ability.id), name=ability.name, effect=ability.effect_type,
                          effect_chain=values['effect_chain'], duration_turns=values['duration_turns'],
                          guard_percent=values['guard_percent'],
+                         strike_count=values['strike_count'], extra_strike_chance=values['extra_strike_chance'],
+                         max_extra_strikes=values['max_extra_strikes'], trigger_mode=ability.trigger_mode,
+                         proc_chance_percent=values['proc_chance_percent'],
                          cooldown_unit_seconds={'minutes': 60, 'hours': 3600}.get(ability.cooldown_type, 1),
                          status_effect=definition(ability.status_effect) if ability.status_effect else None,
-                         affliction_ops=resolve_operations(ability),
+                         affliction_ops=resolve_operations(ability, db=db),
                          damage=values['power'], catalog_slug=ability.slug, description=ability.description,
                          damage_multiplier=values['damage_multiplier'],
                          requires_weapon=ability.requires_weapon, allowed_weapon_tags=list(ability.allowed_weapon_tags or []),
@@ -47,19 +50,21 @@ def equipped(db, hero):
                        .order_by(EquippedAbility.slot)).all()
     if slots:
         return [known[s.ability_id] for s in slots if s.ability_id in known]
-    return sorted(known.values(), key=lambda a: (a.loadout_order if a.loadout_order is not None else 99, a.name))[:rank_for(db, hero.level).ability_slots]
+    return sorted((a for a in known.values() if a.trigger_mode == 'active'), key=lambda a: (a.loadout_order if a.loadout_order is not None else 99, a.name))[:rank_for(db, hero.level).ability_slots]
 
 
 def combat_loadout(db, hero):
     from app.progression import ranks
-    known = [entry.ability for entry in hero.ability_inventory if entry.unlocked]
+    known = [entry.ability for entry in hero.ability_inventory if entry.unlocked
+             and entry.ability.trigger_mode == 'active']
     return [asdict(executable(a, ranks(db), hero.level)) for a in sorted(known, key=lambda a: (
         a.loadout_order if a.loadout_order is not None else 99, a.name))]
 
 
 def save_loadout(db, hero, ids):
     db.execute(select(Adventurer).where(Adventurer.id == hero.id).with_for_update().execution_options(populate_existing=True)).scalar_one()
-    if not 1 <= len(ids) <= rank_for(db, hero.level).ability_slots:
+    rank = rank_for(db, hero.level)
+    if not 1 <= len(ids) <= rank.ability_slots:
         raise HTTPException(422, "Your rank does not provide that many ability slots.")
     if len(set(ids)) != len(ids):
         raise HTTPException(422, 'Each ability can only occupy one slot.')
@@ -69,7 +74,9 @@ def save_loadout(db, hero, ids):
     known = {entry.ability_id: entry.ability for entry in hero.ability_inventory if entry.unlocked}
     if any(i not in known for i in ids):
         raise HTTPException(422, 'Only learned abilities can be equipped.')
-    if not any(known[i].effect_type == 'damage' or any(op.get('op') == 'detonate' or op.get('op') in ('consume', 'trigger', 'exploit') and op.get('effect', 'damage') == 'damage' for op in known[i].affliction_ops or []) for i in ids):
+    if any(known[i].trigger_mode != 'active' for i in ids):
+        raise HTTPException(422, 'Passive effects must be equipped on armor.')
+    if not any(known[i].trigger_mode == 'active' and (known[i].effect_type == 'damage' or any(op.get('op') == 'detonate' or op.get('op') in ('consume', 'trigger', 'exploit') and op.get('effect', 'damage') == 'damage' for op in known[i].affliction_ops or [])) for i in ids):
         raise HTTPException(422, 'Equip at least one damage ability.')
     if any(known[i].effect_type not in ('damage', 'guard', 'heal', 'buff', 'shield', 'cleanse', 'evade', 'affliction') for i in ids):
         raise HTTPException(422, 'This ability effect is not supported.')

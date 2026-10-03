@@ -13,7 +13,7 @@ def upgrade(conn):
     conn.execute(Village.__table__.insert().values(slug='mosswood', name='Mosswood', region='Mosswood', description='The village exchange and expedition hub.'))
     conn.execute(Shop.__table__.insert().values(slug='mosswood-market', village_slug='mosswood', name='Mosswood Exchange', description='Local weapons, armor, and supplies.'))
     gear = []
-    for row in conn.execute(select(GearDefinition)).mappings():
+    for row in conn.execute(select(GearDefinition.slug, GearDefinition.name, GearDefinition.slot, GearDefinition.bonuses, GearDefinition.price, GearDefinition.required_rank)).mappings():
         gear.append({'item_type':'gear','slug':row['slug'],'name':row['name'],'slot':row['slot'],'bonuses':row['bonuses'],'price':row['price'],'required_rank':row['required_rank']})
     weapons = []
     for row in conn.execute(select(WeaponType.slug, WeaponType.name, WeaponType.tags)).mappings():

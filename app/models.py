@@ -129,6 +129,12 @@ class Ability(Base):
     rank_upgrades = Column(JSON, nullable=False, default=dict)
     duration_turns = Column(Integer, nullable=False, default=lambda context: 2 if context.get_current_parameters().get('effect_type') == 'evade' else 3)
     guard_percent = Column(Integer, nullable=False, default=60)
+    strike_count = Column(Integer, nullable=False, default=1)
+    extra_strike_chance = Column(Integer, nullable=False, default=0)
+    max_extra_strikes = Column(Integer, nullable=False, default=1)
+    trigger_mode = Column(String, nullable=False, default='active')
+    proc_chance_percent = Column(Integer, nullable=False, default=100)
+
     damage_multiplier = Column(Float, nullable=True)
     requires_weapon = Column(Boolean, nullable=False, default=False)
     allowed_weapon_tags = Column(JSON, nullable=False, default=list)
@@ -309,6 +315,7 @@ class GauntletRun(Base):
 
 class Enemy(Base):
     __tablename__ = "enemies"
+    armor_slugs = Column(JSON, nullable=False, default=list)
 
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False, unique=True)
@@ -601,8 +608,17 @@ class AuctionListing(Base):
     )
 
 
+class ArmorEffect(Base):
+    __tablename__ = 'armor_effects'
+    slug = Column(String, primary_key=True)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=False, default='')
+    definition = Column(JSON, nullable=False, default=dict)
+
+
 class GearDefinition(Base):
     __tablename__ = 'gear_definitions'
+    effect_slugs = Column(JSON, nullable=False, default=list)
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False)
     slot = Column(String, nullable=False)

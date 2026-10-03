@@ -17,6 +17,7 @@ from app.auth import current_user
 from app.database import get_db
 
 CATALOGS = {
+    'armor_effects': m.ArmorEffect,
     'weapon_effects': m.WeaponEffect, 'weapon_effect_pools': m.WeaponEffectPool,
     'gauntlets': m.GauntletDefinition,
     'ability_archetypes': m.AbilityArchetype,
@@ -30,6 +31,7 @@ CATALOGS = {
     'gear_definitions': m.GearDefinition,
 }
 ENUMS = {
+    ('abilities', 'trigger_mode'): ['active'],
     ('weapon_effects', 'recipient'): ['targets', 'self'],
     ('abilities', 'effect_type'): ['damage', 'guard', 'heal', 'buff', 'shield', 'cleanse', 'evade', 'affliction'],
     ('abilities', 'target_type'): ['self', 'ally', 'enemy', 'party'],
@@ -139,6 +141,12 @@ def require(condition, message):
 
 
 def validate_values(model, data, catalog):
+    if model is m.GearDefinition:
+        data = {'effect_slugs': [], **data}
+    if model is m.Enemy:
+        data = {'armor_slugs': [], **data}
+    if model is m.Ability:
+        data = {'strike_count': 1, 'extra_strike_chance': 0, 'max_extra_strikes': 1, 'trigger_mode': 'active', 'proc_chance_percent': 100, **data}
     if model in (m.WeaponType, m.WeaponDefinition):
         data = {'effect_pool_slug': None, **data}
     elif model is m.EnemyWeapon:
@@ -205,12 +213,22 @@ def validate_definition(db, row):
             if value is not None:
                 require(db.scalar(select(fk.column).where(fk.column == value)) is not None,
                         f'{column.name} references a missing {fk.column.table.name} definition.')
+    if isinstance(row, m.GearDefinition):
+        strings(row.effect_slugs, 'effect_slugs')
+        require(len(row.effect_slugs) <= 4 and len(set(row.effect_slugs)) == len(row.effect_slugs), 'Armor supports up to four distinct effects.')
+        require(all(db.get(m.ArmorEffect, slug) for slug in row.effect_slugs), 'Unknown armor effect.')
+    if isinstance(row, m.Enemy):
+        strings(row.armor_slugs, 'armor_slugs')
+        require(len(row.armor_slugs) <= 8 and len(set(row.armor_slugs)) == len(row.armor_slugs), 'Enemies support up to eight armor definitions.')
+        require(all(db.get(m.GearDefinition, slug) for slug in row.armor_slugs), 'Unknown armor definition.')
     if isinstance(row, m.GauntletDefinition):
         from app.gauntlets import validate_rules
         row.settings = validate_rules(db, row.settings)
     elif isinstance(row, m.Ability):
         from app.ability_design import validate_chain, validate_upgrades
         number('duration_turns', 1, 100); number('guard_percent', 0, 100)
+        number('strike_count', 1, 10); number('extra_strike_chance', 0, 100)
+        number('max_extra_strikes', 0, 10); number('proc_chance_percent', 0, 100)
         row.effect_chain = validate_chain(row.effect_chain, row.target_type)
         row.rank_upgrades = validate_upgrades(row.rank_upgrades, row.effect_chain)
         for slug in row.rank_upgrades:
@@ -228,9 +246,11 @@ def validate_definition(db, row):
         from app.weapon_effects import validate_ability_role
         validate_ability_role(row.status_effect_slug, row.affliction_ops)
         resolve_operations(row)
-    elif isinstance(row, m.AbilityArchetype):
+    elif isinstance(row, (m.AbilityArchetype, m.ArmorEffect)):
         from app.ability_design import validate_template
-        row.definition = validate_template(row.definition)
+        row.definition = validate_template(row.definition, armor=isinstance(row, m.ArmorEffect))
+        if isinstance(row, m.ArmorEffect):
+            row.definition['trigger_mode'] = 'on_hit'
         status_slug = row.definition.get('status_effect_slug')
         if status_slug:
             require(isinstance(status_slug, str) and db.get(m.StatusEffect, status_slug) is not None, 'Unknown affliction definition.')

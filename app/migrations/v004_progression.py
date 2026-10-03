@@ -13,7 +13,7 @@ def upgrade(conn):
         if i == 1:
             unlocks = ["Fourth ability slot", "Bronze contracts", "Bronze Vanguard Sword"]
         if i == 2:
-            unlocks = ["Second passive slot (passive system planned)", "Silver contracts and Vanguard Sword", "Advanced party roles (planned)"]
+            unlocks = ["Silver contracts and Vanguard Sword", "Advanced party roles (planned)"]
         conn.execute(RankDefinition.__table__.insert().values(slug=name.lower(), name=name,
             min_level=max(1, i * 10), ability_slots=3 if i == 0 else 4,
             passive_slots=1 if i < 2 else 2, unlocks=unlocks,

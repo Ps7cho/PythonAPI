@@ -1,5 +1,6 @@
 from app.attributes import derived_stats
 from app.gear import stats as gear_stats, effective_attributes
+from app.armor_effects import combat_armor_effects
 from app.consumables import inventory as consumable_inventory
 from app.models import OwnedConsumable
 from app.progression import award_experience, rank_for, validate_rank_entry
@@ -206,6 +207,7 @@ def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-ba
                        "attributes": effective_attributes(db, h), "power": 10, "acted": False, "guarding": False,
                        "equipped_weapon": equipped_weapon(db, h),
                        "weapons": combat_weapons(db, h),
+                       "armor_effects": combat_armor_effects(db, h),
                        "consumables": consumable_inventory(db, h.id),
                        **restore_cooldowns(h.combat_cooldowns),
                        "statuses": deepcopy(h.combat_statuses or []),
@@ -417,6 +419,8 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
             alias_id = db.scalar(select(Ability.id).where(Ability.slug == request.action))
         spec = next((a for a in actor['equipped_abilities'] if
                      a['slug'] == str(request.ability_id or alias_id)), None)
+        if spec is not None and spec.get('trigger_mode') == 'on_hit':
+            raise HTTPException(409, 'Passive reactions trigger automatically when hit.')
         if spec is None:
             raise HTTPException(409, 'That ability is not learned.')
         if request.weapon_id is not None:
@@ -457,7 +461,9 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
     events = [result["message"] for result in results]
     actor["acted"] = True
 
-    if all(e["hp"] == 0 for e in enemies):
+    if all(p["hp"] == 0 for p in participants):
+        encounter.state = "defeat"
+    elif all(e["hp"] == 0 for e in enemies):
         encounter.state = "victory"
     elif all(p["acted"] for p in participants if p["hp"] > 0):
         # Resolve the enemy phase within this action's transaction, then wait again.

@@ -13,11 +13,20 @@ SLOTS = ('Head', 'Chest', 'Hands', 'Legs', 'Feet', 'Off Hand', 'Amulet', 'Ring')
 router = APIRouter(prefix='/api/adventurers', tags=['equipment'])
 
 
+def armor_descriptions(gear):
+    from sqlalchemy.orm import object_session
+    from app.models import ArmorEffect
+    db = object_session(gear)
+    return [dict(slug=e.slug, name=e.name, description=e.description, **e.definition)
+            for slug in (gear.definition.effect_slugs or []) if (e := db.get(ArmorEffect, slug)) is not None]
+
+
 def serialize(gear):
     definition = gear.definition
     return dict(id=str(gear.id), item_type='gear', definition_slug=definition.slug,
         name=definition.name, slot=definition.slot, bonuses=definition.bonuses,
-        required_rank=definition.required_rank)
+        required_rank=definition.required_rank,
+        effects=armor_descriptions(gear))
 
 
 def inventory(db, hero):

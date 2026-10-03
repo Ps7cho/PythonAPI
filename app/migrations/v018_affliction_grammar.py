@@ -25,7 +25,10 @@ def seed_abilities(conn):
     from sqlalchemy.dialects.sqlite import insert as sqlite_insert
     from sqlalchemy.dialects.postgresql import insert as postgres_insert
     insert = sqlite_insert if conn.dialect.name == 'sqlite' else postgres_insert
+    removed = conn.execute(text("SELECT version FROM schema_migrations WHERE version='034_remove_application_abilities'")).first()
     for item in GRAMMAR_ABILITIES:
+        if removed and any(op['op'] == 'apply' for op in item.get('affliction_ops', [])):
+            continue
         ability_id = conn.scalar(insert(Ability).values(**item, starter=True, effect_type='affliction',
              ability_type='affliction', power=0, cost_type='None', loadout_order=40,
              cooldown_type='turn', cooldown_value=2).on_conflict_do_nothing(index_elements=['slug']).returning(Ability.id))

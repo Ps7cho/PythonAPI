@@ -64,7 +64,7 @@ def test_failed_multitarget_cast_does_not_leak_damage_status_or_cooldown():
 
 def test_database_definitions_profiles_and_snapshot_stability():
     with SessionLocal() as db:
-        ability = db.scalar(select(Ability).where(Ability.slug == 'shadow_hex'))
+        ability = db.scalar(select(Ability).where(Ability.slug == 'weapon_strike'))
         snapshot = executable(ability)
         assert snapshot.status_effect is None
         from app.models import WeaponEffect, StatusEffect
@@ -163,9 +163,9 @@ def test_camp_rest_cures():
 def test_player_can_equip_and_apply_database_status(client):
     hero = client.post('/api/adventurers', json={'name': 'Venom fighter'}).json()['id']
     abilities = client.get('/api/adventurers/' + hero).json()['abilities']
-    venom = next(a for a in abilities if a['name'] == 'Venom Strike')
+    venom = next(a for a in abilities if a['name'] == 'Strike')
     assert venom['status_effect'] is None
-    assert venom['affliction_ops'][0]['op'] == 'exploit'
+    assert venom['affliction_ops'] == []
     from app.models import Weapon, WeaponEffect
     from app.weapon_effects import snapshot_effect
     with SessionLocal.begin() as db:

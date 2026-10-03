@@ -20,7 +20,7 @@ def plan_moves(participants, enemies, turn, rng_for, now):
         candidates = []
         for entry in enemy.get('abilities', []):
             spec = entry['ability']
-            if (entry['weight'] <= 0 or turn < enemy.get('ability_ready_turns', {}).get(spec['slug'], 1)
+            if (spec.get('trigger_mode') == 'on_hit' or entry['weight'] <= 0 or turn < enemy.get('ability_ready_turns', {}).get(spec['slug'], 1)
                     or now < enemy.get('ability_ready_at', {}).get(spec['slug'], 0)):
                 continue
             ability = CombatAbility(**spec)

@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import inspect, select, text
 
 from app.database import SessionLocal
 from app.models import Ability, Enemy, EnemyAbility
@@ -123,7 +123,17 @@ def seed_enemy_abilities() -> None:
     from sqlalchemy.dialects.postgresql import insert as postgres_insert
     with SessionLocal.begin() as db:
         insert = sqlite_insert if db.bind.dialect.name == 'sqlite' else postgres_insert
+        retired = inspect(db.bind).has_table('schema_migrations') and db.execute(text("SELECT version FROM schema_migrations WHERE version='034_remove_application_abilities'")).first()
+        fallback = None
+        if retired:
+            fallback = db.scalar(select(Ability).where(Ability.slug == 'weapon_strike'))
+            if fallback is None:
+                fallback = Ability(slug='weapon_strike', name='Weapon Strike', description='Attack with the equipped weapon and its effects.',
+                                   requires_weapon=True, damage_multiplier=1, power=0, cost_type='None', allowed_weapon_tags=[])
+                db.add(fallback); db.flush()
         for spec in ABILITIES:
+            if retired and spec['slug'] in ASSIGNMENTS:
+                continue
             db.execute(insert(Ability).values(**spec, status_effect_slug=ASSIGNMENTS.get(spec["slug"])).on_conflict_do_nothing(index_elements=['slug']))
         for enemy_slug, slug, name, cap, multiplier in [
             ('goblin-archer', 'scatter_volley', 'Scatter Volley', 3, 0.75),
@@ -143,7 +153,7 @@ def seed_enemy_abilities() -> None:
         catalog = {a.slug:a for a in db.scalars(select(Ability).where(Ability.slug.in_([a['slug'] for a in ABILITIES])))}
         for slug, _, _, _, _, _, _, _, assignments in ENEMY_SPECS:
             for name in assignments:
-                ability = catalog[name]
+                ability = catalog.get(name) or fallback
                 db.execute(insert(EnemyAbility).values(enemy_slug=slug, ability_id=ability.id,
                     weight=1, priority=2 if ability.effect_type in ('heal','guard') else 1)
                     .on_conflict_do_nothing(index_elements=['enemy_slug','ability_id']))
@@ -161,6 +171,8 @@ def seed_status_abilities():
         ('necrotic_touch', 'Necrotic Touch', 'necrosis', []),
     ]
     with SessionLocal.begin() as db:
+        if inspect(db.bind).has_table('schema_migrations') and db.execute(text("SELECT version FROM schema_migrations WHERE version='034_remove_application_abilities'")).first():
+            return
         insert = sqlite_insert if db.bind.dialect.name == 'sqlite' else postgres_insert
         hero_ids = list(db.scalars(select(Adventurer.id)))
         for slug, name, effect, tags in definitions:

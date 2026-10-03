@@ -104,3 +104,13 @@ def migrate(engine):
             from app.migrations.v031_weapon_effects import upgrade as weapon_effects_upgrade
             weapon_effects_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('031_weapon_effects')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='033_ability_triggers'")).first():
+            from app.migrations.v033_ability_triggers import upgrade as ability_triggers_upgrade
+            ability_triggers_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('033_ability_triggers')"))
+
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='036_armor_effects'")).first():
+            from app.migrations.v036_armor_effects import upgrade as armor_effects_upgrade
+            armor_effects_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('036_armor_effects')"))
