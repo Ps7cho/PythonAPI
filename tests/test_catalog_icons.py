@@ -1,0 +1,131 @@
+from copy import deepcopy
+from uuid import UUID
+
+import pytest
+from sqlalchemy import create_engine, inspect, select, text
+
+from app.catalog_editor import CATALOGS
+from app.catalog_icons import ICON_LIBRARY
+from app.database import SessionLocal
+from app.models import QuestTemplate, User, WeaponDefinition
+from app.migrations.v040_catalog_icons import upgrade
+
+
+@pytest.fixture
+def icon_editor(client):
+    username = client.get('/api/auth/me').json()['username']
+    with SessionLocal.begin() as db:
+        db.scalar(select(User).where(User.username == username)).account_type = 'developer'
+    return client
+
+
+def records(client):
+    return client.get('/api/abilities?inspect=true').json()['editor']['catalogs']
+
+
+def test_every_worldsmith_catalog_has_optional_icon(icon_editor):
+    for schema in records(icon_editor).values():
+        field = next(f for f in schema['fields'] if f['name'] == 'icon_path')
+        assert field['nullable'] and not field['immutable']
+
+
+@pytest.mark.parametrize('catalog', ['abilities', 'enemies', 'quests', 'weapon_definitions', 'gear_definitions', 'consumables', 'enemy_abilities'])
+def test_icon_review_save_reload_and_clear(icon_editor, catalog):
+    if catalog == 'weapon_definitions':
+        with SessionLocal.begin() as db:
+            db.add(WeaponDefinition(slug='icon-test-blade', name='Icon Test Blade', weapon_type_slug='sword', base_damage=10, required_rank='iron'))
+    original = deepcopy(records(icon_editor)[catalog]['records'][0])
+    current = original
+
+    def edit(path, review=False):
+        return icon_editor.post('/api/catalog-editor', json=dict(
+            catalog=catalog, key=current['key'], values={**current['values'], 'icon_path': path},
+            expected_revision=current['revision'], validate_only=review))
+
+    try:
+        path = ICON_LIBRARY[0]['path']
+        assert edit(path, review=True).status_code == 200
+        untouched = next(r for r in records(icon_editor)[catalog]['records'] if r['key'] == original['key'])
+        assert untouched['values']['icon_path'] == original['values']['icon_path']
+        saved = edit(path)
+        assert saved.status_code == 200, saved.text
+        current = saved.json()['record']
+        reloaded = next(r for r in records(icon_editor)[catalog]['records'] if r['key'] == original['key'])
+        assert reloaded['values']['icon_path'] == path
+        assert reloaded['revision'] != original['revision']
+        stale = icon_editor.post('/api/catalog-editor', json=dict(
+            catalog=catalog, key=original['key'], values=original['values'], expected_revision=original['revision']))
+        assert stale.status_code == 409
+        cleared = edit(None)
+        assert cleared.status_code == 200, cleared.text
+        current = cleared.json()['record']
+        assert current['values']['icon_path'] is None
+    finally:
+        assert edit(original['values']['icon_path']).status_code == 200
+        with SessionLocal.begin() as db:
+            if catalog == 'quests':
+                # Validation expands source defaults; keep this shared fixture's
+                # original source JSON for subsequent scheduler tests.
+                db.get(QuestTemplate, original['values']['slug']).journey = original['values']['journey']
+            if catalog == 'weapon_definitions':
+                db.delete(db.get(WeaponDefinition, 'icon-test-blade'))
+
+
+@pytest.mark.parametrize('path', ['https://example.com/icon.webp', 'assets/icons/../private.webp', 'assets/icons/unknown.webp'])
+def test_uninstalled_icons_rejected(icon_editor, path):
+    record = records(icon_editor)['abilities']['records'][0]
+    result = icon_editor.post('/api/catalog-editor', json=dict(
+        catalog='abilities', key=record['key'], values={**record['values'], 'icon_path': path},
+        expected_revision=record['revision']))
+    assert result.status_code == 422
+
+
+def test_icon_migration_preserves_existing_rows_and_can_repeat():
+    engine = create_engine('sqlite:///:memory:')
+    with engine.begin() as conn:
+        for model in CATALOGS.values():
+            table = model.__tablename__
+            conn.execute(text(f'CREATE TABLE {table} (legacy_value VARCHAR)'))
+            conn.execute(text(f"INSERT INTO {table} VALUES ('preserved')"))
+        upgrade(conn)
+        upgrade(conn)
+        for model in CATALOGS.values():
+            table = model.__tablename__
+            assert 'icon_path' in {c['name'] for c in inspect(conn).get_columns(table)}
+            assert conn.execute(text(f'SELECT legacy_value, icon_path FROM {table}')).one() == ('preserved', None)
+    engine.dispose()
+
+
+def test_weapon_inventory_uses_blueprint_assignment(client):
+    from app.weapon_effects import create_weapon
+    from app.weapons import serialize_weapon
+    hero = client.post('/api/adventurers', json={'name': 'Icon weapon owner'}).json()
+    with SessionLocal() as db:
+        definition = WeaponDefinition(slug='icon-inventory-blade', name='Icon Inventory Blade',
+                                      weapon_type_slug='sword', base_damage=12, required_rank='iron',
+                                      icon_path=ICON_LIBRARY[0]['path'])
+        db.add(definition)
+        weapon = create_weapon(db, adventurer_id=UUID(hero['id']), weapon_type_slug='sword',
+                               name=definition.name, base_damage=12, effects=[],
+                               weapon_definition_slug=definition.slug)
+        db.flush()
+        assert serialize_weapon(weapon)['icon_path'] == ICON_LIBRARY[0]['path']
+        assert serialize_weapon(weapon)['weapon_definition_slug'] == definition.slug
+        definition.icon_path = None
+        assert serialize_weapon(weapon)['icon_path'] is None
+        db.rollback()
+
+
+def test_shop_artwork_does_not_mutate_saved_stock():
+    from app.models import Consumable
+    from app.shop import stock_icons
+    stock = [{'item_type': 'consumable', 'slug': 'healing-potion', 'price': 20}]
+    before = deepcopy(stock)
+    with SessionLocal() as db:
+        db.get(Consumable, 'healing-potion').icon_path = ICON_LIBRARY[0]['path']
+        db.flush()
+        display = stock_icons(db, stock)
+        assert display[0]['icon_path'] == ICON_LIBRARY[0]['path']
+        assert display[0]['price'] == 20
+        assert stock == before
+        db.rollback()

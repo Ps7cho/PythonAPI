@@ -154,6 +154,7 @@ class QuestTemplateRead(BaseModel):
 
     slug: str
     name: str
+    icon_path: str | None = None
     difficulty: int
     min_encounters: int
     max_encounters: int

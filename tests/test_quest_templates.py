@@ -6,7 +6,7 @@ from app.models import QuestTemplate
 def test_catalog_matches_template(client):
     response = client.get('/api/quest-templates/goblin-trouble')
     assert response.status_code == 200
-    assert response.json() == {**GOBLIN_TROUBLE, "journey": {}, "rank_index": 0}
+    assert response.json() == {**GOBLIN_TROUBLE, "icon_path": None, "journey": {}, "rank_index": 0}
     assert len(client.get('/api/quest-templates').json()) == 15
     assert client.get('/api/quest-templates/missing').status_code == 404
 

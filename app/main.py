@@ -94,6 +94,7 @@ def serialize_ability(ability: Ability) -> Dict[str, Any]:
     return {
         "id": str(ability.id),
         "name": ability.name,
+        "icon_path": ability.icon_path,
         "slug": ability.slug,
         "damage_multiplier": ability.damage_multiplier,
         "status_effect": definition(ability.status_effect) if ability.status_effect else None,

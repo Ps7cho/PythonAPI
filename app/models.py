@@ -8,6 +8,11 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 
 
+class CatalogIcon:
+    """Optional presentation asset shared by all Worldsmith definitions."""
+    icon_path = Column(String(500), nullable=True)
+
+
 class User(Base):
     __tablename__ = "users"
 
@@ -88,7 +93,7 @@ class Adventurer(Base):
     ability_inventory = relationship("AdventurerAbility", back_populates="adventurer", cascade="all, delete-orphan")
 
 
-class StatusEffect(Base):
+class StatusEffect(CatalogIcon, Base):
     __tablename__ = "status_effects"
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False)
@@ -99,14 +104,14 @@ class StatusEffect(Base):
     __table_args__ = (CheckConstraint("damage > 0 AND duration > 0 AND max_stacks > 0", name="ck_status_positive"),)
 
 
-class EntityType(Base):
+class EntityType(CatalogIcon, Base):
     __tablename__ = "entity_types"
     slug = Column(String, primary_key=True)
     # Percentage reduction per status slug: 100 is immune.
     status_resistances = Column(JSON, nullable=False, default=dict)
 
 
-class AbilityArchetype(Base):
+class AbilityArchetype(CatalogIcon, Base):
     __tablename__ = 'ability_archetypes'
 
     slug = Column(String, primary_key=True)
@@ -115,7 +120,7 @@ class AbilityArchetype(Base):
     definition = Column(JSON, nullable=False, default=dict)
 
 
-class Ability(Base):
+class Ability(CatalogIcon, Base):
     __tablename__ = "abilities"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -214,7 +219,7 @@ class PartyMember(Base):
     __table_args__ = (UniqueConstraint("party_id", "adventurer_id", name="uq_party_member"),)
 
 
-class QuestTemplate(Base):
+class QuestTemplate(CatalogIcon, Base):
     __tablename__ = "quest_templates"
 
     slug = Column(String, primary_key=True)
@@ -284,7 +289,7 @@ class QuestRun(Base):
     gauntlet = relationship('GauntletRun', back_populates='quest_run', uselist=False)
 
 
-class GauntletDefinition(Base):
+class GauntletDefinition(CatalogIcon, Base):
     __tablename__ = 'gauntlet_definitions'
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False)
@@ -313,7 +318,7 @@ class GauntletRun(Base):
     __table_args__ = (CheckConstraint('highest_stage_completed >= 0 AND highest_stage_reached >= highest_stage_completed'),)
 
 
-class Enemy(Base):
+class Enemy(CatalogIcon, Base):
     __tablename__ = "enemies"
     armor_slugs = Column(JSON, nullable=False, default=list)
 
@@ -325,7 +330,7 @@ class Enemy(Base):
     stat_ranges = Column(JSON, nullable=False, default=dict)
 
 
-class EnemyAbility(Base):
+class EnemyAbility(CatalogIcon, Base):
     __tablename__ = "enemy_abilities"
 
     enemy_slug = Column(String, ForeignKey("enemies.slug"), primary_key=True)
@@ -366,7 +371,7 @@ class Encounter(Base):
                                    cascade="all, delete-orphan", order_by="EncounterEnemy.position")
 
 
-class LootType(Base):
+class LootType(CatalogIcon, Base):
     __tablename__ = "loot_types"
 
     slug = Column(String, primary_key=True)
@@ -410,7 +415,7 @@ class GameEvent(Base):
     quest_run = relationship("QuestRun", back_populates="events")
 
 
-class WeaponEffect(Base):
+class WeaponEffect(CatalogIcon, Base):
     __tablename__ = 'weapon_effects'
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False)
@@ -422,7 +427,7 @@ class WeaponEffect(Base):
     effect_chain = Column(JSON, nullable=False, default=list)
 
 
-class WeaponEffectPool(Base):
+class WeaponEffectPool(CatalogIcon, Base):
     __tablename__ = 'weapon_effect_pools'
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False)
@@ -433,7 +438,7 @@ class WeaponEffectPool(Base):
     entries = Column(JSON, nullable=False, default=list)
 
 
-class WeaponType(Base):
+class WeaponType(CatalogIcon, Base):
     __tablename__ = "weapon_types"
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False, unique=True)
@@ -441,7 +446,7 @@ class WeaponType(Base):
     effect_pool_slug = Column(String, ForeignKey('weapon_effect_pools.slug'), nullable=True)
 
 
-class WeaponDefinition(Base):
+class WeaponDefinition(CatalogIcon, Base):
     """Reusable weapon blueprint which can be assigned to quest loot tables."""
     __tablename__ = "weapon_definitions"
     slug = Column(String, primary_key=True)
@@ -453,7 +458,7 @@ class WeaponDefinition(Base):
     weapon_type = relationship("WeaponType")
 
 
-class Village(Base):
+class Village(CatalogIcon, Base):
     __tablename__ = "villages"
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False, unique=True)
@@ -461,7 +466,7 @@ class Village(Base):
     description = Column(String, nullable=False, default="")
 
 
-class Shop(Base):
+class Shop(CatalogIcon, Base):
     __tablename__ = "shops"
     slug = Column(String, primary_key=True)
     village_slug = Column(String, ForeignKey("villages.slug"), nullable=False, index=True)
@@ -470,7 +475,7 @@ class Shop(Base):
     village = relationship("Village")
 
 
-class ShopTable(Base):
+class ShopTable(CatalogIcon, Base):
     __tablename__ = "shop_tables"
     slug = Column(String, primary_key=True)
     shop_slug = Column(String, ForeignKey("shops.slug"), nullable=False, index=True)
@@ -501,11 +506,13 @@ class Weapon(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     adventurer_id = Column(UUID(as_uuid=True), ForeignKey("adventurers.id"), nullable=False, index=True)
     weapon_type_slug = Column(String, ForeignKey("weapon_types.slug"), nullable=False)
+    weapon_definition_slug = Column(String, ForeignKey("weapon_definitions.slug"), nullable=True)
     name = Column(String, nullable=False)
     base_damage = Column(Integer, nullable=False)
     effects = Column(JSON, nullable=False, default=list)
     rarity = Column(String, nullable=False, default='common')
     weapon_type = relationship("WeaponType")
+    definition = relationship("WeaponDefinition")
 
 
 class EquippedWeapon(Base):
@@ -515,7 +522,7 @@ class EquippedWeapon(Base):
     weapon = relationship("Weapon")
 
 
-class EnemyWeapon(Base):
+class EnemyWeapon(CatalogIcon, Base):
     __tablename__ = "enemy_weapons"
     enemy_slug = Column(String, ForeignKey("enemies.slug"), primary_key=True)
     effect_slugs = Column(JSON, nullable=False, default=list)
@@ -530,13 +537,13 @@ class PartyInvite(Base):
     expires_at = Column(DateTime, nullable=False)
 
 
-class RestPolicy(Base):
+class RestPolicy(CatalogIcon, Base):
     __tablename__ = "rest_policies"
     slug = Column(String, primary_key=True)
     settings = Column(JSON, nullable=False)
 
 
-class RankDefinition(Base):
+class RankDefinition(CatalogIcon, Base):
     __tablename__ = "rank_definitions"
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False)
@@ -555,7 +562,7 @@ class RaidRotation(Base):
     snapshot = Column(JSON, nullable=False)
 
 
-class Consumable(Base):
+class Consumable(CatalogIcon, Base):
     __tablename__ = "consumables"
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False)
@@ -574,7 +581,7 @@ class OwnedConsumable(Base):
     __table_args__ = (CheckConstraint("quantity >= 0", name="ck_consumable_quantity"),)
 
 
-class EssenceDefinition(Base):
+class EssenceDefinition(CatalogIcon, Base):
     __tablename__ = "essence_definitions"
     consumable_slug = Column(String, ForeignKey("consumables.slug"), primary_key=True)
     active = Column(Boolean, nullable=False, default=True, server_default="true")
@@ -595,7 +602,7 @@ class AbsorbedEssence(Base):
     )
 
 
-class OrbOutcome(Base):
+class OrbOutcome(CatalogIcon, Base):
     __tablename__ = "orb_outcomes"
     orb_slug = Column(String, ForeignKey("consumables.slug"), primary_key=True)
     essence_slug = Column(String, ForeignKey("essence_definitions.consumable_slug"), primary_key=True, index=True)
@@ -625,7 +632,7 @@ class AuctionListing(Base):
     )
 
 
-class ArmorEffect(Base):
+class ArmorEffect(CatalogIcon, Base):
     __tablename__ = 'armor_effects'
     slug = Column(String, primary_key=True)
     name = Column(String, nullable=False)
@@ -633,7 +640,7 @@ class ArmorEffect(Base):
     definition = Column(JSON, nullable=False, default=dict)
 
 
-class GearDefinition(Base):
+class GearDefinition(CatalogIcon, Base):
     __tablename__ = 'gear_definitions'
     effect_slugs = Column(JSON, nullable=False, default=list)
     slug = Column(String, primary_key=True)

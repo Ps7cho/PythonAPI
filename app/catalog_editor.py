@@ -141,6 +141,8 @@ def require(condition, message):
 
 
 def validate_values(model, data, catalog):
+    # Older clients and newly drafted definitions omit optional artwork.
+    data = {"icon_path": None, **data}
     if model is m.GearDefinition:
         data = {'effect_slugs': [], **data}
     if model is m.Enemy:
@@ -173,6 +175,9 @@ def validate_values(model, data, catalog):
             require(len(value) <= (c.type.length or (10000 if name == 'description' else 200)), f'{name} is too long.')
             if name in ('name', 'slug'):
                 require(bool(value.strip()), f'{name} cannot be empty.')
+        if name == 'icon_path':
+            from app.catalog_icons import ICON_PATHS
+            require(value in ICON_PATHS, 'Choose an icon from the installed icon library.')
         if (catalog, name) in ENUMS:
             require(value in ENUMS[catalog, name], f'Unsupported {name}.')
     return parsed

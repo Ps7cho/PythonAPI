@@ -38,17 +38,28 @@ class PurchaseRequest(BaseModel):
 router = APIRouter(prefix="/api/shop", tags=["shop"])
 
 
+def stock_icons(db, items):
+    """Display current artwork without changing saved stock or prices."""
+    models = {'gear': GearDefinition, 'weapon': WeaponType, 'consumable': Consumable}
+    paths = {}
+    for kind, model in models.items():
+        slugs = {item['slug'] for item in items if item.get('item_type') == kind and item.get('slug')}
+        if slugs:
+            paths.update({(kind, row.slug): row.icon_path for row in db.scalars(select(model).where(model.slug.in_(slugs)))})
+    return [{**item, 'icon_path': paths.get((item.get('item_type'), item.get('slug')))} for item in items]
+
+
 def catalog(db: Session):
     from app.scheduled_refresh import current_shop_stock
     tables = list(db.scalars(select(ShopTable).where(ShopTable.shop_slug == 'mosswood-market').order_by(ShopTable.category)))
     if tables:
         rotation = current_shop_stock(db, 'mosswood-market')
-        return {table.category: rotation.stock.get(table.slug, []) if rotation else table.items for table in tables}
+        return {table.category: stock_icons(db, rotation.stock.get(table.slug, []) if rotation else table.items) for table in tables}
     return {
-        "gear": [{"item_type": "gear", "slug": g.slug, "name": g.name, "slot": g.slot,
+        "gear": [{"item_type": "gear", "slug": g.slug, "name": g.name, "icon_path": g.icon_path, "slot": g.slot,
                   "bonuses": g.bonuses, "price": g.price, "required_rank": g.required_rank}
                  for g in db.scalars(select(GearDefinition).order_by(GearDefinition.name))],
-        "weapons": [{"item_type": "weapon", "slug": weapon.slug, "name": weapon.name,
+        "weapons": [{"item_type": "weapon", "slug": weapon.slug, "name": weapon.name, "icon_path": weapon.icon_path,
                      "price": WEAPON_PRICES[weapon.slug], "tags": weapon.tags,
                      "base_damage": 12 + list(WEAPON_PRICES).index(weapon.slug) * 2}
                     for weapon in db.scalars(select(WeaponType).where(WeaponType.slug.in_(WEAPON_PRICES)).order_by(WeaponType.name))],
@@ -79,7 +90,7 @@ def village_catalog(db: Session = Depends(get_db), user: User = Depends(current_
                           'resets_at': rotation.resets_at.isoformat() + 'Z' if rotation else None,
                           'server_time': utc_now().isoformat(),
                           'tables': [{'slug': table.slug, 'category': table.category,
-                                      'items': rotation.stock.get(table.slug, []) if rotation else table.items} for table in tables]})
+                                      'items': stock_icons(db, rotation.stock.get(table.slug, []) if rotation else table.items)} for table in tables]})
         villages.append({'slug': village.slug, 'name': village.name, 'region': village.region,
                          'description': village.description, 'shops': shops})
     return villages

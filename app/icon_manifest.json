@@ -1,0 +1,7322 @@
+[
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_arm_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_arm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_blt_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_blt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_brs_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_brs_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_bts_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_bts_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_cll_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_cll_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_gl_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_gl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_hlt_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_hlt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_pnc_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_pnc_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set01/dw_sh_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set01",
+    "name": "dw_sh_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_arm_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_arm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_blt_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_blt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_brs_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_brs_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_bts_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_bts_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_cl_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_gl_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_gl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_hlt_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_hlt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_pnc_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_pnc_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set02/pp_sh_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set02",
+    "name": "pp_sh_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_arm_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_arm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_blt_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_blt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_brs_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_brs_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_bts_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_bts_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_cl_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_gl_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_gl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_hlt_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_hlt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_pnc_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_pnc_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set03/pg_sh_t_01.webp",
+    "category": "Armor/Heavy Armor sets/Set03",
+    "name": "pg_sh_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_arm_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_arm_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_blt_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_blt_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_br_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_br_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_bts_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_bts_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_cl_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_cl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_gl_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_gl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_hl_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_hl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_pn_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_pn_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set04/kre_sh_01_t.webp",
+    "category": "Armor/Heavy Armor sets/Set04",
+    "name": "kre_sh_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8522.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8522"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8523.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8523"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8524.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8524"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8525.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8525"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8526.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8526"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8527.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8527"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8528.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8528"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8529.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8529"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set05/8530.webp",
+    "category": "Armor/Heavy Armor sets/Set05",
+    "name": "8530"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_ar_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_ar_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_blt_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_blt_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_br_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_br_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_bt_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_bt_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_cl_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_cl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_gl_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_gl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_h_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_h_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_pn_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_pn_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set06/fantom_sh_t.webp",
+    "category": "Armor/Heavy Armor sets/Set06",
+    "name": "fantom_sh_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_ar_c.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_ar_c"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_blt_t.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_blt_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_br_t.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_br_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_bt_t.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_bt_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_cl_c.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_cl_c"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_gl_t.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_gl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_hl_t.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_hl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_pn_t.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_pn_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set07/iron_sh_t.webp",
+    "category": "Armor/Heavy Armor sets/Set07",
+    "name": "iron_sh_t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_arm_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_arm_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_blt_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_blt_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_br_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_br_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_bt_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_bt_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_cl_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_cl_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_gl_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_gl_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_hl_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_hl_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_pn_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_pn_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Heavy Armor sets/Set08/h_sh_01t.webp",
+    "category": "Armor/Heavy Armor sets/Set08",
+    "name": "h_sh_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_arm_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_arm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_blt_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_blt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_brs_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_brs_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_bts_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_bts_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_cl_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_gl_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_gl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_hlt_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_hlt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_pnc_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_pnc_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set01/mgg_sh_t_01.webp",
+    "category": "Armor/Light Armor sets/Set01",
+    "name": "mgg_sh_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_arm_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_arm_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_blt_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_blt_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_brs_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_brs_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_bts_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_bts_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_cl_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_cl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_gl_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_gl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_hlm_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_hlm_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_pns_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_pns_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set02/archi_shl_01_t.webp",
+    "category": "Armor/Light Armor sets/Set02",
+    "name": "archi_shl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_arm_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_arm_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_blt_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_blt_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_brs_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_brs_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_bts_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_bts_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_cl_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_cl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_gl_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_gl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_hlm_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_hlm_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_pnc_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_pnc_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set03/dru_shl_01_t.webp",
+    "category": "Armor/Light Armor sets/Set03",
+    "name": "dru_shl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_arm_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_arm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_blt_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_blt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_brs_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_brs_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_bts_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_bts_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_cl_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_gls_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_gls_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_hlm_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_hlm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_pnc_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_pnc_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set04/rg_shl_t_01.webp",
+    "category": "Armor/Light Armor sets/Set04",
+    "name": "rg_shl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/046_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "046_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/047_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "047_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/048_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "048_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/049_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "049_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/050_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "050_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/051_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "051_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/052_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "052_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/053_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "053_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set05/056_vswf_t.webp",
+    "category": "Armor/Light Armor sets/Set05",
+    "name": "056_vswf_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/asd_001_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "asd_001_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/blts_001_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "blts_001_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/bootts_002_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "bootts_002_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/brs_001_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "brs_001_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/brs_003_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "brs_003_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/cdr_002_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "cdr_002_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/gw_002_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "gw_002_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/hsm_003_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "hsm_003_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set06/sdp_002_t.webp",
+    "category": "Armor/Light Armor sets/Set06",
+    "name": "sdp_002_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_arm_01t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_arm_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_blt_01t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_blt_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_br_01t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_br_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_bt_01t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_bt_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_cl_01t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_cl_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_gl_01t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_gl_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_hlm_01t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_hlm_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_pn_01_t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_pn_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set07/c_sh_01t.webp",
+    "category": "Armor/Light Armor sets/Set07",
+    "name": "c_sh_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_ar_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_ar_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_blt_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_blt_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_brc_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_brc_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_bt_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_bt_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_cl_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_cl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_gl_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_gl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_h_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_h_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_pn_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_pn_t"
+  },
+  {
+    "path": "assets/icons/Armor/Light Armor sets/Set08/illusionist_sh_t.webp",
+    "category": "Armor/Light Armor sets/Set08",
+    "name": "illusionist_sh_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_arm_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_arm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_blt_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_blt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_brs_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_brs_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_bt_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_bt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_clc_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_clc_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_gll_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_gll_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_hlt_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_hlt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_pnc_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_pnc_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 01/ar_shl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 01",
+    "name": "ar_shl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_arm_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_arm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_blt_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_blt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_brs_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_brs_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_bts_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_bts_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_gl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_gl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_hlm_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_hlm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_pnc_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_pnc_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 02/htt_shl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 02",
+    "name": "htt_shl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_arm_01_t.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_arm_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_bl_01_t.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_bl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_br_01_t.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_br_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_bt_01_t.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_bt_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_cl_01_t.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_cl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_gl_01_t.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_gl_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_hlml_01_b.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_hlml_01_b"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_pn_01_t.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_pn_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 03/nnj_sh_01_t.webp",
+    "category": "Armor/Medium Armor sets/Set 03",
+    "name": "nnj_sh_01_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_arm_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_arm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_bl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_bl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_br_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_br_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_bt_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_bt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_gl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_gl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_hl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_hl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_pn_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_pn_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 04/htt_sh_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 04",
+    "name": "htt_sh_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_arm_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_arm_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_blt_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_blt_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_br_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_br_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_bt_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_bt_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_cl_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_cl_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_gl_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_gl_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_hlm_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_hlm_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_pns_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_pns_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 05/L_shl_01t.webp",
+    "category": "Armor/Medium Armor sets/Set 05",
+    "name": "L_shl_01t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/armor_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "armor_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/belt_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "belt_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/book_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "book_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/boot_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "boot_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/bracelets_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "bracelets_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/gloves_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "gloves_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/hood_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "hood_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/pants_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "pants_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/shoulders_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "shoulders_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 06/staff_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 06",
+    "name": "staff_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_ar_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_ar_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_blt_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_blt_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_bsc_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_bsc_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_bts_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_bts_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_cl_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_cl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_gl_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_gl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_hl_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_hl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_pn_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_pn_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 07/Crimson_sh_t.webp",
+    "category": "Armor/Medium Armor sets/Set 07",
+    "name": "Crimson_sh_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_ar_t.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_ar_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_blt_n.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_blt_n"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_brc_t.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_brc_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_bt_t.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_bt_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_cl_t.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_cl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_gl_t.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_gl_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_h_t.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_h_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_pnc_t.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_pnc_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 08/sharpshooter_sh_t.webp",
+    "category": "Armor/Medium Armor sets/Set 08",
+    "name": "sharpshooter_sh_t"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_a_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_a_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_bl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_bl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_br_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_br_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_bt_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_bt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_cl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_gl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_gl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_hl_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_hl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_pn_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_pn_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/Medium Armor sets/Set 09/ren_sh_t_01.webp",
+    "category": "Armor/Medium Armor sets/Set 09",
+    "name": "ren_sh_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/necklace_1.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "necklace_1"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/necklace_2.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "necklace_2"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/necklace_3.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "necklace_3"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/necklace_4.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "necklace_4"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/necklace_5.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "necklace_5"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/nk_t_01.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "nk_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/nk_t_02.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "nk_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/nk_t_03.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "nk_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/nk_t_04.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "nk_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/nk_t_05.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "nk_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/nk_t_06.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "nk_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/necklace/nk_t_07.webp",
+    "category": "Armor/misc Items/necklace",
+    "name": "nk_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rings_1.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rings_1"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rings_2.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rings_2"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rings_3.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rings_3"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rings_4.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rings_4"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rings_5.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rings_5"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rings_6.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rings_6"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rings_7.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rings_7"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rings_8.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rings_8"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rn_t_01.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rn_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rn_t_02.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rn_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rn_t_03.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rn_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rn_t_04.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rn_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rn_t_05.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rn_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rn_t_06.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rn_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/misc Items/rings/rn_t_07.webp",
+    "category": "Armor/misc Items/rings",
+    "name": "rn_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belt_t_01.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belt_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belt_t_02.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belt_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belt_t_03.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belt_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belt_t_04.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belt_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belt_t_05.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belt_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belt_t_06.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belt_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belt_t_07.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belt_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_1.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_10.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_11.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_12.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_13.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_14.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_15.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_16.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_17.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_18.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_18"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_19.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_19"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_2.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_20.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_20"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_3.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_4.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_5.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_6.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_7.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_8.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/belts/belts_9.webp",
+    "category": "Armor/One off armor/belts",
+    "name": "belts_9"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boot_t_01.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boot_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boot_t_02.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boot_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boot_t_03.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boot_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boot_t_04.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boot_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boot_t_05.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boot_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boot_t_06.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boot_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boot_t_07.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boot_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_1.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_10.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_11.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_12.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_13.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_14.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_15.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_16.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_17.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_2.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_3.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_4.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_5.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_6.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_7.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_8.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/boots_9.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "boots_9"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/Leather_boots_t-01.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "Leather_boots_t-01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/reinforced_shoes_t.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "reinforced_shoes_t"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/boots/shadow_boots_t.webp",
+    "category": "Armor/One off armor/boots",
+    "name": "shadow_boots_t"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/br_t_01.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "br_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/br_t_02.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "br_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/br_t_03.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "br_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/br_t_04.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "br_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/br_t_05.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "br_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/br_t_06.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "br_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/br_t_07.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "br_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_1.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_10.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_11.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_12.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_13.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_14.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_15.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_16.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_17.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_18.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_18"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_19.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_19"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_2.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_3.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_4.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_5.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_6.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_7.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_8.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/bracers_9.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "bracers_9"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/bracers/combat_bracelets_t.webp",
+    "category": "Armor/One off armor/bracers",
+    "name": "combat_bracelets_t"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_02.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_03.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_04.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_05.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_06.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_07.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_08.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_08"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_09.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_09"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/arm_t_10.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "arm_t_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_1.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_10.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_11.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_12.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_13.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_14.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_15.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_16.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_17.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_18.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_18"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_19.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_19"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_2.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_20.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_20"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_21.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_21"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_3.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_4.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_5.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_6.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_7.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_8.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/armor_9.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "armor_9"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/chest/composite_breastplate_t.webp",
+    "category": "Armor/One off armor/chest",
+    "name": "composite_breastplate_t"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cl_t_01.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cl_t_02.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cl_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cl_t_03.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cl_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cl_t_04.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cl_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cl_t_05.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cl_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cl_t_06.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cl_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cl_t_07.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cl_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_1.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_10.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_11.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_12.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_13.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_14.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_15.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_16.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_17.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_18.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_18"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_19.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_19"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_2.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_20.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_20"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_21.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_21"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_22.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_22"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_23.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_23"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_24.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_24"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_3.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_4.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_5.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_6.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_7.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_8.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/cloaks/cloaks_9.webp",
+    "category": "Armor/One off armor/cloaks",
+    "name": "cloaks_9"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gl_t_01.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gl_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gl_t_02.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gl_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gl_t_03.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gl_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gl_t_04.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gl_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gl_t_05.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gl_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gl_t_06.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gl_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gl_t_07.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gl_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_1.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_10.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_11.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_12.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_13.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_14.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_15.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_16.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_17.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_18.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_18"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_19.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_19"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_2.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_20.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_20"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_3.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_4.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_5.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_6.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_7.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_8.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/gloves/gloves_9.webp",
+    "category": "Armor/One off armor/gloves",
+    "name": "gloves_9"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_1.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_10.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_11.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_12.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_13.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_14.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_15.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_16.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_17.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_18.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_18"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_19.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_19"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_2.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_20.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_20"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_21.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_21"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_22.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_22"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_23.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_23"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_3.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_4.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_5.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_6.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_7.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_8.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/helmets_9.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "helmets_9"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_01.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_02.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_03.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_04.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_05.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_06.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_07.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_08.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_08"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_09.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_09"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/hlm_t_10.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "hlm_t_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/helmets/infantry_helmet_t.webp",
+    "category": "Armor/One off armor/helmets",
+    "name": "infantry_helmet_t"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_1.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_10.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_11.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_12.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_13.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_14.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_15.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_16.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_17.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_18.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_18"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_19.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_19"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_2.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_20.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_20"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_3.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_4.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_5.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_6.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_7.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_8.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pants_9.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pants_9"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pn_t_01.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pn_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pn_t_02.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pn_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pn_t_03.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pn_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pn_t_04.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pn_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pn_t_05.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pn_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pn_t_06.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pn_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/pants/pn_t_07.webp",
+    "category": "Armor/One off armor/pants",
+    "name": "pn_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/fortified_shoulders_t.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "fortified_shoulders_t"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/sh_t_01.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "sh_t_01"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/sh_t_02.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "sh_t_02"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/sh_t_03.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "sh_t_03"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/sh_t_04.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "sh_t_04"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/sh_t_05.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "sh_t_05"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/sh_t_06.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "sh_t_06"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/sh_t_07.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "sh_t_07"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_1.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_1"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_10.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_10"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_11.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_11"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_12.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_12"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_13.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_13"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_14.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_14"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_15.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_15"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_16.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_16"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_17.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_17"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_18.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_18"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_19.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_19"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_2.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_2"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_3.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_3"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_4.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_4"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_5.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_5"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_6.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_6"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_7.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_7"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_8.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_8"
+  },
+  {
+    "path": "assets/icons/Armor/One off armor/shoulders/shoulders_9.webp",
+    "category": "Armor/One off armor/shoulders",
+    "name": "shoulders_9"
+  },
+  {
+    "path": "assets/icons/Gems/01_small_gem_t.webp",
+    "category": "Gems",
+    "name": "01_small_gem_t"
+  },
+  {
+    "path": "assets/icons/Gems/02_medium_gem_t.webp",
+    "category": "Gems",
+    "name": "02_medium_gem_t"
+  },
+  {
+    "path": "assets/icons/Gems/03_big_gem_t.webp",
+    "category": "Gems",
+    "name": "03_big_gem_t"
+  },
+  {
+    "path": "assets/icons/Gems/04_large_gem_t.webp",
+    "category": "Gems",
+    "name": "04_large_gem_t"
+  },
+  {
+    "path": "assets/icons/Gems/05_pure_gem-t.webp",
+    "category": "Gems",
+    "name": "05_pure_gem-t"
+  },
+  {
+    "path": "assets/icons/Gems/06_royal_gem_t.webp",
+    "category": "Gems",
+    "name": "06_royal_gem_t"
+  },
+  {
+    "path": "assets/icons/Gems/Amber_stone_t.webp",
+    "category": "Gems",
+    "name": "Amber_stone_t"
+  },
+  {
+    "path": "assets/icons/Gems/crt_t_01.webp",
+    "category": "Gems",
+    "name": "crt_t_01"
+  },
+  {
+    "path": "assets/icons/Gems/ff_02_t.webp",
+    "category": "Gems",
+    "name": "ff_02_t"
+  },
+  {
+    "path": "assets/icons/Gems/gem_f_t_01.webp",
+    "category": "Gems",
+    "name": "gem_f_t_01"
+  },
+  {
+    "path": "assets/icons/Gems/gen_rb_t_01.webp",
+    "category": "Gems",
+    "name": "gen_rb_t_01"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_01.webp",
+    "category": "Gems",
+    "name": "gm_t_01"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_02.webp",
+    "category": "Gems",
+    "name": "gm_t_02"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_03.webp",
+    "category": "Gems",
+    "name": "gm_t_03"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_04.webp",
+    "category": "Gems",
+    "name": "gm_t_04"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_05.webp",
+    "category": "Gems",
+    "name": "gm_t_05"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_06.webp",
+    "category": "Gems",
+    "name": "gm_t_06"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_07.webp",
+    "category": "Gems",
+    "name": "gm_t_07"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_08.webp",
+    "category": "Gems",
+    "name": "gm_t_08"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_09.webp",
+    "category": "Gems",
+    "name": "gm_t_09"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_10.webp",
+    "category": "Gems",
+    "name": "gm_t_10"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_11.webp",
+    "category": "Gems",
+    "name": "gm_t_11"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_12.webp",
+    "category": "Gems",
+    "name": "gm_t_12"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_13.webp",
+    "category": "Gems",
+    "name": "gm_t_13"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_14.webp",
+    "category": "Gems",
+    "name": "gm_t_14"
+  },
+  {
+    "path": "assets/icons/Gems/gm_t_15.webp",
+    "category": "Gems",
+    "name": "gm_t_15"
+  },
+  {
+    "path": "assets/icons/Gems/ice_stone_t.webp",
+    "category": "Gems",
+    "name": "ice_stone_t"
+  },
+  {
+    "path": "assets/icons/Gems/ore_f_t_01.webp",
+    "category": "Gems",
+    "name": "ore_f_t_01"
+  },
+  {
+    "path": "assets/icons/Gems/sp_gem_t.webp",
+    "category": "Gems",
+    "name": "sp_gem_t"
+  },
+  {
+    "path": "assets/icons/Gems/stellar_tear_t.webp",
+    "category": "Gems",
+    "name": "stellar_tear_t"
+  },
+  {
+    "path": "assets/icons/Gems/t_01_a.webp",
+    "category": "Gems",
+    "name": "t_01_a"
+  },
+  {
+    "path": "assets/icons/Gems/t_02_a.webp",
+    "category": "Gems",
+    "name": "t_02_a"
+  },
+  {
+    "path": "assets/icons/Mobs/1.webp",
+    "category": "Mobs",
+    "name": "1"
+  },
+  {
+    "path": "assets/icons/Mobs/10.webp",
+    "category": "Mobs",
+    "name": "10"
+  },
+  {
+    "path": "assets/icons/Mobs/11.webp",
+    "category": "Mobs",
+    "name": "11"
+  },
+  {
+    "path": "assets/icons/Mobs/12.webp",
+    "category": "Mobs",
+    "name": "12"
+  },
+  {
+    "path": "assets/icons/Mobs/13.webp",
+    "category": "Mobs",
+    "name": "13"
+  },
+  {
+    "path": "assets/icons/Mobs/14.webp",
+    "category": "Mobs",
+    "name": "14"
+  },
+  {
+    "path": "assets/icons/Mobs/15.webp",
+    "category": "Mobs",
+    "name": "15"
+  },
+  {
+    "path": "assets/icons/Mobs/16.webp",
+    "category": "Mobs",
+    "name": "16"
+  },
+  {
+    "path": "assets/icons/Mobs/17.webp",
+    "category": "Mobs",
+    "name": "17"
+  },
+  {
+    "path": "assets/icons/Mobs/18.webp",
+    "category": "Mobs",
+    "name": "18"
+  },
+  {
+    "path": "assets/icons/Mobs/19.webp",
+    "category": "Mobs",
+    "name": "19"
+  },
+  {
+    "path": "assets/icons/Mobs/2.webp",
+    "category": "Mobs",
+    "name": "2"
+  },
+  {
+    "path": "assets/icons/Mobs/20.webp",
+    "category": "Mobs",
+    "name": "20"
+  },
+  {
+    "path": "assets/icons/Mobs/21.webp",
+    "category": "Mobs",
+    "name": "21"
+  },
+  {
+    "path": "assets/icons/Mobs/22.webp",
+    "category": "Mobs",
+    "name": "22"
+  },
+  {
+    "path": "assets/icons/Mobs/23.webp",
+    "category": "Mobs",
+    "name": "23"
+  },
+  {
+    "path": "assets/icons/Mobs/24.webp",
+    "category": "Mobs",
+    "name": "24"
+  },
+  {
+    "path": "assets/icons/Mobs/25.webp",
+    "category": "Mobs",
+    "name": "25"
+  },
+  {
+    "path": "assets/icons/Mobs/26.webp",
+    "category": "Mobs",
+    "name": "26"
+  },
+  {
+    "path": "assets/icons/Mobs/27.webp",
+    "category": "Mobs",
+    "name": "27"
+  },
+  {
+    "path": "assets/icons/Mobs/28.webp",
+    "category": "Mobs",
+    "name": "28"
+  },
+  {
+    "path": "assets/icons/Mobs/29.webp",
+    "category": "Mobs",
+    "name": "29"
+  },
+  {
+    "path": "assets/icons/Mobs/3.webp",
+    "category": "Mobs",
+    "name": "3"
+  },
+  {
+    "path": "assets/icons/Mobs/30.webp",
+    "category": "Mobs",
+    "name": "30"
+  },
+  {
+    "path": "assets/icons/Mobs/31.webp",
+    "category": "Mobs",
+    "name": "31"
+  },
+  {
+    "path": "assets/icons/Mobs/32.webp",
+    "category": "Mobs",
+    "name": "32"
+  },
+  {
+    "path": "assets/icons/Mobs/33.webp",
+    "category": "Mobs",
+    "name": "33"
+  },
+  {
+    "path": "assets/icons/Mobs/34.webp",
+    "category": "Mobs",
+    "name": "34"
+  },
+  {
+    "path": "assets/icons/Mobs/35.webp",
+    "category": "Mobs",
+    "name": "35"
+  },
+  {
+    "path": "assets/icons/Mobs/36.webp",
+    "category": "Mobs",
+    "name": "36"
+  },
+  {
+    "path": "assets/icons/Mobs/37.webp",
+    "category": "Mobs",
+    "name": "37"
+  },
+  {
+    "path": "assets/icons/Mobs/38.webp",
+    "category": "Mobs",
+    "name": "38"
+  },
+  {
+    "path": "assets/icons/Mobs/39.webp",
+    "category": "Mobs",
+    "name": "39"
+  },
+  {
+    "path": "assets/icons/Mobs/4.webp",
+    "category": "Mobs",
+    "name": "4"
+  },
+  {
+    "path": "assets/icons/Mobs/40.webp",
+    "category": "Mobs",
+    "name": "40"
+  },
+  {
+    "path": "assets/icons/Mobs/41.webp",
+    "category": "Mobs",
+    "name": "41"
+  },
+  {
+    "path": "assets/icons/Mobs/42.webp",
+    "category": "Mobs",
+    "name": "42"
+  },
+  {
+    "path": "assets/icons/Mobs/43.webp",
+    "category": "Mobs",
+    "name": "43"
+  },
+  {
+    "path": "assets/icons/Mobs/44.webp",
+    "category": "Mobs",
+    "name": "44"
+  },
+  {
+    "path": "assets/icons/Mobs/45.webp",
+    "category": "Mobs",
+    "name": "45"
+  },
+  {
+    "path": "assets/icons/Mobs/46.webp",
+    "category": "Mobs",
+    "name": "46"
+  },
+  {
+    "path": "assets/icons/Mobs/47.webp",
+    "category": "Mobs",
+    "name": "47"
+  },
+  {
+    "path": "assets/icons/Mobs/48.webp",
+    "category": "Mobs",
+    "name": "48"
+  },
+  {
+    "path": "assets/icons/Mobs/49.webp",
+    "category": "Mobs",
+    "name": "49"
+  },
+  {
+    "path": "assets/icons/Mobs/5.webp",
+    "category": "Mobs",
+    "name": "5"
+  },
+  {
+    "path": "assets/icons/Mobs/50.webp",
+    "category": "Mobs",
+    "name": "50"
+  },
+  {
+    "path": "assets/icons/Mobs/51.webp",
+    "category": "Mobs",
+    "name": "51"
+  },
+  {
+    "path": "assets/icons/Mobs/52.webp",
+    "category": "Mobs",
+    "name": "52"
+  },
+  {
+    "path": "assets/icons/Mobs/53.webp",
+    "category": "Mobs",
+    "name": "53"
+  },
+  {
+    "path": "assets/icons/Mobs/54.webp",
+    "category": "Mobs",
+    "name": "54"
+  },
+  {
+    "path": "assets/icons/Mobs/55.webp",
+    "category": "Mobs",
+    "name": "55"
+  },
+  {
+    "path": "assets/icons/Mobs/56.webp",
+    "category": "Mobs",
+    "name": "56"
+  },
+  {
+    "path": "assets/icons/Mobs/57.webp",
+    "category": "Mobs",
+    "name": "57"
+  },
+  {
+    "path": "assets/icons/Mobs/58.webp",
+    "category": "Mobs",
+    "name": "58"
+  },
+  {
+    "path": "assets/icons/Mobs/59.webp",
+    "category": "Mobs",
+    "name": "59"
+  },
+  {
+    "path": "assets/icons/Mobs/6.webp",
+    "category": "Mobs",
+    "name": "6"
+  },
+  {
+    "path": "assets/icons/Mobs/60.webp",
+    "category": "Mobs",
+    "name": "60"
+  },
+  {
+    "path": "assets/icons/Mobs/61.webp",
+    "category": "Mobs",
+    "name": "61"
+  },
+  {
+    "path": "assets/icons/Mobs/62.webp",
+    "category": "Mobs",
+    "name": "62"
+  },
+  {
+    "path": "assets/icons/Mobs/63.webp",
+    "category": "Mobs",
+    "name": "63"
+  },
+  {
+    "path": "assets/icons/Mobs/64.webp",
+    "category": "Mobs",
+    "name": "64"
+  },
+  {
+    "path": "assets/icons/Mobs/65.webp",
+    "category": "Mobs",
+    "name": "65"
+  },
+  {
+    "path": "assets/icons/Mobs/66.webp",
+    "category": "Mobs",
+    "name": "66"
+  },
+  {
+    "path": "assets/icons/Mobs/67.webp",
+    "category": "Mobs",
+    "name": "67"
+  },
+  {
+    "path": "assets/icons/Mobs/68.webp",
+    "category": "Mobs",
+    "name": "68"
+  },
+  {
+    "path": "assets/icons/Mobs/69.webp",
+    "category": "Mobs",
+    "name": "69"
+  },
+  {
+    "path": "assets/icons/Mobs/7.webp",
+    "category": "Mobs",
+    "name": "7"
+  },
+  {
+    "path": "assets/icons/Mobs/70.webp",
+    "category": "Mobs",
+    "name": "70"
+  },
+  {
+    "path": "assets/icons/Mobs/71.webp",
+    "category": "Mobs",
+    "name": "71"
+  },
+  {
+    "path": "assets/icons/Mobs/72.webp",
+    "category": "Mobs",
+    "name": "72"
+  },
+  {
+    "path": "assets/icons/Mobs/73.webp",
+    "category": "Mobs",
+    "name": "73"
+  },
+  {
+    "path": "assets/icons/Mobs/74.webp",
+    "category": "Mobs",
+    "name": "74"
+  },
+  {
+    "path": "assets/icons/Mobs/75.webp",
+    "category": "Mobs",
+    "name": "75"
+  },
+  {
+    "path": "assets/icons/Mobs/76.webp",
+    "category": "Mobs",
+    "name": "76"
+  },
+  {
+    "path": "assets/icons/Mobs/77.webp",
+    "category": "Mobs",
+    "name": "77"
+  },
+  {
+    "path": "assets/icons/Mobs/78.webp",
+    "category": "Mobs",
+    "name": "78"
+  },
+  {
+    "path": "assets/icons/Mobs/79.webp",
+    "category": "Mobs",
+    "name": "79"
+  },
+  {
+    "path": "assets/icons/Mobs/8.webp",
+    "category": "Mobs",
+    "name": "8"
+  },
+  {
+    "path": "assets/icons/Mobs/80.webp",
+    "category": "Mobs",
+    "name": "80"
+  },
+  {
+    "path": "assets/icons/Mobs/81.webp",
+    "category": "Mobs",
+    "name": "81"
+  },
+  {
+    "path": "assets/icons/Mobs/82.webp",
+    "category": "Mobs",
+    "name": "82"
+  },
+  {
+    "path": "assets/icons/Mobs/83.webp",
+    "category": "Mobs",
+    "name": "83"
+  },
+  {
+    "path": "assets/icons/Mobs/84.webp",
+    "category": "Mobs",
+    "name": "84"
+  },
+  {
+    "path": "assets/icons/Mobs/85.webp",
+    "category": "Mobs",
+    "name": "85"
+  },
+  {
+    "path": "assets/icons/Mobs/86.webp",
+    "category": "Mobs",
+    "name": "86"
+  },
+  {
+    "path": "assets/icons/Mobs/87.webp",
+    "category": "Mobs",
+    "name": "87"
+  },
+  {
+    "path": "assets/icons/Mobs/88.webp",
+    "category": "Mobs",
+    "name": "88"
+  },
+  {
+    "path": "assets/icons/Mobs/89.webp",
+    "category": "Mobs",
+    "name": "89"
+  },
+  {
+    "path": "assets/icons/Mobs/9.webp",
+    "category": "Mobs",
+    "name": "9"
+  },
+  {
+    "path": "assets/icons/Mobs/90.webp",
+    "category": "Mobs",
+    "name": "90"
+  },
+  {
+    "path": "assets/icons/Mobs/91.webp",
+    "category": "Mobs",
+    "name": "91"
+  },
+  {
+    "path": "assets/icons/Mobs/92.webp",
+    "category": "Mobs",
+    "name": "92"
+  },
+  {
+    "path": "assets/icons/Mobs/93.webp",
+    "category": "Mobs",
+    "name": "93"
+  },
+  {
+    "path": "assets/icons/Mobs/94.webp",
+    "category": "Mobs",
+    "name": "94"
+  },
+  {
+    "path": "assets/icons/Mobs/95.webp",
+    "category": "Mobs",
+    "name": "95"
+  },
+  {
+    "path": "assets/icons/Mobs/96.webp",
+    "category": "Mobs",
+    "name": "96"
+  },
+  {
+    "path": "assets/icons/Mobs/97.webp",
+    "category": "Mobs",
+    "name": "97"
+  },
+  {
+    "path": "assets/icons/Mobs/addons_091.webp",
+    "category": "Mobs",
+    "name": "addons_091"
+  },
+  {
+    "path": "assets/icons/Mobs/addons_093.webp",
+    "category": "Mobs",
+    "name": "addons_093"
+  },
+  {
+    "path": "assets/icons/Mobs/addons_095.webp",
+    "category": "Mobs",
+    "name": "addons_095"
+  },
+  {
+    "path": "assets/icons/Mobs/addons_096.webp",
+    "category": "Mobs",
+    "name": "addons_096"
+  },
+  {
+    "path": "assets/icons/Mobs/addons_097.webp",
+    "category": "Mobs",
+    "name": "addons_097"
+  },
+  {
+    "path": "assets/icons/Mobs/am_t_04.webp",
+    "category": "Mobs",
+    "name": "am_t_04"
+  },
+  {
+    "path": "assets/icons/Mobs/ancient_vampire.webp",
+    "category": "Mobs",
+    "name": "ancient_vampire"
+  },
+  {
+    "path": "assets/icons/Mobs/Arctic_wolf.webp",
+    "category": "Mobs",
+    "name": "Arctic_wolf"
+  },
+  {
+    "path": "assets/icons/Mobs/ash_zombies.webp",
+    "category": "Mobs",
+    "name": "ash_zombies"
+  },
+  {
+    "path": "assets/icons/Mobs/banshee.webp",
+    "category": "Mobs",
+    "name": "banshee"
+  },
+  {
+    "path": "assets/icons/Mobs/bat_01.webp",
+    "category": "Mobs",
+    "name": "bat_01"
+  },
+  {
+    "path": "assets/icons/Mobs/bear.webp",
+    "category": "Mobs",
+    "name": "bear"
+  },
+  {
+    "path": "assets/icons/Mobs/bear_01.webp",
+    "category": "Mobs",
+    "name": "bear_01"
+  },
+  {
+    "path": "assets/icons/Mobs/beest_01.webp",
+    "category": "Mobs",
+    "name": "beest_01"
+  },
+  {
+    "path": "assets/icons/Mobs/beest_02.webp",
+    "category": "Mobs",
+    "name": "beest_02"
+  },
+  {
+    "path": "assets/icons/Mobs/beest_03.webp",
+    "category": "Mobs",
+    "name": "beest_03"
+  },
+  {
+    "path": "assets/icons/Mobs/bird_01.webp",
+    "category": "Mobs",
+    "name": "bird_01"
+  },
+  {
+    "path": "assets/icons/Mobs/bogard.webp",
+    "category": "Mobs",
+    "name": "bogard"
+  },
+  {
+    "path": "assets/icons/Mobs/bone_beast.webp",
+    "category": "Mobs",
+    "name": "bone_beast"
+  },
+  {
+    "path": "assets/icons/Mobs/buddy.webp",
+    "category": "Mobs",
+    "name": "buddy"
+  },
+  {
+    "path": "assets/icons/Mobs/bug.webp",
+    "category": "Mobs",
+    "name": "bug"
+  },
+  {
+    "path": "assets/icons/Mobs/bug2.webp",
+    "category": "Mobs",
+    "name": "bug2"
+  },
+  {
+    "path": "assets/icons/Mobs/cat_01.webp",
+    "category": "Mobs",
+    "name": "cat_01"
+  },
+  {
+    "path": "assets/icons/Mobs/chicken_01.webp",
+    "category": "Mobs",
+    "name": "chicken_01"
+  },
+  {
+    "path": "assets/icons/Mobs/crocodile_01.webp",
+    "category": "Mobs",
+    "name": "crocodile_01"
+  },
+  {
+    "path": "assets/icons/Mobs/crow_01.webp",
+    "category": "Mobs",
+    "name": "crow_01"
+  },
+  {
+    "path": "assets/icons/Mobs/crystal_golem_01.webp",
+    "category": "Mobs",
+    "name": "crystal_golem_01"
+  },
+  {
+    "path": "assets/icons/Mobs/cyclop_01.webp",
+    "category": "Mobs",
+    "name": "cyclop_01"
+  },
+  {
+    "path": "assets/icons/Mobs/dark_knight_01.webp",
+    "category": "Mobs",
+    "name": "dark_knight_01"
+  },
+  {
+    "path": "assets/icons/Mobs/dark_knight_02.webp",
+    "category": "Mobs",
+    "name": "dark_knight_02"
+  },
+  {
+    "path": "assets/icons/Mobs/dark_knight_03.webp",
+    "category": "Mobs",
+    "name": "dark_knight_03"
+  },
+  {
+    "path": "assets/icons/Mobs/dark_knight_04.webp",
+    "category": "Mobs",
+    "name": "dark_knight_04"
+  },
+  {
+    "path": "assets/icons/Mobs/demon_01.webp",
+    "category": "Mobs",
+    "name": "demon_01"
+  },
+  {
+    "path": "assets/icons/Mobs/demon_02.webp",
+    "category": "Mobs",
+    "name": "demon_02"
+  },
+  {
+    "path": "assets/icons/Mobs/demon_03.webp",
+    "category": "Mobs",
+    "name": "demon_03"
+  },
+  {
+    "path": "assets/icons/Mobs/demon_04.webp",
+    "category": "Mobs",
+    "name": "demon_04"
+  },
+  {
+    "path": "assets/icons/Mobs/demon_05.webp",
+    "category": "Mobs",
+    "name": "demon_05"
+  },
+  {
+    "path": "assets/icons/Mobs/demon_06.webp",
+    "category": "Mobs",
+    "name": "demon_06"
+  },
+  {
+    "path": "assets/icons/Mobs/demon_07.webp",
+    "category": "Mobs",
+    "name": "demon_07"
+  },
+  {
+    "path": "assets/icons/Mobs/demon_08.webp",
+    "category": "Mobs",
+    "name": "demon_08"
+  },
+  {
+    "path": "assets/icons/Mobs/diver_01.webp",
+    "category": "Mobs",
+    "name": "diver_01"
+  },
+  {
+    "path": "assets/icons/Mobs/dog_01.webp",
+    "category": "Mobs",
+    "name": "dog_01"
+  },
+  {
+    "path": "assets/icons/Mobs/doll_01.webp",
+    "category": "Mobs",
+    "name": "doll_01"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_01.webp",
+    "category": "Mobs",
+    "name": "dragon_01"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_02.webp",
+    "category": "Mobs",
+    "name": "dragon_02"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_03.webp",
+    "category": "Mobs",
+    "name": "dragon_03"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_04.webp",
+    "category": "Mobs",
+    "name": "dragon_04"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_05.webp",
+    "category": "Mobs",
+    "name": "dragon_05"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_06.webp",
+    "category": "Mobs",
+    "name": "dragon_06"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_07.webp",
+    "category": "Mobs",
+    "name": "dragon_07"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_08.webp",
+    "category": "Mobs",
+    "name": "dragon_08"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_09.webp",
+    "category": "Mobs",
+    "name": "dragon_09"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_10.webp",
+    "category": "Mobs",
+    "name": "dragon_10"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_11.webp",
+    "category": "Mobs",
+    "name": "dragon_11"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_12.webp",
+    "category": "Mobs",
+    "name": "dragon_12"
+  },
+  {
+    "path": "assets/icons/Mobs/dragon_13.webp",
+    "category": "Mobs",
+    "name": "dragon_13"
+  },
+  {
+    "path": "assets/icons/Mobs/dummy_01.webp",
+    "category": "Mobs",
+    "name": "dummy_01"
+  },
+  {
+    "path": "assets/icons/Mobs/elephant_01.webp",
+    "category": "Mobs",
+    "name": "elephant_01"
+  },
+  {
+    "path": "assets/icons/Mobs/eye_01.webp",
+    "category": "Mobs",
+    "name": "eye_01"
+  },
+  {
+    "path": "assets/icons/Mobs/eye_02.webp",
+    "category": "Mobs",
+    "name": "eye_02"
+  },
+  {
+    "path": "assets/icons/Mobs/frog_01.webp",
+    "category": "Mobs",
+    "name": "frog_01"
+  },
+  {
+    "path": "assets/icons/Mobs/frost_giant_01.webp",
+    "category": "Mobs",
+    "name": "frost_giant_01"
+  },
+  {
+    "path": "assets/icons/Mobs/ghost_01.webp",
+    "category": "Mobs",
+    "name": "ghost_01"
+  },
+  {
+    "path": "assets/icons/Mobs/ghoul_01.webp",
+    "category": "Mobs",
+    "name": "ghoul_01"
+  },
+  {
+    "path": "assets/icons/Mobs/goat_01.webp",
+    "category": "Mobs",
+    "name": "goat_01"
+  },
+  {
+    "path": "assets/icons/Mobs/goblin_01.webp",
+    "category": "Mobs",
+    "name": "goblin_01"
+  },
+  {
+    "path": "assets/icons/Mobs/goblin_02.webp",
+    "category": "Mobs",
+    "name": "goblin_02"
+  },
+  {
+    "path": "assets/icons/Mobs/goblin_03.webp",
+    "category": "Mobs",
+    "name": "goblin_03"
+  },
+  {
+    "path": "assets/icons/Mobs/goblin_04.webp",
+    "category": "Mobs",
+    "name": "goblin_04"
+  },
+  {
+    "path": "assets/icons/Mobs/golem_01.webp",
+    "category": "Mobs",
+    "name": "golem_01"
+  },
+  {
+    "path": "assets/icons/Mobs/golem_01a.webp",
+    "category": "Mobs",
+    "name": "golem_01a"
+  },
+  {
+    "path": "assets/icons/Mobs/golem_02.webp",
+    "category": "Mobs",
+    "name": "golem_02"
+  },
+  {
+    "path": "assets/icons/Mobs/golem_03.webp",
+    "category": "Mobs",
+    "name": "golem_03"
+  },
+  {
+    "path": "assets/icons/Mobs/golem_04.webp",
+    "category": "Mobs",
+    "name": "golem_04"
+  },
+  {
+    "path": "assets/icons/Mobs/gremlin_01.webp",
+    "category": "Mobs",
+    "name": "gremlin_01"
+  },
+  {
+    "path": "assets/icons/Mobs/grey wolf_02.webp",
+    "category": "Mobs",
+    "name": "grey wolf_02"
+  },
+  {
+    "path": "assets/icons/Mobs/horse_01.webp",
+    "category": "Mobs",
+    "name": "horse_01"
+  },
+  {
+    "path": "assets/icons/Mobs/hound.webp",
+    "category": "Mobs",
+    "name": "hound"
+  },
+  {
+    "path": "assets/icons/Mobs/insect_01.webp",
+    "category": "Mobs",
+    "name": "insect_01"
+  },
+  {
+    "path": "assets/icons/Mobs/insect_02.webp",
+    "category": "Mobs",
+    "name": "insect_02"
+  },
+  {
+    "path": "assets/icons/Mobs/insect_03.webp",
+    "category": "Mobs",
+    "name": "insect_03"
+  },
+  {
+    "path": "assets/icons/Mobs/jin.webp",
+    "category": "Mobs",
+    "name": "jin"
+  },
+  {
+    "path": "assets/icons/Mobs/joker_01.webp",
+    "category": "Mobs",
+    "name": "joker_01"
+  },
+  {
+    "path": "assets/icons/Mobs/joker_02.webp",
+    "category": "Mobs",
+    "name": "joker_02"
+  },
+  {
+    "path": "assets/icons/Mobs/l_01.webp",
+    "category": "Mobs",
+    "name": "l_01"
+  },
+  {
+    "path": "assets/icons/Mobs/l_02.webp",
+    "category": "Mobs",
+    "name": "l_02"
+  },
+  {
+    "path": "assets/icons/Mobs/l_03.webp",
+    "category": "Mobs",
+    "name": "l_03"
+  },
+  {
+    "path": "assets/icons/Mobs/lion_01.webp",
+    "category": "Mobs",
+    "name": "lion_01"
+  },
+  {
+    "path": "assets/icons/Mobs/living_armor_01.webp",
+    "category": "Mobs",
+    "name": "living_armor_01"
+  },
+  {
+    "path": "assets/icons/Mobs/living_armor_02.webp",
+    "category": "Mobs",
+    "name": "living_armor_02"
+  },
+  {
+    "path": "assets/icons/Mobs/living_armor_03.webp",
+    "category": "Mobs",
+    "name": "living_armor_03"
+  },
+  {
+    "path": "assets/icons/Mobs/living_armor_04.webp",
+    "category": "Mobs",
+    "name": "living_armor_04"
+  },
+  {
+    "path": "assets/icons/Mobs/lizardman_01.webp",
+    "category": "Mobs",
+    "name": "lizardman_01"
+  },
+  {
+    "path": "assets/icons/Mobs/madman.webp",
+    "category": "Mobs",
+    "name": "madman"
+  },
+  {
+    "path": "assets/icons/Mobs/mask_01.webp",
+    "category": "Mobs",
+    "name": "mask_01"
+  },
+  {
+    "path": "assets/icons/Mobs/mummy_01.webp",
+    "category": "Mobs",
+    "name": "mummy_01"
+  },
+  {
+    "path": "assets/icons/Mobs/nightmare_01.webp",
+    "category": "Mobs",
+    "name": "nightmare_01"
+  },
+  {
+    "path": "assets/icons/Mobs/ogr_01.webp",
+    "category": "Mobs",
+    "name": "ogr_01"
+  },
+  {
+    "path": "assets/icons/Mobs/orc_01.webp",
+    "category": "Mobs",
+    "name": "orc_01"
+  },
+  {
+    "path": "assets/icons/Mobs/orc_02.webp",
+    "category": "Mobs",
+    "name": "orc_02"
+  },
+  {
+    "path": "assets/icons/Mobs/orc_03.webp",
+    "category": "Mobs",
+    "name": "orc_03"
+  },
+  {
+    "path": "assets/icons/Mobs/orc_04.webp",
+    "category": "Mobs",
+    "name": "orc_04"
+  },
+  {
+    "path": "assets/icons/Mobs/orc_05.webp",
+    "category": "Mobs",
+    "name": "orc_05"
+  },
+  {
+    "path": "assets/icons/Mobs/owl_01.webp",
+    "category": "Mobs",
+    "name": "owl_01"
+  },
+  {
+    "path": "assets/icons/Mobs/ox_01.webp",
+    "category": "Mobs",
+    "name": "ox_01"
+  },
+  {
+    "path": "assets/icons/Mobs/parasit_01.webp",
+    "category": "Mobs",
+    "name": "parasit_01"
+  },
+  {
+    "path": "assets/icons/Mobs/parasit_02.webp",
+    "category": "Mobs",
+    "name": "parasit_02"
+  },
+  {
+    "path": "assets/icons/Mobs/phoenix_01.webp",
+    "category": "Mobs",
+    "name": "phoenix_01"
+  },
+  {
+    "path": "assets/icons/Mobs/pig_01.webp",
+    "category": "Mobs",
+    "name": "pig_01"
+  },
+  {
+    "path": "assets/icons/Mobs/Plant_Monster_01.webp",
+    "category": "Mobs",
+    "name": "Plant_Monster_01"
+  },
+  {
+    "path": "assets/icons/Mobs/pumpkin.webp",
+    "category": "Mobs",
+    "name": "pumpkin"
+  },
+  {
+    "path": "assets/icons/Mobs/rat_01.webp",
+    "category": "Mobs",
+    "name": "rat_01"
+  },
+  {
+    "path": "assets/icons/Mobs/red_ghoul_01.webp",
+    "category": "Mobs",
+    "name": "red_ghoul_01"
+  },
+  {
+    "path": "assets/icons/Mobs/robot_01.webp",
+    "category": "Mobs",
+    "name": "robot_01"
+  },
+  {
+    "path": "assets/icons/Mobs/robot_02.webp",
+    "category": "Mobs",
+    "name": "robot_02"
+  },
+  {
+    "path": "assets/icons/Mobs/robot_03.webp",
+    "category": "Mobs",
+    "name": "robot_03"
+  },
+  {
+    "path": "assets/icons/Mobs/robot_04.webp",
+    "category": "Mobs",
+    "name": "robot_04"
+  },
+  {
+    "path": "assets/icons/Mobs/robot_05.webp",
+    "category": "Mobs",
+    "name": "robot_05"
+  },
+  {
+    "path": "assets/icons/Mobs/sheep_01.webp",
+    "category": "Mobs",
+    "name": "sheep_01"
+  },
+  {
+    "path": "assets/icons/Mobs/skeleton_01.webp",
+    "category": "Mobs",
+    "name": "skeleton_01"
+  },
+  {
+    "path": "assets/icons/Mobs/skeleton_02.webp",
+    "category": "Mobs",
+    "name": "skeleton_02"
+  },
+  {
+    "path": "assets/icons/Mobs/skeleton_03.webp",
+    "category": "Mobs",
+    "name": "skeleton_03"
+  },
+  {
+    "path": "assets/icons/Mobs/skeleton_04.webp",
+    "category": "Mobs",
+    "name": "skeleton_04"
+  },
+  {
+    "path": "assets/icons/Mobs/skeleton_05.webp",
+    "category": "Mobs",
+    "name": "skeleton_05"
+  },
+  {
+    "path": "assets/icons/Mobs/skeleton_06.webp",
+    "category": "Mobs",
+    "name": "skeleton_06"
+  },
+  {
+    "path": "assets/icons/Mobs/skeleton_07.webp",
+    "category": "Mobs",
+    "name": "skeleton_07"
+  },
+  {
+    "path": "assets/icons/Mobs/snail_01.webp",
+    "category": "Mobs",
+    "name": "snail_01"
+  },
+  {
+    "path": "assets/icons/Mobs/snail_02.webp",
+    "category": "Mobs",
+    "name": "snail_02"
+  },
+  {
+    "path": "assets/icons/Mobs/snake_01.webp",
+    "category": "Mobs",
+    "name": "snake_01"
+  },
+  {
+    "path": "assets/icons/Mobs/spider_01.webp",
+    "category": "Mobs",
+    "name": "spider_01"
+  },
+  {
+    "path": "assets/icons/Mobs/spider_02.webp",
+    "category": "Mobs",
+    "name": "spider_02"
+  },
+  {
+    "path": "assets/icons/Mobs/spider_03.webp",
+    "category": "Mobs",
+    "name": "spider_03"
+  },
+  {
+    "path": "assets/icons/Mobs/tentacle_01.webp",
+    "category": "Mobs",
+    "name": "tentacle_01"
+  },
+  {
+    "path": "assets/icons/Mobs/troll_01.webp",
+    "category": "Mobs",
+    "name": "troll_01"
+  },
+  {
+    "path": "assets/icons/Mobs/turtle_01.webp",
+    "category": "Mobs",
+    "name": "turtle_01"
+  },
+  {
+    "path": "assets/icons/Mobs/werewolf_01.webp",
+    "category": "Mobs",
+    "name": "werewolf_01"
+  },
+  {
+    "path": "assets/icons/Mobs/yeti_01.webp",
+    "category": "Mobs",
+    "name": "yeti_01"
+  },
+  {
+    "path": "assets/icons/Mobs/zombie_01.webp",
+    "category": "Mobs",
+    "name": "zombie_01"
+  },
+  {
+    "path": "assets/icons/Mobs/zombie_02.webp",
+    "category": "Mobs",
+    "name": "zombie_02"
+  },
+  {
+    "path": "assets/icons/Money/TradingIcons_111_t.webp",
+    "category": "Money",
+    "name": "TradingIcons_111_t"
+  },
+  {
+    "path": "assets/icons/Money/TradingIcons_112_t.webp",
+    "category": "Money",
+    "name": "TradingIcons_112_t"
+  },
+  {
+    "path": "assets/icons/Money/TrophyIcons_75_t.webp",
+    "category": "Money",
+    "name": "TrophyIcons_75_t"
+  },
+  {
+    "path": "assets/icons/Orbs/addons_11_t.webp",
+    "category": "Orbs",
+    "name": "addons_11_t"
+  },
+  {
+    "path": "assets/icons/Orbs/addons_13_t.webp",
+    "category": "Orbs",
+    "name": "addons_13_t"
+  },
+  {
+    "path": "assets/icons/Orbs/addons_45_t.webp",
+    "category": "Orbs",
+    "name": "addons_45_t"
+  },
+  {
+    "path": "assets/icons/Orbs/addons_50_t.webp",
+    "category": "Orbs",
+    "name": "addons_50_t"
+  },
+  {
+    "path": "assets/icons/Orbs/gm_t_11.webp",
+    "category": "Orbs",
+    "name": "gm_t_11"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_01_t.webp",
+    "category": "Orbs",
+    "name": "orb_01_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_02_t.webp",
+    "category": "Orbs",
+    "name": "orb_02_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_03_t.webp",
+    "category": "Orbs",
+    "name": "orb_03_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_04_t.webp",
+    "category": "Orbs",
+    "name": "orb_04_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_05_t.webp",
+    "category": "Orbs",
+    "name": "orb_05_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_06_t.webp",
+    "category": "Orbs",
+    "name": "orb_06_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_07_t.webp",
+    "category": "Orbs",
+    "name": "orb_07_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_08_t.webp",
+    "category": "Orbs",
+    "name": "orb_08_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_09_t.webp",
+    "category": "Orbs",
+    "name": "orb_09_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_10_t.webp",
+    "category": "Orbs",
+    "name": "orb_10_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_11_t.webp",
+    "category": "Orbs",
+    "name": "orb_11_t"
+  },
+  {
+    "path": "assets/icons/Orbs/orb_12_t.webp",
+    "category": "Orbs",
+    "name": "orb_12_t"
+  },
+  {
+    "path": "assets/icons/Potions/18.webp",
+    "category": "Potions",
+    "name": "18"
+  },
+  {
+    "path": "assets/icons/Potions/33.webp",
+    "category": "Potions",
+    "name": "33"
+  },
+  {
+    "path": "assets/icons/Potions/36.webp",
+    "category": "Potions",
+    "name": "36"
+  },
+  {
+    "path": "assets/icons/Potions/37.webp",
+    "category": "Potions",
+    "name": "37"
+  },
+  {
+    "path": "assets/icons/Potions/4.webp",
+    "category": "Potions",
+    "name": "4"
+  },
+  {
+    "path": "assets/icons/Potions/48.webp",
+    "category": "Potions",
+    "name": "48"
+  },
+  {
+    "path": "assets/icons/Potions/5.webp",
+    "category": "Potions",
+    "name": "5"
+  },
+  {
+    "path": "assets/icons/Potions/7.webp",
+    "category": "Potions",
+    "name": "7"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_01.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_01"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_02.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_02"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_07.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_07"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_08.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_08"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_09.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_09"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_10.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_10"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_12.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_12"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_13.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_13"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_15.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_15"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_16.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_16"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_17.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_17"
+  },
+  {
+    "path": "assets/icons/Potions/PotionIconsAdd_18.webp",
+    "category": "Potions",
+    "name": "PotionIconsAdd_18"
+  },
+  {
+    "path": "assets/icons/Potions/pt_t_01.webp",
+    "category": "Potions",
+    "name": "pt_t_01"
+  },
+  {
+    "path": "assets/icons/Potions/pt_t_02.webp",
+    "category": "Potions",
+    "name": "pt_t_02"
+  },
+  {
+    "path": "assets/icons/Potions/pt_t_03.webp",
+    "category": "Potions",
+    "name": "pt_t_03"
+  },
+  {
+    "path": "assets/icons/Potions/pt_t_04.webp",
+    "category": "Potions",
+    "name": "pt_t_04"
+  },
+  {
+    "path": "assets/icons/Potions/pt_t_05.webp",
+    "category": "Potions",
+    "name": "pt_t_05"
+  },
+  {
+    "path": "assets/icons/Potions/pt_t_06.webp",
+    "category": "Potions",
+    "name": "pt_t_06"
+  },
+  {
+    "path": "assets/icons/Potions/pt_t_07.webp",
+    "category": "Potions",
+    "name": "pt_t_07"
+  },
+  {
+    "path": "assets/icons/Potions/pt_t_08.webp",
+    "category": "Potions",
+    "name": "pt_t_08"
+  },
+  {
+    "path": "assets/icons/Potions/ptn_t_01.webp",
+    "category": "Potions",
+    "name": "ptn_t_01"
+  },
+  {
+    "path": "assets/icons/Potions/t_07_a.webp",
+    "category": "Potions",
+    "name": "t_07_a"
+  },
+  {
+    "path": "assets/icons/Skills/addon_01.webp",
+    "category": "Skills",
+    "name": "addon_01"
+  },
+  {
+    "path": "assets/icons/Skills/addon_02.webp",
+    "category": "Skills",
+    "name": "addon_02"
+  },
+  {
+    "path": "assets/icons/Skills/addon_03.webp",
+    "category": "Skills",
+    "name": "addon_03"
+  },
+  {
+    "path": "assets/icons/Skills/addon_04.webp",
+    "category": "Skills",
+    "name": "addon_04"
+  },
+  {
+    "path": "assets/icons/Skills/addon_05.webp",
+    "category": "Skills",
+    "name": "addon_05"
+  },
+  {
+    "path": "assets/icons/Skills/addon_06.webp",
+    "category": "Skills",
+    "name": "addon_06"
+  },
+  {
+    "path": "assets/icons/Skills/addon_07.webp",
+    "category": "Skills",
+    "name": "addon_07"
+  },
+  {
+    "path": "assets/icons/Skills/addon_08.webp",
+    "category": "Skills",
+    "name": "addon_08"
+  },
+  {
+    "path": "assets/icons/Skills/addon_09.webp",
+    "category": "Skills",
+    "name": "addon_09"
+  },
+  {
+    "path": "assets/icons/Skills/addon_10.webp",
+    "category": "Skills",
+    "name": "addon_10"
+  },
+  {
+    "path": "assets/icons/Skills/addon_11.webp",
+    "category": "Skills",
+    "name": "addon_11"
+  },
+  {
+    "path": "assets/icons/Skills/addon_12.webp",
+    "category": "Skills",
+    "name": "addon_12"
+  },
+  {
+    "path": "assets/icons/Skills/addon_13.webp",
+    "category": "Skills",
+    "name": "addon_13"
+  },
+  {
+    "path": "assets/icons/Skills/addon_14.webp",
+    "category": "Skills",
+    "name": "addon_14"
+  },
+  {
+    "path": "assets/icons/Skills/addon_15.webp",
+    "category": "Skills",
+    "name": "addon_15"
+  },
+  {
+    "path": "assets/icons/Skills/addon_16.webp",
+    "category": "Skills",
+    "name": "addon_16"
+  },
+  {
+    "path": "assets/icons/Skills/addon_17.webp",
+    "category": "Skills",
+    "name": "addon_17"
+  },
+  {
+    "path": "assets/icons/Skills/addon_18.webp",
+    "category": "Skills",
+    "name": "addon_18"
+  },
+  {
+    "path": "assets/icons/Skills/addon_19.webp",
+    "category": "Skills",
+    "name": "addon_19"
+  },
+  {
+    "path": "assets/icons/Skills/addon_20.webp",
+    "category": "Skills",
+    "name": "addon_20"
+  },
+  {
+    "path": "assets/icons/Skills/addon_21.webp",
+    "category": "Skills",
+    "name": "addon_21"
+  },
+  {
+    "path": "assets/icons/Skills/addon_22.webp",
+    "category": "Skills",
+    "name": "addon_22"
+  },
+  {
+    "path": "assets/icons/Skills/addon_23.webp",
+    "category": "Skills",
+    "name": "addon_23"
+  },
+  {
+    "path": "assets/icons/Skills/addon_24.webp",
+    "category": "Skills",
+    "name": "addon_24"
+  },
+  {
+    "path": "assets/icons/Skills/addon_25.webp",
+    "category": "Skills",
+    "name": "addon_25"
+  },
+  {
+    "path": "assets/icons/Skills/addon_26.webp",
+    "category": "Skills",
+    "name": "addon_26"
+  },
+  {
+    "path": "assets/icons/Skills/addon_27.webp",
+    "category": "Skills",
+    "name": "addon_27"
+  },
+  {
+    "path": "assets/icons/Skills/addon_28.webp",
+    "category": "Skills",
+    "name": "addon_28"
+  },
+  {
+    "path": "assets/icons/Skills/addon_29.webp",
+    "category": "Skills",
+    "name": "addon_29"
+  },
+  {
+    "path": "assets/icons/Skills/addon_30.webp",
+    "category": "Skills",
+    "name": "addon_30"
+  },
+  {
+    "path": "assets/icons/Skills/addon_31.webp",
+    "category": "Skills",
+    "name": "addon_31"
+  },
+  {
+    "path": "assets/icons/Skills/addon_32.webp",
+    "category": "Skills",
+    "name": "addon_32"
+  },
+  {
+    "path": "assets/icons/Skills/addon_33.webp",
+    "category": "Skills",
+    "name": "addon_33"
+  },
+  {
+    "path": "assets/icons/Skills/addon_34.webp",
+    "category": "Skills",
+    "name": "addon_34"
+  },
+  {
+    "path": "assets/icons/Skills/addon_35.webp",
+    "category": "Skills",
+    "name": "addon_35"
+  },
+  {
+    "path": "assets/icons/Skills/addon_36.webp",
+    "category": "Skills",
+    "name": "addon_36"
+  },
+  {
+    "path": "assets/icons/Skills/addon_37.webp",
+    "category": "Skills",
+    "name": "addon_37"
+  },
+  {
+    "path": "assets/icons/Skills/addon_38.webp",
+    "category": "Skills",
+    "name": "addon_38"
+  },
+  {
+    "path": "assets/icons/Skills/addon_39.webp",
+    "category": "Skills",
+    "name": "addon_39"
+  },
+  {
+    "path": "assets/icons/Skills/addon_40.webp",
+    "category": "Skills",
+    "name": "addon_40"
+  },
+  {
+    "path": "assets/icons/Skills/blue_01.webp",
+    "category": "Skills",
+    "name": "blue_01"
+  },
+  {
+    "path": "assets/icons/Skills/blue_02.webp",
+    "category": "Skills",
+    "name": "blue_02"
+  },
+  {
+    "path": "assets/icons/Skills/blue_03.webp",
+    "category": "Skills",
+    "name": "blue_03"
+  },
+  {
+    "path": "assets/icons/Skills/blue_04.webp",
+    "category": "Skills",
+    "name": "blue_04"
+  },
+  {
+    "path": "assets/icons/Skills/blue_05.webp",
+    "category": "Skills",
+    "name": "blue_05"
+  },
+  {
+    "path": "assets/icons/Skills/blue_06.webp",
+    "category": "Skills",
+    "name": "blue_06"
+  },
+  {
+    "path": "assets/icons/Skills/blue_07.webp",
+    "category": "Skills",
+    "name": "blue_07"
+  },
+  {
+    "path": "assets/icons/Skills/blue_08.webp",
+    "category": "Skills",
+    "name": "blue_08"
+  },
+  {
+    "path": "assets/icons/Skills/blue_09.webp",
+    "category": "Skills",
+    "name": "blue_09"
+  },
+  {
+    "path": "assets/icons/Skills/blue_10.webp",
+    "category": "Skills",
+    "name": "blue_10"
+  },
+  {
+    "path": "assets/icons/Skills/blue_11.webp",
+    "category": "Skills",
+    "name": "blue_11"
+  },
+  {
+    "path": "assets/icons/Skills/blue_12.webp",
+    "category": "Skills",
+    "name": "blue_12"
+  },
+  {
+    "path": "assets/icons/Skills/blue_13.webp",
+    "category": "Skills",
+    "name": "blue_13"
+  },
+  {
+    "path": "assets/icons/Skills/blue_14.webp",
+    "category": "Skills",
+    "name": "blue_14"
+  },
+  {
+    "path": "assets/icons/Skills/blue_15.webp",
+    "category": "Skills",
+    "name": "blue_15"
+  },
+  {
+    "path": "assets/icons/Skills/blue_16.webp",
+    "category": "Skills",
+    "name": "blue_16"
+  },
+  {
+    "path": "assets/icons/Skills/blue_17.webp",
+    "category": "Skills",
+    "name": "blue_17"
+  },
+  {
+    "path": "assets/icons/Skills/blue_18.webp",
+    "category": "Skills",
+    "name": "blue_18"
+  },
+  {
+    "path": "assets/icons/Skills/blue_19.webp",
+    "category": "Skills",
+    "name": "blue_19"
+  },
+  {
+    "path": "assets/icons/Skills/blue_20.webp",
+    "category": "Skills",
+    "name": "blue_20"
+  },
+  {
+    "path": "assets/icons/Skills/blue_21.webp",
+    "category": "Skills",
+    "name": "blue_21"
+  },
+  {
+    "path": "assets/icons/Skills/blue_22.webp",
+    "category": "Skills",
+    "name": "blue_22"
+  },
+  {
+    "path": "assets/icons/Skills/blue_23.webp",
+    "category": "Skills",
+    "name": "blue_23"
+  },
+  {
+    "path": "assets/icons/Skills/blue_24.webp",
+    "category": "Skills",
+    "name": "blue_24"
+  },
+  {
+    "path": "assets/icons/Skills/blue_25.webp",
+    "category": "Skills",
+    "name": "blue_25"
+  },
+  {
+    "path": "assets/icons/Skills/blue_26.webp",
+    "category": "Skills",
+    "name": "blue_26"
+  },
+  {
+    "path": "assets/icons/Skills/blue_27.webp",
+    "category": "Skills",
+    "name": "blue_27"
+  },
+  {
+    "path": "assets/icons/Skills/blue_28.webp",
+    "category": "Skills",
+    "name": "blue_28"
+  },
+  {
+    "path": "assets/icons/Skills/blue_29.webp",
+    "category": "Skills",
+    "name": "blue_29"
+  },
+  {
+    "path": "assets/icons/Skills/blue_30.webp",
+    "category": "Skills",
+    "name": "blue_30"
+  },
+  {
+    "path": "assets/icons/Skills/blue_31.webp",
+    "category": "Skills",
+    "name": "blue_31"
+  },
+  {
+    "path": "assets/icons/Skills/blue_32.webp",
+    "category": "Skills",
+    "name": "blue_32"
+  },
+  {
+    "path": "assets/icons/Skills/blue_33.webp",
+    "category": "Skills",
+    "name": "blue_33"
+  },
+  {
+    "path": "assets/icons/Skills/blue_34.webp",
+    "category": "Skills",
+    "name": "blue_34"
+  },
+  {
+    "path": "assets/icons/Skills/blue_35.webp",
+    "category": "Skills",
+    "name": "blue_35"
+  },
+  {
+    "path": "assets/icons/Skills/blue_36.webp",
+    "category": "Skills",
+    "name": "blue_36"
+  },
+  {
+    "path": "assets/icons/Skills/blue_37.webp",
+    "category": "Skills",
+    "name": "blue_37"
+  },
+  {
+    "path": "assets/icons/Skills/blue_38.webp",
+    "category": "Skills",
+    "name": "blue_38"
+  },
+  {
+    "path": "assets/icons/Skills/blue_39.webp",
+    "category": "Skills",
+    "name": "blue_39"
+  },
+  {
+    "path": "assets/icons/Skills/blue_40.webp",
+    "category": "Skills",
+    "name": "blue_40"
+  },
+  {
+    "path": "assets/icons/Skills/blue_41.webp",
+    "category": "Skills",
+    "name": "blue_41"
+  },
+  {
+    "path": "assets/icons/Skills/blue_42.webp",
+    "category": "Skills",
+    "name": "blue_42"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_01.webp",
+    "category": "Skills",
+    "name": "emerald_01"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_02.webp",
+    "category": "Skills",
+    "name": "emerald_02"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_03.webp",
+    "category": "Skills",
+    "name": "emerald_03"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_04.webp",
+    "category": "Skills",
+    "name": "emerald_04"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_05.webp",
+    "category": "Skills",
+    "name": "emerald_05"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_06.webp",
+    "category": "Skills",
+    "name": "emerald_06"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_07.webp",
+    "category": "Skills",
+    "name": "emerald_07"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_08.webp",
+    "category": "Skills",
+    "name": "emerald_08"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_09.webp",
+    "category": "Skills",
+    "name": "emerald_09"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_10.webp",
+    "category": "Skills",
+    "name": "emerald_10"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_11.webp",
+    "category": "Skills",
+    "name": "emerald_11"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_12.webp",
+    "category": "Skills",
+    "name": "emerald_12"
+  },
+  {
+    "path": "assets/icons/Skills/emerald_13.webp",
+    "category": "Skills",
+    "name": "emerald_13"
+  },
+  {
+    "path": "assets/icons/Skills/gray_01.webp",
+    "category": "Skills",
+    "name": "gray_01"
+  },
+  {
+    "path": "assets/icons/Skills/gray_02.webp",
+    "category": "Skills",
+    "name": "gray_02"
+  },
+  {
+    "path": "assets/icons/Skills/gray_03.webp",
+    "category": "Skills",
+    "name": "gray_03"
+  },
+  {
+    "path": "assets/icons/Skills/gray_04.webp",
+    "category": "Skills",
+    "name": "gray_04"
+  },
+  {
+    "path": "assets/icons/Skills/gray_05.webp",
+    "category": "Skills",
+    "name": "gray_05"
+  },
+  {
+    "path": "assets/icons/Skills/gray_06.webp",
+    "category": "Skills",
+    "name": "gray_06"
+  },
+  {
+    "path": "assets/icons/Skills/gray_07.webp",
+    "category": "Skills",
+    "name": "gray_07"
+  },
+  {
+    "path": "assets/icons/Skills/gray_08.webp",
+    "category": "Skills",
+    "name": "gray_08"
+  },
+  {
+    "path": "assets/icons/Skills/gray_09.webp",
+    "category": "Skills",
+    "name": "gray_09"
+  },
+  {
+    "path": "assets/icons/Skills/gray_10.webp",
+    "category": "Skills",
+    "name": "gray_10"
+  },
+  {
+    "path": "assets/icons/Skills/gray_11.webp",
+    "category": "Skills",
+    "name": "gray_11"
+  },
+  {
+    "path": "assets/icons/Skills/gray_12.webp",
+    "category": "Skills",
+    "name": "gray_12"
+  },
+  {
+    "path": "assets/icons/Skills/green_01.webp",
+    "category": "Skills",
+    "name": "green_01"
+  },
+  {
+    "path": "assets/icons/Skills/green_02.webp",
+    "category": "Skills",
+    "name": "green_02"
+  },
+  {
+    "path": "assets/icons/Skills/green_03.webp",
+    "category": "Skills",
+    "name": "green_03"
+  },
+  {
+    "path": "assets/icons/Skills/green_04.webp",
+    "category": "Skills",
+    "name": "green_04"
+  },
+  {
+    "path": "assets/icons/Skills/green_05.webp",
+    "category": "Skills",
+    "name": "green_05"
+  },
+  {
+    "path": "assets/icons/Skills/green_06.webp",
+    "category": "Skills",
+    "name": "green_06"
+  },
+  {
+    "path": "assets/icons/Skills/green_07.webp",
+    "category": "Skills",
+    "name": "green_07"
+  },
+  {
+    "path": "assets/icons/Skills/green_08.webp",
+    "category": "Skills",
+    "name": "green_08"
+  },
+  {
+    "path": "assets/icons/Skills/green_09.webp",
+    "category": "Skills",
+    "name": "green_09"
+  },
+  {
+    "path": "assets/icons/Skills/green_10.webp",
+    "category": "Skills",
+    "name": "green_10"
+  },
+  {
+    "path": "assets/icons/Skills/green_11.webp",
+    "category": "Skills",
+    "name": "green_11"
+  },
+  {
+    "path": "assets/icons/Skills/green_12.webp",
+    "category": "Skills",
+    "name": "green_12"
+  },
+  {
+    "path": "assets/icons/Skills/green_13.webp",
+    "category": "Skills",
+    "name": "green_13"
+  },
+  {
+    "path": "assets/icons/Skills/green_14.webp",
+    "category": "Skills",
+    "name": "green_14"
+  },
+  {
+    "path": "assets/icons/Skills/green_15.webp",
+    "category": "Skills",
+    "name": "green_15"
+  },
+  {
+    "path": "assets/icons/Skills/green_16.webp",
+    "category": "Skills",
+    "name": "green_16"
+  },
+  {
+    "path": "assets/icons/Skills/green_17.webp",
+    "category": "Skills",
+    "name": "green_17"
+  },
+  {
+    "path": "assets/icons/Skills/green_18.webp",
+    "category": "Skills",
+    "name": "green_18"
+  },
+  {
+    "path": "assets/icons/Skills/green_19.webp",
+    "category": "Skills",
+    "name": "green_19"
+  },
+  {
+    "path": "assets/icons/Skills/green_20.webp",
+    "category": "Skills",
+    "name": "green_20"
+  },
+  {
+    "path": "assets/icons/Skills/green_21.webp",
+    "category": "Skills",
+    "name": "green_21"
+  },
+  {
+    "path": "assets/icons/Skills/green_22.webp",
+    "category": "Skills",
+    "name": "green_22"
+  },
+  {
+    "path": "assets/icons/Skills/green_23.webp",
+    "category": "Skills",
+    "name": "green_23"
+  },
+  {
+    "path": "assets/icons/Skills/green_24.webp",
+    "category": "Skills",
+    "name": "green_24"
+  },
+  {
+    "path": "assets/icons/Skills/green_25.webp",
+    "category": "Skills",
+    "name": "green_25"
+  },
+  {
+    "path": "assets/icons/Skills/green_26.webp",
+    "category": "Skills",
+    "name": "green_26"
+  },
+  {
+    "path": "assets/icons/Skills/green_27.webp",
+    "category": "Skills",
+    "name": "green_27"
+  },
+  {
+    "path": "assets/icons/Skills/green_28.webp",
+    "category": "Skills",
+    "name": "green_28"
+  },
+  {
+    "path": "assets/icons/Skills/green_29.webp",
+    "category": "Skills",
+    "name": "green_29"
+  },
+  {
+    "path": "assets/icons/Skills/green_30.webp",
+    "category": "Skills",
+    "name": "green_30"
+  },
+  {
+    "path": "assets/icons/Skills/green_31.webp",
+    "category": "Skills",
+    "name": "green_31"
+  },
+  {
+    "path": "assets/icons/Skills/green_32.webp",
+    "category": "Skills",
+    "name": "green_32"
+  },
+  {
+    "path": "assets/icons/Skills/green_33.webp",
+    "category": "Skills",
+    "name": "green_33"
+  },
+  {
+    "path": "assets/icons/Skills/red_01.webp",
+    "category": "Skills",
+    "name": "red_01"
+  },
+  {
+    "path": "assets/icons/Skills/red_02.webp",
+    "category": "Skills",
+    "name": "red_02"
+  },
+  {
+    "path": "assets/icons/Skills/red_03.webp",
+    "category": "Skills",
+    "name": "red_03"
+  },
+  {
+    "path": "assets/icons/Skills/red_04.webp",
+    "category": "Skills",
+    "name": "red_04"
+  },
+  {
+    "path": "assets/icons/Skills/red_05.webp",
+    "category": "Skills",
+    "name": "red_05"
+  },
+  {
+    "path": "assets/icons/Skills/red_06.webp",
+    "category": "Skills",
+    "name": "red_06"
+  },
+  {
+    "path": "assets/icons/Skills/red_07.webp",
+    "category": "Skills",
+    "name": "red_07"
+  },
+  {
+    "path": "assets/icons/Skills/red_08.webp",
+    "category": "Skills",
+    "name": "red_08"
+  },
+  {
+    "path": "assets/icons/Skills/red_09.webp",
+    "category": "Skills",
+    "name": "red_09"
+  },
+  {
+    "path": "assets/icons/Skills/red_10.webp",
+    "category": "Skills",
+    "name": "red_10"
+  },
+  {
+    "path": "assets/icons/Skills/red_11.webp",
+    "category": "Skills",
+    "name": "red_11"
+  },
+  {
+    "path": "assets/icons/Skills/red_12.webp",
+    "category": "Skills",
+    "name": "red_12"
+  },
+  {
+    "path": "assets/icons/Skills/red_13.webp",
+    "category": "Skills",
+    "name": "red_13"
+  },
+  {
+    "path": "assets/icons/Skills/red_14.webp",
+    "category": "Skills",
+    "name": "red_14"
+  },
+  {
+    "path": "assets/icons/Skills/red_15.webp",
+    "category": "Skills",
+    "name": "red_15"
+  },
+  {
+    "path": "assets/icons/Skills/red_16.webp",
+    "category": "Skills",
+    "name": "red_16"
+  },
+  {
+    "path": "assets/icons/Skills/red_17.webp",
+    "category": "Skills",
+    "name": "red_17"
+  },
+  {
+    "path": "assets/icons/Skills/red_18.webp",
+    "category": "Skills",
+    "name": "red_18"
+  },
+  {
+    "path": "assets/icons/Skills/red_19.webp",
+    "category": "Skills",
+    "name": "red_19"
+  },
+  {
+    "path": "assets/icons/Skills/red_20.webp",
+    "category": "Skills",
+    "name": "red_20"
+  },
+  {
+    "path": "assets/icons/Skills/red_21.webp",
+    "category": "Skills",
+    "name": "red_21"
+  },
+  {
+    "path": "assets/icons/Skills/red_22.webp",
+    "category": "Skills",
+    "name": "red_22"
+  },
+  {
+    "path": "assets/icons/Skills/red_23.webp",
+    "category": "Skills",
+    "name": "red_23"
+  },
+  {
+    "path": "assets/icons/Skills/red_24.webp",
+    "category": "Skills",
+    "name": "red_24"
+  },
+  {
+    "path": "assets/icons/Skills/red_25.webp",
+    "category": "Skills",
+    "name": "red_25"
+  },
+  {
+    "path": "assets/icons/Skills/red_26.webp",
+    "category": "Skills",
+    "name": "red_26"
+  },
+  {
+    "path": "assets/icons/Skills/red_27.webp",
+    "category": "Skills",
+    "name": "red_27"
+  },
+  {
+    "path": "assets/icons/Skills/red_28.webp",
+    "category": "Skills",
+    "name": "red_28"
+  },
+  {
+    "path": "assets/icons/Skills/red_29.webp",
+    "category": "Skills",
+    "name": "red_29"
+  },
+  {
+    "path": "assets/icons/Skills/red_30.webp",
+    "category": "Skills",
+    "name": "red_30"
+  },
+  {
+    "path": "assets/icons/Skills/red_31.webp",
+    "category": "Skills",
+    "name": "red_31"
+  },
+  {
+    "path": "assets/icons/Skills/red_32.webp",
+    "category": "Skills",
+    "name": "red_32"
+  },
+  {
+    "path": "assets/icons/Skills/red_33.webp",
+    "category": "Skills",
+    "name": "red_33"
+  },
+  {
+    "path": "assets/icons/Skills/red_34.webp",
+    "category": "Skills",
+    "name": "red_34"
+  },
+  {
+    "path": "assets/icons/Skills/red_35.webp",
+    "category": "Skills",
+    "name": "red_35"
+  },
+  {
+    "path": "assets/icons/Skills/red_36.webp",
+    "category": "Skills",
+    "name": "red_36"
+  },
+  {
+    "path": "assets/icons/Skills/red_37.webp",
+    "category": "Skills",
+    "name": "red_37"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_01.webp",
+    "category": "Skills",
+    "name": "SpellBook01_01"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_02.webp",
+    "category": "Skills",
+    "name": "SpellBook01_02"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_03.webp",
+    "category": "Skills",
+    "name": "SpellBook01_03"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_04.webp",
+    "category": "Skills",
+    "name": "SpellBook01_04"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_05.webp",
+    "category": "Skills",
+    "name": "SpellBook01_05"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_06.webp",
+    "category": "Skills",
+    "name": "SpellBook01_06"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_07.webp",
+    "category": "Skills",
+    "name": "SpellBook01_07"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_08.webp",
+    "category": "Skills",
+    "name": "SpellBook01_08"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_09.webp",
+    "category": "Skills",
+    "name": "SpellBook01_09"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_10.webp",
+    "category": "Skills",
+    "name": "SpellBook01_10"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_100.webp",
+    "category": "Skills",
+    "name": "SpellBook01_100"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_101.webp",
+    "category": "Skills",
+    "name": "SpellBook01_101"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_102.webp",
+    "category": "Skills",
+    "name": "SpellBook01_102"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_11.webp",
+    "category": "Skills",
+    "name": "SpellBook01_11"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_12.webp",
+    "category": "Skills",
+    "name": "SpellBook01_12"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_13.webp",
+    "category": "Skills",
+    "name": "SpellBook01_13"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_14.webp",
+    "category": "Skills",
+    "name": "SpellBook01_14"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_15.webp",
+    "category": "Skills",
+    "name": "SpellBook01_15"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_16.webp",
+    "category": "Skills",
+    "name": "SpellBook01_16"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_17.webp",
+    "category": "Skills",
+    "name": "SpellBook01_17"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_18.webp",
+    "category": "Skills",
+    "name": "SpellBook01_18"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_19.webp",
+    "category": "Skills",
+    "name": "SpellBook01_19"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_20.webp",
+    "category": "Skills",
+    "name": "SpellBook01_20"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_21.webp",
+    "category": "Skills",
+    "name": "SpellBook01_21"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_22.webp",
+    "category": "Skills",
+    "name": "SpellBook01_22"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_23.webp",
+    "category": "Skills",
+    "name": "SpellBook01_23"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_24.webp",
+    "category": "Skills",
+    "name": "SpellBook01_24"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_25.webp",
+    "category": "Skills",
+    "name": "SpellBook01_25"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_26.webp",
+    "category": "Skills",
+    "name": "SpellBook01_26"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_27.webp",
+    "category": "Skills",
+    "name": "SpellBook01_27"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_28.webp",
+    "category": "Skills",
+    "name": "SpellBook01_28"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_29.webp",
+    "category": "Skills",
+    "name": "SpellBook01_29"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_30.webp",
+    "category": "Skills",
+    "name": "SpellBook01_30"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_31.webp",
+    "category": "Skills",
+    "name": "SpellBook01_31"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_32.webp",
+    "category": "Skills",
+    "name": "SpellBook01_32"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_33.webp",
+    "category": "Skills",
+    "name": "SpellBook01_33"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_34.webp",
+    "category": "Skills",
+    "name": "SpellBook01_34"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_35.webp",
+    "category": "Skills",
+    "name": "SpellBook01_35"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_36.webp",
+    "category": "Skills",
+    "name": "SpellBook01_36"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_37.webp",
+    "category": "Skills",
+    "name": "SpellBook01_37"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_38.webp",
+    "category": "Skills",
+    "name": "SpellBook01_38"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_39.webp",
+    "category": "Skills",
+    "name": "SpellBook01_39"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_40.webp",
+    "category": "Skills",
+    "name": "SpellBook01_40"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_41.webp",
+    "category": "Skills",
+    "name": "SpellBook01_41"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_42.webp",
+    "category": "Skills",
+    "name": "SpellBook01_42"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_43.webp",
+    "category": "Skills",
+    "name": "SpellBook01_43"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_44.webp",
+    "category": "Skills",
+    "name": "SpellBook01_44"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_45.webp",
+    "category": "Skills",
+    "name": "SpellBook01_45"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_46.webp",
+    "category": "Skills",
+    "name": "SpellBook01_46"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_47.webp",
+    "category": "Skills",
+    "name": "SpellBook01_47"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_48.webp",
+    "category": "Skills",
+    "name": "SpellBook01_48"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_49.webp",
+    "category": "Skills",
+    "name": "SpellBook01_49"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_50.webp",
+    "category": "Skills",
+    "name": "SpellBook01_50"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_51.webp",
+    "category": "Skills",
+    "name": "SpellBook01_51"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_52.webp",
+    "category": "Skills",
+    "name": "SpellBook01_52"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_53.webp",
+    "category": "Skills",
+    "name": "SpellBook01_53"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_54.webp",
+    "category": "Skills",
+    "name": "SpellBook01_54"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_55.webp",
+    "category": "Skills",
+    "name": "SpellBook01_55"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_56.webp",
+    "category": "Skills",
+    "name": "SpellBook01_56"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_57.webp",
+    "category": "Skills",
+    "name": "SpellBook01_57"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_58.webp",
+    "category": "Skills",
+    "name": "SpellBook01_58"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_59.webp",
+    "category": "Skills",
+    "name": "SpellBook01_59"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_60.webp",
+    "category": "Skills",
+    "name": "SpellBook01_60"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_61.webp",
+    "category": "Skills",
+    "name": "SpellBook01_61"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_62.webp",
+    "category": "Skills",
+    "name": "SpellBook01_62"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_63.webp",
+    "category": "Skills",
+    "name": "SpellBook01_63"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_64.webp",
+    "category": "Skills",
+    "name": "SpellBook01_64"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_65.webp",
+    "category": "Skills",
+    "name": "SpellBook01_65"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_66.webp",
+    "category": "Skills",
+    "name": "SpellBook01_66"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_67.webp",
+    "category": "Skills",
+    "name": "SpellBook01_67"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_68.webp",
+    "category": "Skills",
+    "name": "SpellBook01_68"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_69.webp",
+    "category": "Skills",
+    "name": "SpellBook01_69"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_70.webp",
+    "category": "Skills",
+    "name": "SpellBook01_70"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_71.webp",
+    "category": "Skills",
+    "name": "SpellBook01_71"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_72.webp",
+    "category": "Skills",
+    "name": "SpellBook01_72"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_73.webp",
+    "category": "Skills",
+    "name": "SpellBook01_73"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_74.webp",
+    "category": "Skills",
+    "name": "SpellBook01_74"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_75.webp",
+    "category": "Skills",
+    "name": "SpellBook01_75"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_76.webp",
+    "category": "Skills",
+    "name": "SpellBook01_76"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_77.webp",
+    "category": "Skills",
+    "name": "SpellBook01_77"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_78.webp",
+    "category": "Skills",
+    "name": "SpellBook01_78"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_79.webp",
+    "category": "Skills",
+    "name": "SpellBook01_79"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_80.webp",
+    "category": "Skills",
+    "name": "SpellBook01_80"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_81.webp",
+    "category": "Skills",
+    "name": "SpellBook01_81"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_82.webp",
+    "category": "Skills",
+    "name": "SpellBook01_82"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_83.webp",
+    "category": "Skills",
+    "name": "SpellBook01_83"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_84.webp",
+    "category": "Skills",
+    "name": "SpellBook01_84"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_85.webp",
+    "category": "Skills",
+    "name": "SpellBook01_85"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_86.webp",
+    "category": "Skills",
+    "name": "SpellBook01_86"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_87.webp",
+    "category": "Skills",
+    "name": "SpellBook01_87"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_88.webp",
+    "category": "Skills",
+    "name": "SpellBook01_88"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_89.webp",
+    "category": "Skills",
+    "name": "SpellBook01_89"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_90.webp",
+    "category": "Skills",
+    "name": "SpellBook01_90"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_91.webp",
+    "category": "Skills",
+    "name": "SpellBook01_91"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_92.webp",
+    "category": "Skills",
+    "name": "SpellBook01_92"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_93.webp",
+    "category": "Skills",
+    "name": "SpellBook01_93"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_94.webp",
+    "category": "Skills",
+    "name": "SpellBook01_94"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_95.webp",
+    "category": "Skills",
+    "name": "SpellBook01_95"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_96.webp",
+    "category": "Skills",
+    "name": "SpellBook01_96"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_97.webp",
+    "category": "Skills",
+    "name": "SpellBook01_97"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_98.webp",
+    "category": "Skills",
+    "name": "SpellBook01_98"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBook01_99.webp",
+    "category": "Skills",
+    "name": "SpellBook01_99"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_01.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_01"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_02.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_02"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_03.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_03"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_04.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_04"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_05.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_05"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_06.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_06"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_07.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_07"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_08.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_08"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_09.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_09"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_10.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_10"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_100.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_100"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_101.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_101"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_102.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_102"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_103.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_103"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_104.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_104"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_105.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_105"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_106.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_106"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_107.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_107"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_108.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_108"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_109.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_109"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_11.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_11"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_110.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_110"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_111.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_111"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_112.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_112"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_113.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_113"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_114.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_114"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_115.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_115"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_116.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_116"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_12.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_12"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_13.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_13"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_14.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_14"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_15.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_15"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_16.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_16"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_17.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_17"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_18.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_18"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_19.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_19"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_20.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_20"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_21.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_21"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_22.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_22"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_23.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_23"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_24.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_24"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_25.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_25"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_26.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_26"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_27.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_27"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_28.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_28"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_29.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_29"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_30.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_30"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_31.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_31"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_32.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_32"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_33.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_33"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_34.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_34"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_35.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_35"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_36.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_36"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_37.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_37"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_38.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_38"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_39.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_39"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_40.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_40"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_41.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_41"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_42.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_42"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_43.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_43"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_44.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_44"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_45.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_45"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_46.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_46"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_47.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_47"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_48.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_48"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_49.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_49"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_50.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_50"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_51.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_51"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_52.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_52"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_53.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_53"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_54.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_54"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_55.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_55"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_56.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_56"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_57.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_57"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_58.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_58"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_59.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_59"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_60.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_60"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_61.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_61"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_62.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_62"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_63.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_63"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_64.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_64"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_65.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_65"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_66.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_66"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_67.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_67"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_68.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_68"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_69.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_69"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_70.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_70"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_71.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_71"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_72.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_72"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_73.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_73"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_74.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_74"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_75.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_75"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_76.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_76"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_77.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_77"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_78.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_78"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_79.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_79"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_80.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_80"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_81.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_81"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_82.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_82"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_83.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_83"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_84.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_84"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_85.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_85"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_86.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_86"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_87.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_87"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_88.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_88"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_89.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_89"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_90.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_90"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_91.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_91"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_92.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_92"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_93.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_93"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_94.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_94"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_95.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_95"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_96.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_96"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_97.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_97"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_98.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_98"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_99.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_99"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_001.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_001"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_002.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_002"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_003.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_003"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_004.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_004"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_005.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_005"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_006.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_006"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_007.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_007"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_008.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_008"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_009.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_009"
+  },
+  {
+    "path": "assets/icons/Skills/SpellBookPage09_add_010.webp",
+    "category": "Skills",
+    "name": "SpellBookPage09_add_010"
+  },
+  {
+    "path": "assets/icons/Skills/violet_01.webp",
+    "category": "Skills",
+    "name": "violet_01"
+  },
+  {
+    "path": "assets/icons/Skills/violet_02.webp",
+    "category": "Skills",
+    "name": "violet_02"
+  },
+  {
+    "path": "assets/icons/Skills/violet_03.webp",
+    "category": "Skills",
+    "name": "violet_03"
+  },
+  {
+    "path": "assets/icons/Skills/violet_04.webp",
+    "category": "Skills",
+    "name": "violet_04"
+  },
+  {
+    "path": "assets/icons/Skills/violet_05.webp",
+    "category": "Skills",
+    "name": "violet_05"
+  },
+  {
+    "path": "assets/icons/Skills/violet_06.webp",
+    "category": "Skills",
+    "name": "violet_06"
+  },
+  {
+    "path": "assets/icons/Skills/violet_07.webp",
+    "category": "Skills",
+    "name": "violet_07"
+  },
+  {
+    "path": "assets/icons/Skills/violet_08.webp",
+    "category": "Skills",
+    "name": "violet_08"
+  },
+  {
+    "path": "assets/icons/Skills/violet_09.webp",
+    "category": "Skills",
+    "name": "violet_09"
+  },
+  {
+    "path": "assets/icons/Skills/violet_10.webp",
+    "category": "Skills",
+    "name": "violet_10"
+  },
+  {
+    "path": "assets/icons/Skills/violet_11.webp",
+    "category": "Skills",
+    "name": "violet_11"
+  },
+  {
+    "path": "assets/icons/Skills/violet_12.webp",
+    "category": "Skills",
+    "name": "violet_12"
+  },
+  {
+    "path": "assets/icons/Skills/violet_13.webp",
+    "category": "Skills",
+    "name": "violet_13"
+  },
+  {
+    "path": "assets/icons/Skills/violet_14.webp",
+    "category": "Skills",
+    "name": "violet_14"
+  },
+  {
+    "path": "assets/icons/Skills/violet_15.webp",
+    "category": "Skills",
+    "name": "violet_15"
+  },
+  {
+    "path": "assets/icons/Skills/violet_16.webp",
+    "category": "Skills",
+    "name": "violet_16"
+  },
+  {
+    "path": "assets/icons/Skills/violet_17.webp",
+    "category": "Skills",
+    "name": "violet_17"
+  },
+  {
+    "path": "assets/icons/Skills/violet_18.webp",
+    "category": "Skills",
+    "name": "violet_18"
+  },
+  {
+    "path": "assets/icons/Skills/violet_19.webp",
+    "category": "Skills",
+    "name": "violet_19"
+  },
+  {
+    "path": "assets/icons/Skills/violet_20.webp",
+    "category": "Skills",
+    "name": "violet_20"
+  },
+  {
+    "path": "assets/icons/Skills/violet_21.webp",
+    "category": "Skills",
+    "name": "violet_21"
+  },
+  {
+    "path": "assets/icons/Skills/violet_22.webp",
+    "category": "Skills",
+    "name": "violet_22"
+  },
+  {
+    "path": "assets/icons/Skills/violet_23.webp",
+    "category": "Skills",
+    "name": "violet_23"
+  },
+  {
+    "path": "assets/icons/Skills/violet_24.webp",
+    "category": "Skills",
+    "name": "violet_24"
+  },
+  {
+    "path": "assets/icons/Skills/violet_25.webp",
+    "category": "Skills",
+    "name": "violet_25"
+  },
+  {
+    "path": "assets/icons/Skills/violet_26.webp",
+    "category": "Skills",
+    "name": "violet_26"
+  },
+  {
+    "path": "assets/icons/Skills/violet_27.webp",
+    "category": "Skills",
+    "name": "violet_27"
+  },
+  {
+    "path": "assets/icons/Skills/violet_28.webp",
+    "category": "Skills",
+    "name": "violet_28"
+  },
+  {
+    "path": "assets/icons/Skills/violet_29.webp",
+    "category": "Skills",
+    "name": "violet_29"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_01.webp",
+    "category": "Skills",
+    "name": "yellow_01"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_02.webp",
+    "category": "Skills",
+    "name": "yellow_02"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_03.webp",
+    "category": "Skills",
+    "name": "yellow_03"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_04.webp",
+    "category": "Skills",
+    "name": "yellow_04"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_05.webp",
+    "category": "Skills",
+    "name": "yellow_05"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_06.webp",
+    "category": "Skills",
+    "name": "yellow_06"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_07.webp",
+    "category": "Skills",
+    "name": "yellow_07"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_08.webp",
+    "category": "Skills",
+    "name": "yellow_08"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_09.webp",
+    "category": "Skills",
+    "name": "yellow_09"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_10.webp",
+    "category": "Skills",
+    "name": "yellow_10"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_11.webp",
+    "category": "Skills",
+    "name": "yellow_11"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_12.webp",
+    "category": "Skills",
+    "name": "yellow_12"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_13.webp",
+    "category": "Skills",
+    "name": "yellow_13"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_14.webp",
+    "category": "Skills",
+    "name": "yellow_14"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_15.webp",
+    "category": "Skills",
+    "name": "yellow_15"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_16.webp",
+    "category": "Skills",
+    "name": "yellow_16"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_17.webp",
+    "category": "Skills",
+    "name": "yellow_17"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_18.webp",
+    "category": "Skills",
+    "name": "yellow_18"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_19.webp",
+    "category": "Skills",
+    "name": "yellow_19"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_20.webp",
+    "category": "Skills",
+    "name": "yellow_20"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_21.webp",
+    "category": "Skills",
+    "name": "yellow_21"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_22.webp",
+    "category": "Skills",
+    "name": "yellow_22"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_23.webp",
+    "category": "Skills",
+    "name": "yellow_23"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_24.webp",
+    "category": "Skills",
+    "name": "yellow_24"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_25.webp",
+    "category": "Skills",
+    "name": "yellow_25"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_26.webp",
+    "category": "Skills",
+    "name": "yellow_26"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_27.webp",
+    "category": "Skills",
+    "name": "yellow_27"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_28.webp",
+    "category": "Skills",
+    "name": "yellow_28"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_29.webp",
+    "category": "Skills",
+    "name": "yellow_29"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_30.webp",
+    "category": "Skills",
+    "name": "yellow_30"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_31.webp",
+    "category": "Skills",
+    "name": "yellow_31"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_32.webp",
+    "category": "Skills",
+    "name": "yellow_32"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_33.webp",
+    "category": "Skills",
+    "name": "yellow_33"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_34.webp",
+    "category": "Skills",
+    "name": "yellow_34"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_35.webp",
+    "category": "Skills",
+    "name": "yellow_35"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_36.webp",
+    "category": "Skills",
+    "name": "yellow_36"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_37.webp",
+    "category": "Skills",
+    "name": "yellow_37"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_38.webp",
+    "category": "Skills",
+    "name": "yellow_38"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_39.webp",
+    "category": "Skills",
+    "name": "yellow_39"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_40.webp",
+    "category": "Skills",
+    "name": "yellow_40"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_41.webp",
+    "category": "Skills",
+    "name": "yellow_41"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_42.webp",
+    "category": "Skills",
+    "name": "yellow_42"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_43.webp",
+    "category": "Skills",
+    "name": "yellow_43"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_44.webp",
+    "category": "Skills",
+    "name": "yellow_44"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_45.webp",
+    "category": "Skills",
+    "name": "yellow_45"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_46.webp",
+    "category": "Skills",
+    "name": "yellow_46"
+  },
+  {
+    "path": "assets/icons/Skills/yellow_47.webp",
+    "category": "Skills",
+    "name": "yellow_47"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_01_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_01_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_02_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_03_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_04_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_05_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_06_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_06_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_07_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_07_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_08_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_08_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_09_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_09_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_10_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_10_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_11_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_11_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_12_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_12_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_13_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_13_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_14_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_14_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_mercenary_t.webp",
+    "category": "Weapons/axes",
+    "name": "axe_mercenary_t"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_t_01.webp",
+    "category": "Weapons/axes",
+    "name": "axe_t_01"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_t_02.webp",
+    "category": "Weapons/axes",
+    "name": "axe_t_02"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_t_03.webp",
+    "category": "Weapons/axes",
+    "name": "axe_t_03"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_t_04.webp",
+    "category": "Weapons/axes",
+    "name": "axe_t_04"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_t_05.webp",
+    "category": "Weapons/axes",
+    "name": "axe_t_05"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/axe_t_06.webp",
+    "category": "Weapons/axes",
+    "name": "axe_t_06"
+  },
+  {
+    "path": "assets/icons/Weapons/axes/hell-ax_t.webp",
+    "category": "Weapons/axes",
+    "name": "hell-ax_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/accurate_bow_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "accurate_bow_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_01_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_01_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_02_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_03_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_04_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_05_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_06_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_06_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_07_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_07_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_08_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_08_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_09_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_09_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_10_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_10_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_11_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_11_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bow_12_t.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bow_12_t"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bw_t_01.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bw_t_01"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bw_t_02.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bw_t_02"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bw_t_03.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bw_t_03"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bw_t_04.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bw_t_04"
+  },
+  {
+    "path": "assets/icons/Weapons/bows_and_crossbows/bw_t_05.webp",
+    "category": "Weapons/bows_and_crossbows",
+    "name": "bw_t_05"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_01_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_01_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_02_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_03_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_04_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_05_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_06_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_06_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_07_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_07_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_08_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_08_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_09_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_09_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_10_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_10_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_11_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_11_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_12_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_12_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/dagger_13_t.webp",
+    "category": "Weapons/daggers",
+    "name": "dagger_13_t"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/kn_t_01.webp",
+    "category": "Weapons/daggers",
+    "name": "kn_t_01"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/kn_t_02.webp",
+    "category": "Weapons/daggers",
+    "name": "kn_t_02"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/kn_t_03.webp",
+    "category": "Weapons/daggers",
+    "name": "kn_t_03"
+  },
+  {
+    "path": "assets/icons/Weapons/daggers/kn_t_04.webp",
+    "category": "Weapons/daggers",
+    "name": "kn_t_04"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_01_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_01_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_02_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_03_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_04_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_05_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_06_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_06_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_07_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_07_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_08_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_08_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_09_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_09_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_10_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_10_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_11_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_11_t"
+  },
+  {
+    "path": "assets/icons/Weapons/Fist Weapon/fist_weapon_12_t.webp",
+    "category": "Weapons/Fist Weapon",
+    "name": "fist_weapon_12_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/bl_t_01.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "bl_t_01"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/bl_t_02.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "bl_t_02"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/bl_t_03.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "bl_t_03"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/bl_t_04.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "bl_t_04"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/bl_t_05.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "bl_t_05"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/bl_t_06.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "bl_t_06"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/bl_t_07.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "bl_t_07"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/flail_01_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "flail_01_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/flail_02_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "flail_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/flail_03_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "flail_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/flail_04_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "flail_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/flail_05_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "flail_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/iron_hammer_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "iron_hammer_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_01_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_01_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_02_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_03_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_04_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_05_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_06_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_06_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_07_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_07_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_08_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_08_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_09_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_09_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_10_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_10_t"
+  },
+  {
+    "path": "assets/icons/Weapons/maces_and_hammers/mace_11_t.webp",
+    "category": "Weapons/maces_and_hammers",
+    "name": "mace_11_t"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shield_t_01.webp",
+    "category": "Weapons/shields",
+    "name": "shield_t_01"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shield_t_02.webp",
+    "category": "Weapons/shields",
+    "name": "shield_t_02"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shield_t_03.webp",
+    "category": "Weapons/shields",
+    "name": "shield_t_03"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shield_t_04.webp",
+    "category": "Weapons/shields",
+    "name": "shield_t_04"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shield_t_05.webp",
+    "category": "Weapons/shields",
+    "name": "shield_t_05"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shield_t_06.webp",
+    "category": "Weapons/shields",
+    "name": "shield_t_06"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shield_t_07.webp",
+    "category": "Weapons/shields",
+    "name": "shield_t_07"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shield_t_08.webp",
+    "category": "Weapons/shields",
+    "name": "shield_t_08"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shl_t_01.webp",
+    "category": "Weapons/shields",
+    "name": "shl_t_01"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shl_t_02.webp",
+    "category": "Weapons/shields",
+    "name": "shl_t_02"
+  },
+  {
+    "path": "assets/icons/Weapons/shields/shl_t_03.webp",
+    "category": "Weapons/shields",
+    "name": "shl_t_03"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/emerald_staff_t.webp",
+    "category": "Weapons/staffs",
+    "name": "emerald_staff_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/staff_t_01.webp",
+    "category": "Weapons/staffs",
+    "name": "staff_t_01"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/staff_t_02.webp",
+    "category": "Weapons/staffs",
+    "name": "staff_t_02"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/staff_t_03.webp",
+    "category": "Weapons/staffs",
+    "name": "staff_t_03"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/staff_t_04.webp",
+    "category": "Weapons/staffs",
+    "name": "staff_t_04"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/staff_t_05.webp",
+    "category": "Weapons/staffs",
+    "name": "staff_t_05"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_01_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_01_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_02_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_03_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_04_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_05_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_06_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_06_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_07_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_07_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_08_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_08_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_09_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_09_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_10_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_10_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_11_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_11_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staffs/stave_12_t.webp",
+    "category": "Weapons/staffs",
+    "name": "stave_12_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_01_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_01_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_02_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_03_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_04_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_05_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_06_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_06_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_07_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_07_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_08_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_08_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_09_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_09_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_10_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_10_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_11_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_11_t"
+  },
+  {
+    "path": "assets/icons/Weapons/staves/stave_12_t.webp",
+    "category": "Weapons/staves",
+    "name": "stave_12_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/sharp_blade_t.webp",
+    "category": "Weapons/swords",
+    "name": "sharp_blade_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_02_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_02_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_03_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_03_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_04_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_04_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_05_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_05_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_06_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_06_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_07_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_07_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_08_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_08_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_09_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_09_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_10_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_10_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_11_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_11_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_12_t.webp",
+    "category": "Weapons/swords",
+    "name": "swords_12_t"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_t_01.webp",
+    "category": "Weapons/swords",
+    "name": "swords_t_01"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_t_02.webp",
+    "category": "Weapons/swords",
+    "name": "swords_t_02"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_t_03.webp",
+    "category": "Weapons/swords",
+    "name": "swords_t_03"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_t_04.webp",
+    "category": "Weapons/swords",
+    "name": "swords_t_04"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_t_05.webp",
+    "category": "Weapons/swords",
+    "name": "swords_t_05"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_t_06.webp",
+    "category": "Weapons/swords",
+    "name": "swords_t_06"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_t_07.webp",
+    "category": "Weapons/swords",
+    "name": "swords_t_07"
+  },
+  {
+    "path": "assets/icons/Weapons/swords/swords_t_08.webp",
+    "category": "Weapons/swords",
+    "name": "swords_t_08"
+  }
+]

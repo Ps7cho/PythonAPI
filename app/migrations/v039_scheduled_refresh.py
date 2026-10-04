@@ -10,7 +10,10 @@ def upgrade(conn):
     essentials = {'gear': {'leather-coat', 'lucky-ring'},
                   'weapons': {'sword', 'axe'},
                   'consumables': {'healing-potion'}}
-    for row in conn.execute(ShopTable.__table__.select()).mappings():
+    # Select only the columns this migration owns; later model columns may not
+    # exist yet when upgrading an older installation.
+    from sqlalchemy import select
+    for row in conn.execute(select(ShopTable.slug, ShopTable.category, ShopTable.items)).mappings():
         required = essentials.get(row['category'], set())
         items = [{**item, 'always_stocked': True} if item.get('slug') in required else item
                  for item in row['items'] or []]

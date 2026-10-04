@@ -22,7 +22,7 @@ def add_loot(rules):
 
 
 def inventory(db, hero_id):
-    return [dict(slug=row.consumable_slug, name=row.definition.name,
+    return [dict(slug=row.consumable_slug, name=row.definition.name, icon_path=row.definition.icon_path,
                  description=row.definition.description, quantity=row.quantity,
                  effect=row.definition.effect, power=row.definition.power, item_type='consumable')
             for row in db.scalars(select(OwnedConsumable).where(

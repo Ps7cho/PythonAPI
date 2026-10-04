@@ -122,3 +122,7 @@ def migrate(engine):
             from app.migrations.v039_scheduled_refresh import upgrade as scheduled_refresh_upgrade
             scheduled_refresh_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('039_scheduled_refresh')"))
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='040_catalog_icons'")).first():
+            from app.migrations.v040_catalog_icons import upgrade as icons_upgrade
+            icons_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('040_catalog_icons')"))

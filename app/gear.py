@@ -25,7 +25,7 @@ def serialize(gear):
     from app.item_rarity import item_rarity
     definition = gear.definition
     return dict(id=str(gear.id), item_type='gear', definition_slug=definition.slug,
-        name=definition.name, slot=definition.slot, bonuses=definition.bonuses,
+        name=definition.name, icon_path=definition.icon_path, slot=definition.slot, bonuses=definition.bonuses,
         required_rank=definition.required_rank,
         effects=armor_descriptions(gear), **item_rarity(gear.rarity))
 

@@ -86,6 +86,7 @@ class EnemyRead(BaseModel):
     slug: str
     name: str
     enemy_type: str
+    icon_path: str | None = None
     attributes: dict[str, int]
     stat_ranges: EnemyStats
 
@@ -118,7 +119,7 @@ def roll_enemy(enemy: Enemy, party_size: int, rng=None, loadouts=None) -> Encoun
         weapon['base_damage'] = rolled['power']
     from app.armor_effects import enemy_armor_effects
     return EncounterEnemy(id=instance_id, enemy_slug=enemy.slug, position=0, state={
-        "id": str(instance_id), "enemy_slug": enemy.slug, "name": enemy.name,
+        "id": str(instance_id), "enemy_slug": enemy.slug, "name": enemy.name, "icon_path": enemy.icon_path,
         "enemy_type": enemy.enemy_type, "attributes": deepcopy(enemy.attributes),
         "status_resistances": deepcopy(enemy.type_profile.status_resistances) if enemy.type_profile else {},
         "hp": hp, "max_hp": hp, **rolled,
