@@ -39,6 +39,7 @@ class CombatAbility:
     max_extra_strikes: int = 1
     trigger_mode: str = 'active'
     proc_chance_percent: int = 100
+    icon_path: str | None = None
 
 
 

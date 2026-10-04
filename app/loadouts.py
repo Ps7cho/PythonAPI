@@ -27,7 +27,7 @@ class AbilityUseRequest(BaseModel):
 def executable(ability, ladder=(), level=1, db=None):
     from app.ability_design import rank_values
     values = rank_values(ability, ladder, level)
-    return CombatAbility(slug=str(ability.id), name=ability.name, effect=ability.effect_type,
+    return CombatAbility(slug=str(ability.id), name=ability.name, effect=ability.effect_type, icon_path=ability.icon_path,
                          effect_chain=values['effect_chain'], duration_turns=values['duration_turns'],
                          guard_percent=values['guard_percent'],
                          strike_count=values['strike_count'], extra_strike_chance=values['extra_strike_chance'],

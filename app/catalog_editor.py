@@ -142,7 +142,8 @@ def require(condition, message):
 
 def validate_values(model, data, catalog):
     # Older clients and newly drafted definitions omit optional artwork.
-    data = {"icon_path": None, **data}
+    if 'icon_path' in model.__table__.columns:
+        data = {"icon_path": None, **data}
     if model is m.GearDefinition:
         data = {'effect_slugs': [], **data}
     if model is m.Enemy:

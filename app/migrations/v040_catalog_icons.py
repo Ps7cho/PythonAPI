@@ -1,4 +1,4 @@
-"""Optional artwork for every editable Worldsmith catalog; existing rows stay blank."""
+"""Optional Worldsmith artwork, excluding quest routes; existing rows stay blank."""
 from sqlalchemy import inspect, text
 
 
@@ -7,6 +7,8 @@ def upgrade(conn):
 
     inspector = inspect(conn)
     for model in CATALOGS.values():
+        if 'icon_path' not in model.__table__.columns:
+            continue
         table = model.__tablename__
         if inspector.has_table(table) and 'icon_path' not in {c['name'] for c in inspector.get_columns(table)}:
             conn.execute(text(f'ALTER TABLE {table} ADD COLUMN icon_path VARCHAR(500)'))

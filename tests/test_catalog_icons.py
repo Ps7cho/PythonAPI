@@ -7,7 +7,7 @@ from sqlalchemy import create_engine, inspect, select, text
 from app.catalog_editor import CATALOGS
 from app.catalog_icons import ICON_LIBRARY
 from app.database import SessionLocal
-from app.models import QuestTemplate, User, WeaponDefinition
+from app.models import User, WeaponDefinition
 from app.migrations.v040_catalog_icons import upgrade
 
 
@@ -23,13 +23,17 @@ def records(client):
     return client.get('/api/abilities?inspect=true').json()['editor']['catalogs']
 
 
-def test_every_worldsmith_catalog_has_optional_icon(icon_editor):
-    for schema in records(icon_editor).values():
+def test_worldsmith_catalog_icons_exclude_quest_routes(icon_editor):
+    for name, schema in records(icon_editor).items():
+        if name == 'quests':
+            assert all(f['name'] != 'icon_path' for f in schema['fields'])
+            assert all('icon_path' not in r['values'] for r in schema['records'])
+            continue
         field = next(f for f in schema['fields'] if f['name'] == 'icon_path')
         assert field['nullable'] and not field['immutable']
 
 
-@pytest.mark.parametrize('catalog', ['abilities', 'enemies', 'quests', 'weapon_definitions', 'gear_definitions', 'consumables', 'enemy_abilities'])
+@pytest.mark.parametrize('catalog', ['abilities', 'enemies', 'weapon_definitions', 'gear_definitions', 'consumables', 'enemy_abilities'])
 def test_icon_review_save_reload_and_clear(icon_editor, catalog):
     if catalog == 'weapon_definitions':
         with SessionLocal.begin() as db:
@@ -63,10 +67,6 @@ def test_icon_review_save_reload_and_clear(icon_editor, catalog):
     finally:
         assert edit(original['values']['icon_path']).status_code == 200
         with SessionLocal.begin() as db:
-            if catalog == 'quests':
-                # Validation expands source defaults; keep this shared fixture's
-                # original source JSON for subsequent scheduler tests.
-                db.get(QuestTemplate, original['values']['slug']).journey = original['values']['journey']
             if catalog == 'weapon_definitions':
                 db.delete(db.get(WeaponDefinition, 'icon-test-blade'))
 
@@ -91,6 +91,10 @@ def test_icon_migration_preserves_existing_rows_and_can_repeat():
         upgrade(conn)
         for model in CATALOGS.values():
             table = model.__tablename__
+            if 'icon_path' not in model.__table__.columns:
+                assert 'icon_path' not in {c['name'] for c in inspect(conn).get_columns(table)}
+                assert conn.execute(text(f'SELECT legacy_value FROM {table}')).scalar_one() == 'preserved'
+                continue
             assert 'icon_path' in {c['name'] for c in inspect(conn).get_columns(table)}
             assert conn.execute(text(f'SELECT legacy_value, icon_path FROM {table}')).one() == ('preserved', None)
     engine.dispose()

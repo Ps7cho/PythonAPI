@@ -219,7 +219,7 @@ class PartyMember(Base):
     __table_args__ = (UniqueConstraint("party_id", "adventurer_id", name="uq_party_member"),)
 
 
-class QuestTemplate(CatalogIcon, Base):
+class QuestTemplate(Base):
     __tablename__ = "quest_templates"
 
     slug = Column(String, primary_key=True)
