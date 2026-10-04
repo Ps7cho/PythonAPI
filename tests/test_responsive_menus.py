@@ -493,3 +493,63 @@ def test_raid_refresh_countdown_uses_server_time(browser_backend):
             shop_timer.evaluate("node=>{node.dataset.serverTime=node.dataset.resetAt;node.dataset.anchorTime=String(Date.now());}")
     finally:
         page.close()
+
+
+def test_finished_gauntlet_does_not_reopen_after_refresh(browser_backend):
+    browser, client, username, password = browser_backend
+    page = browser.new_page(viewport={'width': 390, 'height': 844}, has_touch=True)
+    page.route(ORIGIN + '/**', lambda route: serve_frontend(route, client))
+    try:
+        page.goto(ORIGIN + '/')
+        page.locator('#username').fill(username)
+        page.locator('#password').fill(password)
+        page.get_by_role('button', name='Log In', exact=True).click()
+        expect(page.locator('#game')).to_be_visible()
+        headers = {'Authorization': 'Bearer ' + page.evaluate('GameApi.liveToken()')}
+        account_id = client.get('/api/auth/me', headers=headers).json()['id']
+        hero = client.post('/api/adventurers', headers=headers,
+                           json={'name': 'Gauntlet refresh hero'}).json()
+        started = client.post('/api/gauntlet-runs', headers=headers,
+                              json={'adventurer_ids': [hero['id']]})
+        assert started.status_code == 201, started.text
+        encounter = started.json()['encounter']
+        encounter_id = encounter['id']
+
+        page.goto(ORIGIN + '/?encounter=' + encounter_id)
+        expect(page.locator('#combat')).to_be_visible()
+        assert page.evaluate('(id) => localStorage.getItem("encounter-id:" + id)', account_id) == encounter_id
+
+        for _ in range(250):
+            if encounter['state'] == 'defeat':
+                break
+            response = client.post(f'/api/encounters/{encounter_id}/actions', headers=headers,
+                                   json={'actor_id': encounter['pending_actor_ids'][0],
+                                         'expected_turn': encounter['turn'], 'action': 'wait'})
+            assert response.status_code == 200, response.text
+            encounter = response.json()
+        assert encounter['state'] == 'defeat'
+
+        # An old bookmarked URL should open the run summary instead of the fight.
+        page.evaluate('(id) => localStorage.removeItem("encounter-id:" + id)', account_id)
+        page.goto(ORIGIN + '/?encounter=' + encounter_id)
+        expect(page.locator('#tab-gauntlet')).to_have_attribute('aria-selected', 'true')
+        expect(page.locator('#panel-gauntlet')).to_be_visible()
+        assert 'encounter=' not in page.url
+        assert page.evaluate('(id) => localStorage.getItem("encounter-id:" + id)', account_id) is None
+
+        # Older sessions may have saved only the encounter ID in local storage.
+        page.evaluate('([id, encounter]) => localStorage.setItem("encounter-id:" + id, encounter)',
+                      [account_id, encounter_id])
+        page.goto(ORIGIN + '/')
+        expect(page.locator('#tab-gauntlet')).to_have_attribute('aria-selected', 'true')
+        assert page.evaluate('(id) => localStorage.getItem("encounter-id:" + id)', account_id) is None
+
+        page.get_by_role('button', name='View final battle').click()
+        expect(page.locator('#combat')).to_be_visible()
+        assert 'encounter=' not in page.url
+        page.reload()
+        expect(page.locator('#game')).to_be_visible()
+        expect(page.locator('#combat')).to_be_hidden()
+        assert 'encounter=' not in page.url
+    finally:
+        page.close()
