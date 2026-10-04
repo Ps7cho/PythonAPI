@@ -479,6 +479,22 @@ class ShopTable(Base):
     shop = relationship("Shop")
 
 
+class ShopRotation(Base):
+    __tablename__ = 'shop_rotations'
+    shop_slug = Column(String, ForeignKey('shops.slug'), primary_key=True)
+    period = Column(String, primary_key=True)
+    resets_at = Column(DateTime, nullable=False)
+    stock = Column(JSON, nullable=False, default=dict)
+
+
+class ScheduledJob(Base):
+    __tablename__ = 'scheduled_jobs'
+    key = Column(String, primary_key=True)
+    period = Column(String, nullable=False)
+    last_run_at = Column(DateTime, nullable=False)
+    next_run_at = Column(DateTime, nullable=False, index=True)
+
+
 class Weapon(Base):
     required_rank = Column(String, ForeignKey("rank_definitions.slug"), nullable=False, default="iron")
     __tablename__ = "weapons"

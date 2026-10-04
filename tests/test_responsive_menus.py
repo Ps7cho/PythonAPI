@@ -463,3 +463,33 @@ def test_mobile_quest_results_show_combat_and_loot(browser_backend):
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
     finally:
         page.close()
+
+
+def test_raid_refresh_countdown_uses_server_time(browser_backend):
+    browser, client, username, password = browser_backend
+    page = browser.new_page(viewport={'width': 390, 'height': 844}, has_touch=True)
+    page.route(ORIGIN + '/**', lambda route: serve_frontend(route, client))
+    try:
+        page.goto(ORIGIN + '/')
+        page.locator('#username').fill(username)
+        page.locator('#password').fill(password)
+        page.get_by_role('button', name='Log In', exact=True).click()
+        expect(page.locator('#game')).to_be_visible()
+        select_tab(page, page.locator('#game .tabs[role=tablist]').first, 'Quests')
+        select_tab(page, page.locator('#panel-journeys .tabs[role=tablist]').first, 'Raids')
+        countdown = page.locator('#panel-raids .raid-countdown').first
+        expect(countdown).to_be_visible()
+        first = countdown.inner_text()
+        assert first.startswith('Refresh in ')
+        expect(countdown).not_to_have_text(first, timeout=5000)
+        assert countdown.get_attribute('title').startswith('Refreshes ')
+        with page.expect_request(lambda request: '/api/quest-templates' in request.url, timeout=5000):
+            countdown.evaluate("node=>{node.dataset.serverTime=node.dataset.raidReset;node.dataset.anchorTime=String(Date.now());}")
+        select_tab(page, page.locator('#game .tabs[role=tablist]').first, 'Village Shops')
+        shop_timer = page.locator('.village-shop-controls .raid-countdown')
+        expect(shop_timer).to_be_visible()
+        expect(shop_timer).to_contain_text('Stock refresh in ')
+        with page.expect_request(lambda request: '/api/shop/villages' in request.url, timeout=5000):
+            shop_timer.evaluate("node=>{node.dataset.serverTime=node.dataset.resetAt;node.dataset.anchorTime=String(Date.now());}")
+    finally:
+        page.close()

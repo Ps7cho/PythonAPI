@@ -111,6 +111,22 @@ def publish_presence(user_id):
 async def lifespan(app):
     hub.stop.clear()
     auction_thread = None
+    scheduler_thread = None
+    from app.scheduled_refresh import JOBS, run_due_jobs
+    if engine.dialect.name == 'sqlite' and str(engine.url).endswith(':memory:'):
+        for key in JOBS:
+            run_due_jobs(jobs=(key,))
+    else:
+        def refresh_loop():
+            while not hub.stop.is_set():
+                for key in JOBS:
+                    try:
+                        run_due_jobs(jobs=(key,))
+                    except Exception:
+                        logging.exception('Scheduled refresh %s failed; it will retry on the next check.', key)
+                hub.stop.wait(30)
+        scheduler_thread = threading.Thread(target=refresh_loop, daemon=True)
+        scheduler_thread.start()
     if engine.dialect.name == 'postgresql':
         hub.thread = threading.Thread(target=hub.listen, daemon=True)
         hub.thread.start()
@@ -125,6 +141,8 @@ async def lifespan(app):
         hub.stop.set()
         if auction_thread:
             await asyncio.to_thread(auction_thread.join, 7)
+        if scheduler_thread:
+            await asyncio.to_thread(scheduler_thread.join, 7)
         if hub.thread:
             await asyncio.to_thread(hub.thread.join, 7)
         hub.ready.clear()

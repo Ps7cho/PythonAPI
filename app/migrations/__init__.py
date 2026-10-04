@@ -118,3 +118,7 @@ def migrate(engine):
             from app.migrations.v038_item_rarity import upgrade as rarity_upgrade
             rarity_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('038_item_rarity')"))
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='039_scheduled_refresh'")).first():
+            from app.migrations.v039_scheduled_refresh import upgrade as scheduled_refresh_upgrade
+            scheduled_refresh_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('039_scheduled_refresh')"))

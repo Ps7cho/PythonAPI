@@ -63,7 +63,7 @@ def active_adventure(db, ids):
                             QuestRun.status.in_(["active", "awaiting_continue"])).limit(1))
 
 
-def build_plan(db, template):
+def build_plan(db, template, now=None):
     rules = JourneyRules.model_validate(template.journey)
     pool = {slug for stage in rules.stages for group in stage.groups for slug in group}
     if any(not group or len(group) > 6 for stage in rules.stages for group in stage.groups):
@@ -83,7 +83,7 @@ def build_plan(db, template):
     settings.update(name=template.name, region=template.region)
     if rules.raid:
         from app.raids import build_raid_plan
-        return build_raid_plan(db, template.slug, settings)
+        return build_raid_plan(db, template.slug, settings, now=now)
     plan = [{"encounter_id": str(uuid4()), "enemy_slugs": choice(stage.groups),
              "description": stage.description} for stage in rules.stages]
     if rules.encounter_groups:

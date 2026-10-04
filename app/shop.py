@@ -39,9 +39,11 @@ router = APIRouter(prefix="/api/shop", tags=["shop"])
 
 
 def catalog(db: Session):
+    from app.scheduled_refresh import current_shop_stock
     tables = list(db.scalars(select(ShopTable).where(ShopTable.shop_slug == 'mosswood-market').order_by(ShopTable.category)))
     if tables:
-        return {table.category: table.items for table in tables}
+        rotation = current_shop_stock(db, 'mosswood-market')
+        return {table.category: rotation.stock.get(table.slug, []) if rotation else table.items for table in tables}
     return {
         "gear": [{"item_type": "gear", "slug": g.slug, "name": g.name, "slot": g.slot,
                   "bonuses": g.bonuses, "price": g.price, "required_rank": g.required_rank}
@@ -58,18 +60,26 @@ def catalog(db: Session):
 
 @router.get("")
 def shop_catalog(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    from app.scheduled_refresh import run_due_jobs
+    run_due_jobs(jobs=('shop_daily',))
     return catalog(db)
 
 
 @router.get("/villages")
 def village_catalog(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    from app.scheduled_refresh import current_shop_stock, run_due_jobs, utc_now
+    run_due_jobs(jobs=('shop_daily',))
     villages = []
     for village in db.scalars(select(Village).order_by(Village.name)):
         shops = []
         for shop in db.scalars(select(Shop).where(Shop.village_slug == village.slug).order_by(Shop.name)):
+            rotation = current_shop_stock(db, shop.slug)
             tables = db.scalars(select(ShopTable).where(ShopTable.shop_slug == shop.slug).order_by(ShopTable.category))
             shops.append({'slug': shop.slug, 'name': shop.name, 'description': shop.description,
-                          'tables': [{'slug': table.slug, 'category': table.category, 'items': table.items} for table in tables]})
+                          'resets_at': rotation.resets_at.isoformat() + 'Z' if rotation else None,
+                          'server_time': utc_now().isoformat(),
+                          'tables': [{'slug': table.slug, 'category': table.category,
+                                      'items': rotation.stock.get(table.slug, []) if rotation else table.items} for table in tables]})
         villages.append({'slug': village.slug, 'name': village.name, 'region': village.region,
                          'description': village.description, 'shops': shops})
     return villages
@@ -77,6 +87,8 @@ def village_catalog(db: Session = Depends(get_db), user: User = Depends(current_
 
 @router.post("/purchase")
 def purchase(payload: PurchaseRequest, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    from app.scheduled_refresh import current_shop_stock, run_due_jobs
+    run_due_jobs(jobs=('shop_daily',))
     if payload.quantity < 1 or payload.quantity > 20:
         raise HTTPException(422, "Quantity must be between 1 and 20.")
     hero = own_adventurer(db, payload.adventurer_id, user)
@@ -99,6 +111,10 @@ def purchase(payload: PurchaseRequest, db: Session = Depends(get_db), user: User
         raise HTTPException(422, "Unknown shop category.")
     if item is None or price is None:
         raise HTTPException(404, "Shop item not found.")
+    rotation = current_shop_stock(db, 'mosswood-market')
+    if rotation and not any(stock_item.get('item_type') == payload.item_type and stock_item.get('slug') == payload.item_slug
+                            for items in rotation.stock.values() for stock_item in items):
+        raise HTTPException(409, "This item is not in today's shop stock.")
     total = price * payload.quantity
     if hero.gold < total:
         raise HTTPException(409, "Not enough gold.")

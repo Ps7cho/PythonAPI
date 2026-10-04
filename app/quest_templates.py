@@ -186,11 +186,15 @@ router = APIRouter(prefix="/api/quest-templates", tags=["quest templates"])
 
 @router.get("", response_model=list[QuestTemplateRead])
 def list_templates(db: Session = Depends(get_db)):
+    from app.scheduled_refresh import run_due_jobs
+    run_due_jobs(jobs=('raid_daily', 'raid_weekly'))
     return read_templates(db, db.scalars(select(QuestTemplate).order_by(QuestTemplate.name)).all())
 
 
 @router.get("/{slug}", response_model=QuestTemplateRead)
 def get_template(slug: str, db: Session = Depends(get_db)):
+    from app.scheduled_refresh import run_due_jobs
+    run_due_jobs(jobs=('raid_daily', 'raid_weekly'))
     template = db.get(QuestTemplate, slug)
     if template is None:
         raise HTTPException(404, "Quest template not found.")

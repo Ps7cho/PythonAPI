@@ -37,7 +37,8 @@ def rotation_info(slug, cadence, now=None):
     end = start + timedelta(days=7 if cadence == 'weekly' else 1)
     key = slug + ':' + start.date().isoformat()
     return {'key': key, 'seed': sha256(key.encode()).hexdigest()[:16],
-            'period': start.date().isoformat(), 'resets_at': end.isoformat()}
+            'period': start.date().isoformat(), 'resets_at': end.isoformat(),
+            'server_time': now.isoformat()}
 
 
 def build_raid_plan(db, slug, settings, now=None):
