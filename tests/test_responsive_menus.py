@@ -132,7 +132,20 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
                                json={"name": f"Menu tester {width}"})
         assert response.status_code == 200, response.text
         hero_id = response.json()["id"]
-        page.reload()
+        pending_auth = []
+        if width == 390:
+            page.route(ORIGIN + "/api/auth/me", lambda route: pending_auth.append(route))
+        page.reload(wait_until="domcontentloaded")
+        if width == 390:
+            page.wait_for_timeout(150)
+            assert pending_auth, "Startup did not request the saved session"
+            expect(page.locator("#login-panel")).to_be_visible()
+            expect(page.get_by_role("button", name="Log In", exact=True)).to_be_enabled()
+            assert page.locator("script[src*='debug.js']").count() == 0, "Worldsmith loaded before its tab opened"
+            page.unroute(ORIGIN + "/api/auth/me")
+            account = client.get("/api/auth/me", headers={"Authorization": "Bearer " + token})
+            pending_auth.pop().fulfill(status=account.status_code, body=account.content,
+                                       headers={"content-type": "application/json"})
         expect(page.locator("#game")).to_be_visible()
 
         main = page.locator("#game .tabs[role=tablist]").first
@@ -158,6 +171,9 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         expect(page.locator(".journey-card .quest-rank-banner").first).to_be_visible()
         expect(page.locator(".journey-card .quest-rank-banner").first).to_have_attribute("data-rank", "iron")
         expect(page.locator(".journey-card .quest-rank-emblem").first).to_be_visible()
+        expect(page.locator(".journey-card .quest-rank-emblem").first).to_have_text("I")
+        if page.locator(".journey-card .quest-rank-banner[data-rank=bronze]").count():
+            expect(page.locator(".journey-card .quest-rank-banner[data-rank=bronze] .quest-rank-emblem").first).to_have_text("II")
         expect(page.locator(".journey-card .quest-rank-banner").first).to_contain_text("Quest rank")
         if width <= 390:
             def swipe_quest(start_x, end_x):
@@ -228,6 +244,8 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
 
         select_tab(page, main, "Worldsmith")
         nav = page.locator(".studio-nav")
+        expect(page.locator(".dev-studio")).to_be_visible()
+        assert page.locator("script[src*='debug.js']").count() == 1
         library_toggle = page.get_by_role("button", name="Choose Worldsmith library")
         if width <= 390:
             library_toggle.click()
@@ -304,6 +322,27 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
                        {"attributes": "Attributes", "gear": "Equipment", "abilities": "Abilities"}[section])
             panel_height = sheet.locator("#panel-" + section).evaluate("el => el.clientHeight")
             assert panel_height >= 100, f"{section} content is clipped at {width}x{height}: {panel_height}px"
+            if section == "gear":
+                slot = sheet.locator(".equipped-slot").first
+                expect(slot).to_be_visible()
+                contrast = slot.evaluate("""el => {
+                  const color=value=>[...value.matchAll(/\\d+/g)].slice(0,3).map(x=>Number(x[0])/255);
+                  const light=value=>color(value).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+                  const style=getComputedStyle(el),text=getComputedStyle(el.querySelector('strong'));
+                  const a=light(style.backgroundColor),b=light(text.color);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+                }""")
+                assert contrast >= 4.5, f"Equipment slot text contrast is only {contrast:.1f}:1"
+                card = sheet.locator(".inventory-card").first
+                if card.count():
+                    card.click()
+                    expect(card).to_have_attribute("aria-pressed", "true")
+                    card_contrast = card.evaluate("""el => {
+                      const rgb=value=>[...value.matchAll(/\\d+/g)].slice(0,3).map(x=>Number(x[0])/255);
+                      const light=value=>rgb(value).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);
+                      const a=light(getComputedStyle(el).backgroundColor),b=light(getComputedStyle(el.querySelector('strong')).color);
+                      return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+                    }""")
+                    assert card_contrast >= 4.5, f"Inventory item text contrast is only {card_contrast:.1f}:1"
         select_tab(page, main, "Quests")
         select_tab(page, quest_tablist, "Journeys")
         page.locator("[data-quest-template]").first.click()
