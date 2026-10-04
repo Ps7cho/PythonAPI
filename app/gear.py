@@ -22,11 +22,12 @@ def armor_descriptions(gear):
 
 
 def serialize(gear):
+    from app.item_rarity import item_rarity
     definition = gear.definition
     return dict(id=str(gear.id), item_type='gear', definition_slug=definition.slug,
         name=definition.name, slot=definition.slot, bonuses=definition.bonuses,
         required_rank=definition.required_rank,
-        effects=armor_descriptions(gear))
+        effects=armor_descriptions(gear), **item_rarity(gear.rarity))
 
 
 def inventory(db, hero):

@@ -98,11 +98,11 @@ def roll_effects(pool, rng=None):
 
 
 def create_weapon(db, *, adventurer_id, weapon_type_slug, name, base_damage, required_rank='iron',
-                  effects=None, effect_pool_slug=None, weapon_definition_slug=None):
+                  effects=None, effect_pool_slug=None, weapon_definition_slug=None, rarity='common'):
     if effects is None:
         effects = roll_effects(pool_snapshot(db, weapon_type_slug, definition_slug=weapon_definition_slug, pool_slug=effect_pool_slug))
     weapon = Weapon(adventurer_id=adventurer_id, weapon_type_slug=weapon_type_slug, name=name,
-                    base_damage=base_damage, required_rank=required_rank, effects=deepcopy(effects))
+                    base_damage=base_damage, required_rank=required_rank, effects=deepcopy(effects), rarity=rarity)
     db.add(weapon)
     return weapon
 

@@ -114,3 +114,7 @@ def migrate(engine):
             from app.migrations.v036_armor_effects import upgrade as armor_effects_upgrade
             armor_effects_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('036_armor_effects')"))
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='038_item_rarity'")).first():
+            from app.migrations.v038_item_rarity import upgrade as rarity_upgrade
+            rarity_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('038_item_rarity')"))

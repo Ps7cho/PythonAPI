@@ -428,3 +428,38 @@ def test_all_menus_are_clickable_at_each_resolution(browser_backend, width, heig
         assert not errors, f"JavaScript errors at {width}x{height}: {errors}"
     finally:
         page.close()
+
+
+def test_mobile_quest_results_show_combat_and_loot(browser_backend):
+    from uuid import UUID
+    from app.models import EquippedWeapon
+
+    browser, client, username, password = browser_backend
+    page = browser.new_page(viewport={'width': 390, 'height': 844}, has_touch=True)
+    page.route(ORIGIN + '/**', lambda route: serve_frontend(route, client))
+    try:
+        page.goto(ORIGIN + '/')
+        page.locator('#username').fill(username)
+        page.locator('#password').fill(password)
+        page.get_by_role('button', name='Log In', exact=True).click()
+        expect(page.locator('#game')).to_be_visible()
+        headers = {'Authorization': 'Bearer ' + page.evaluate('GameApi.liveToken()')}
+        hero = client.post('/api/adventurers', headers=headers, json={'name': 'Results browser hero'}).json()
+        with SessionLocal.begin() as db:
+            db.get(EquippedWeapon, UUID(hero['id'])).weapon.base_damage = 90
+        encounter = client.post('/api/encounters', headers=headers,
+                                json={'adventurer_ids': [hero['id']], 'enemy_slug': 'goblin'}).json()
+        response = client.post(f"/api/encounters/{encounter['id']}/actions", headers=headers, json={
+            'actor_id': hero['id'], 'expected_turn': encounter['turn'], 'action': 'attack',
+            'target_id': encounter['enemies'][0]['id']})
+        assert response.status_code == 200 and response.json()['state'] == 'victory', response.text
+        page.goto(ORIGIN + '/?results=' + encounter['quest']['id'])
+        expect(page.locator('#quest-results')).to_be_visible()
+        expect(page.get_by_role('heading', name='Party performance')).to_be_visible()
+        expect(page.get_by_role('heading', name='Party loot rolls')).to_be_visible()
+        expect(page.get_by_role('heading', name='Individual loot & rewards')).to_be_visible()
+        assert page.locator('.results-metric').count() == 4
+        assert page.locator('.results-bar-fill').count() > 0
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+    finally:
+        page.close()

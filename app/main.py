@@ -328,6 +328,12 @@ def read_encounter(encounter_id: uuid.UUID, db: Session = Depends(get_db), user:
     return encounter_service.snapshot(encounter)
 
 
+@app.get('/api/quest-runs/{run_id}/results')
+def quest_results(run_id: uuid.UUID, db: Session = Depends(get_db), user: User = Depends(current_user)):
+    from app.run_results import summary
+    return summary(db, run_id, user)
+
+
 @app.post("/api/encounters/{encounter_id}/actions")
 def encounter_action(encounter_id: uuid.UUID, payload: encounter_service.EncounterActionRequest,
                      db: Session = Depends(get_db), user: User = Depends(current_user)):

@@ -15,8 +15,10 @@ the rules interpreting that content stay in reusable server code.
 PostgreSQL/Neon persists SQLAlchemy models in `app/models.py`; tests use SQLite.
 Catalogs define abilities, weapon types, enemies, quest templates, and loot types.
 Characters own learned/equipped abilities, weapon instances, inventory, and cooldowns.
+Owned weapons and armor store rarity; serializers expose their currently empty effect-slot capacity.
 Parties and memberships connect characters to quest runs and encounters. Game events
 record combat and quest outcomes alongside encounter and quest-run records.
+Completed quest results aggregate saved combat events and loot rolls through a read-only API.
 
 Schema changes use ordered migrations in `app/migrations`, tracked in
 `schema_migrations` and serialized with a PostgreSQL advisory lock. Startup currently

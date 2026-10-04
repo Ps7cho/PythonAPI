@@ -72,9 +72,9 @@ def deliver(db, listing, hero):
     item = listing.item
     if item['item_type'] == 'weapon':
         db.add(Weapon(id=UUID(item['id']), adventurer_id=hero.id, name=item['name'],
-            weapon_type_slug=item['weapon_type'], base_damage=item['base_damage'], required_rank=item['required_rank'], effects=item.get('effects', [])))
+            weapon_type_slug=item['weapon_type'], base_damage=item['base_damage'], required_rank=item['required_rank'], effects=item.get('effects', []), rarity=item.get('rarity', 'common')))
     elif item['item_type'] == 'gear':
-        db.add(Gear(id=UUID(item['id']), adventurer_id=hero.id, definition_slug=item['definition_slug']))
+        db.add(Gear(id=UUID(item['id']), adventurer_id=hero.id, definition_slug=item['definition_slug'], rarity=item.get('rarity', 'common')))
     else:
         grant(db, hero.id, item['slug'], listing.quantity)
 

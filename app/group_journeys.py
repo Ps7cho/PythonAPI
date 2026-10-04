@@ -211,7 +211,7 @@ def claim_group_loot(db, quest, participants):
                     from app.consumables import grant
                     grant(db, hero.id, drop['consumable_slug'], drop.get('quantity', 1))
                 else:
-                    db.add(Weapon(adventurer_id=hero.id, effects=deepcopy(drop.get('effects', [])),
+                    db.add(Weapon(adventurer_id=hero.id, effects=deepcopy(drop.get('effects', [])), rarity=drop.get('rarity', 'common'),
                                   **{k: drop[k] for k in ('name', 'weapon_type_slug', 'base_damage', 'required_rank')}))
         elif journey.get('death_policy') == 'rescue_on_return':
             hero.health = 1
@@ -240,6 +240,12 @@ def roll_loot(tier, rng):
     if chance < 100 and rng.randrange(100) >= chance:
         return None
     drop = deepcopy(rng.choices(tier['drops'], weights=[d['weight'] for d in tier['drops']], k=1)[0])
+    if drop.get('weapon_type_slug') and 'rarity' not in drop:
+        from app.item_rarity import roll_rarity
+        drop['rarity'] = roll_rarity(rng)
+    if drop.get('weapon_type_slug'):
+        from app.item_rarity import item_rarity
+        drop.update(item_rarity(drop['rarity']))
     if 'weapon_effect_pool' in drop:
         from app.weapon_effects import roll_effects
         drop['effects'] = roll_effects(drop.pop('weapon_effect_pool'), rng)

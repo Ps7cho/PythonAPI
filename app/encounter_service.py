@@ -605,14 +605,16 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
     elif encounter.state == 'victory' and encounter.quest_run.status == 'victory':
         from app.contracts import settle_contract
         events.extend(settle_contract(db, encounter.quest_run, participants, completed=True))
-    return finish_action(db, encounter, request, events, results)
+    return finish_action(db, encounter, request, events, results,
+                         reward_gains={p['id']: {'gold': victory_gold, 'experience': victory_experience}
+                                       for p in participants if encounter.state == 'victory' and p['hp'] > 0})
 
 
-def finish_action(db, encounter, request, events, results):
+def finish_action(db, encounter, request, events, results, reward_gains=None):
     db.add(GameEvent(quest_run_id=encounter.quest_run_id, event_type="combat_action",
                      payload={"encounter_id": str(encounter.id), "turn": request.expected_turn,
                               "actor_id": str(request.actor_id), "action": request.action or str(request.ability_id),
-                              "messages": events, "action_results": results}))
+                              "messages": events, "action_results": results, "reward_gains": reward_gains or {}}))
     encounter.updated_at = max(datetime.utcnow(), encounter.updated_at + timedelta(microseconds=1))
     notify_run(db, encounter.quest_run_id)
     db.commit()

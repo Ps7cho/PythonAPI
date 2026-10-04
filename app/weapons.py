@@ -59,9 +59,10 @@ def seed_weapons():
 
 
 def serialize_weapon(weapon):
+    from app.item_rarity import item_rarity
     return {"id": str(weapon.id), "name": weapon.name, "weapon_type": weapon.weapon_type_slug,
             "tags": list(weapon.weapon_type.tags), "base_damage": weapon.base_damage, "required_rank": weapon.required_rank,
-            "effects": weapon.effects or []}
+            "effects": weapon.effects or [], **item_rarity(weapon.rarity)}
 
 
 def equipped_weapon(db, hero):

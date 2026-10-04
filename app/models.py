@@ -488,6 +488,7 @@ class Weapon(Base):
     name = Column(String, nullable=False)
     base_damage = Column(Integer, nullable=False)
     effects = Column(JSON, nullable=False, default=list)
+    rarity = Column(String, nullable=False, default='common')
     weapon_type = relationship("WeaponType")
 
 
@@ -632,6 +633,7 @@ class Gear(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     adventurer_id = Column(UUID(as_uuid=True), ForeignKey('adventurers.id'), nullable=False, index=True)
     definition_slug = Column(String, ForeignKey('gear_definitions.slug'), nullable=False)
+    rarity = Column(String, nullable=False, default='common')
     definition = relationship('GearDefinition', lazy='joined')
 
 
