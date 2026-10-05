@@ -113,20 +113,12 @@ async def lifespan(app):
     auction_thread = None
     scheduler_thread = None
     boss_thread = None
-    from app.scheduled_refresh import JOBS, run_due_jobs
+    from app.scheduled_refresh import JOBS, refresh_worker, run_due_jobs
     if engine.dialect.name == 'sqlite' and str(engine.url).endswith(':memory:'):
         for key in JOBS:
             run_due_jobs(jobs=(key,))
     else:
-        def refresh_loop():
-            while not hub.stop.is_set():
-                for key in JOBS:
-                    try:
-                        run_due_jobs(jobs=(key,))
-                    except Exception:
-                        logging.exception('Scheduled refresh %s failed; it will retry on the next check.', key)
-                hub.stop.wait(30)
-        scheduler_thread = threading.Thread(target=refresh_loop, daemon=True)
+        scheduler_thread = threading.Thread(target=refresh_worker, args=(hub.stop,), daemon=True)
         scheduler_thread.start()
         def boss_loop():
             from app.world_boss import tick

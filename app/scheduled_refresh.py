@@ -1,4 +1,5 @@
 """UTC-boundary jobs that catch up to the current period after downtime."""
+import logging
 from datetime import date, datetime, timedelta, timezone
 from math import ceil
 from random import Random
@@ -25,6 +26,28 @@ def period_window(cadence, now=None):
         start -= timedelta(days=start.weekday())
     end = start + timedelta(days=7 if cadence == 'weekly' else 1)
     return start.date().isoformat(), end
+
+
+def seconds_until_next_refresh(now=None):
+    """Return the delay until the nearest UTC cadence boundary."""
+    now = (now or utc_now()).astimezone(timezone.utc)
+    deadline = min(period_window(cadence, now)[1] for cadence in set(JOBS.values()))
+    return max(0.0, (deadline - now).total_seconds())
+
+
+def refresh_worker(stop, retry_seconds=30):
+    """Catch up at startup, then wait for the next daily or weekly deadline."""
+    while not stop.is_set():
+        failed = False
+        for key in JOBS:
+            try:
+                run_due_jobs(jobs=(key,))
+            except Exception:
+                failed = True
+                logging.getLogger(__name__).exception(
+                    'Scheduled refresh %s failed; it will retry after a short delay.', key)
+        delay = retry_seconds if failed else seconds_until_next_refresh()
+        stop.wait(delay)
 
 
 def rotated_stock(items, seed, offset=0):

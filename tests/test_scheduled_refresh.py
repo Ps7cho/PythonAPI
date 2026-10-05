@@ -5,7 +5,8 @@ from sqlalchemy import delete, select
 from app.database import SessionLocal
 from app.models import RaidRotation, ScheduledJob, ShopRotation, ShopTable
 from app.raids import rotation_info
-from app.scheduled_refresh import period_window, run_due_jobs, rotated_stock
+from app.scheduled_refresh import (period_window, refresh_worker, run_due_jobs,
+                                   rotated_stock, seconds_until_next_refresh)
 
 
 def test_utc_boundaries_and_daily_stock_rotation():
@@ -20,6 +21,60 @@ def test_utc_boundaries_and_daily_stock_rotation():
     assert rotated_stock(items, 'first-period') == stock
     assert rotated_stock(items, 'first-period', 1) != stock
     assert rotated_stock(items[:3], 'supplies', 0) != rotated_stock(items[:3], 'supplies', 1)
+
+
+def test_scheduler_waits_for_nearest_utc_deadline():
+    now = datetime(2030, 1, 6, 23, 59, 30, tzinfo=timezone.utc)
+    assert seconds_until_next_refresh(now) == 30
+
+
+def test_refresh_worker_sleeps_until_deadline(monkeypatch):
+    import app.scheduled_refresh as scheduler
+
+    calls = []
+
+    class StopAfterWait:
+        stopped = False
+
+        def is_set(self):
+            return self.stopped
+
+        def wait(self, seconds):
+            calls.append(('wait', seconds))
+            self.stopped = True
+
+    monkeypatch.setattr(scheduler, 'run_due_jobs',
+                        lambda jobs: calls.append(('run', jobs[0])))
+    monkeypatch.setattr(scheduler, 'utc_now', lambda: datetime(
+        2030, 1, 6, 23, 59, 30, tzinfo=timezone.utc))
+
+    refresh_worker(StopAfterWait())
+
+    assert calls == [('run', key) for key in scheduler.JOBS] + [('wait', 30)]
+
+
+def test_refresh_worker_uses_short_retry_after_failure(monkeypatch):
+    import app.scheduled_refresh as scheduler
+
+    waits = []
+
+    class StopAfterWait:
+        stopped = False
+
+        def is_set(self):
+            return self.stopped
+
+        def wait(self, seconds):
+            waits.append(seconds)
+            self.stopped = True
+
+    def fail_one_job(jobs):
+        if jobs[0] == 'raid_daily':
+            raise RuntimeError('database unavailable')
+
+    monkeypatch.setattr(scheduler, 'run_due_jobs', fail_one_job)
+    refresh_worker(StopAfterWait(), retry_seconds=17)
+    assert waits == [17]
 
 
 def test_scheduler_catches_up_once_after_missed_days(client):
