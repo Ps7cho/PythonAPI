@@ -21,6 +21,8 @@ from app.models import Adventurer, Encounter, LoginSession, Party, PartyMember, 
 
 router = APIRouter()
 CHANNEL = 'encounter_changes'
+auction_wakeup = threading.Event()
+boss_wakeup = threading.Event()
 
 
 class Hub:
@@ -44,6 +46,10 @@ class Hub:
                 self.clients.pop(topic, None)
 
     def publish(self, topic=None):
+        if topic in (None, 'auction-deadline'):
+            auction_wakeup.set()
+        if topic in (None, 'world-boss'):
+            boss_wakeup.set()
         with self.lock:
             targets = list(self.clients.get(topic, ())) if topic else [s for group in self.clients.values() for s in group]
             if topic == 'bulletin':
@@ -120,21 +126,15 @@ async def lifespan(app):
     else:
         scheduler_thread = threading.Thread(target=refresh_worker, args=(hub.stop,), daemon=True)
         scheduler_thread.start()
-        def boss_loop():
-            from app.world_boss import tick
-            while not hub.stop.is_set():
-                try:
-                    tick()
-                except Exception:
-                    logging.exception('Alpha Wolf lifecycle check failed; retrying.')
-                hub.stop.wait(1)
-        boss_thread = threading.Thread(target=boss_loop, daemon=True)
+        from app.world_boss import lifecycle_worker
+        boss_thread = threading.Thread(
+            target=lifecycle_worker, args=(hub.stop, boss_wakeup), daemon=True)
         boss_thread.start()
     if engine.dialect.name == 'postgresql':
         hub.thread = threading.Thread(target=hub.listen, daemon=True)
         hub.thread.start()
         from app.auction_house import expiry_worker
-        auction_thread = threading.Thread(target=expiry_worker, args=(hub.stop,), daemon=True)
+        auction_thread = threading.Thread(target=expiry_worker, args=(hub.stop, auction_wakeup), daemon=True)
         auction_thread.start()
     else:
         hub.ready.set()
@@ -142,6 +142,8 @@ async def lifespan(app):
         yield
     finally:
         hub.stop.set()
+        auction_wakeup.set()
+        boss_wakeup.set()
         if auction_thread:
             await asyncio.to_thread(auction_thread.join, 7)
         if scheduler_thread:

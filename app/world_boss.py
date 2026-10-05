@@ -52,7 +52,7 @@ def tick(now=None):
     with SessionLocal.begin() as db:
         state = locked_state(db)
         if state is None or state.phase != 'alpha' or not state.enabled:
-            return
+            return None
         event = latest(db)
         if event and event.status == 'active' and now >= event.ends_at:
             event.status = 'failed'
@@ -82,6 +82,26 @@ def tick(now=None):
                 announce(db, 'world_boss_started', {'event_id': str(event.id)})
             else:
                 announce(db, 'world_boss_missed', {'scheduled_at': start.isoformat()})
+        if event and event.status == 'active':
+            return min(event.ends_at, state.next_start_at)
+        return state.next_start_at
+
+
+def lifecycle_worker(stop, wakeup, retry_seconds=1):
+    """Settle lifecycle transitions at their stored deadlines, not by polling."""
+    import logging
+    while not stop.is_set():
+        # Clear before reading so a committed schedule change cannot be lost.
+        wakeup.clear()
+        try:
+            deadline = tick()
+            delay = None if deadline is None else max(
+                0, (deadline - now_utc()).total_seconds())
+        except Exception:
+            logging.getLogger(__name__).exception(
+                'Alpha Wolf lifecycle check failed; retrying.')
+            delay = retry_seconds
+        wakeup.wait(delay)
 
 
 def announce(db, kind, payload):

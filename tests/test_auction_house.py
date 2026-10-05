@@ -159,3 +159,71 @@ def test_listing_migration_is_repeatable():
         upgrade(conn)
         assert inspect(conn).has_table('auction_listings')
     engine.dispose()
+
+
+def test_expiry_worker_waits_for_nearest_deadline(monkeypatch):
+    import app.auction_house as auctions
+
+    waits = []
+
+    class WakeOnce:
+        def clear(self):
+            pass
+
+        def wait(self, seconds):
+            waits.append(seconds)
+            stop.set()
+
+    stop = __import__('threading').Event()
+    deadline = datetime.utcnow() + timedelta(hours=3)
+    monkeypatch.setattr(auctions, 'settle_expired', lambda db: None)
+    monkeypatch.setattr(auctions, 'next_expiry', lambda db: deadline)
+
+    auctions.expiry_worker(stop, WakeOnce())
+
+    assert len(waits) == 1
+    assert 10799 <= waits[0] <= 10800
+
+
+def test_expiry_worker_waits_without_polling_when_market_is_empty(monkeypatch):
+    import app.auction_house as auctions
+
+    waits = []
+
+    class WakeOnce:
+        def clear(self):
+            pass
+
+        def wait(self, seconds):
+            waits.append(seconds)
+            stop.set()
+
+    stop = __import__('threading').Event()
+    monkeypatch.setattr(auctions, 'settle_expired', lambda db: None)
+    monkeypatch.setattr(auctions, 'next_expiry', lambda db: None)
+
+    auctions.expiry_worker(stop, WakeOnce())
+
+    assert waits == [None]
+
+
+def test_expiry_worker_only_uses_short_delay_after_failure(monkeypatch):
+    import app.auction_house as auctions
+
+    waits = []
+
+    class WakeOnce:
+        def clear(self):
+            pass
+
+        def wait(self, seconds):
+            waits.append(seconds)
+            stop.set()
+
+    stop = __import__('threading').Event()
+    monkeypatch.setattr(auctions, 'settle_expired',
+                        lambda db: (_ for _ in ()).throw(RuntimeError('database unavailable')))
+
+    auctions.expiry_worker(stop, WakeOnce(), retry_seconds=7)
+
+    assert waits == [7]

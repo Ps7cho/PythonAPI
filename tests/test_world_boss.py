@@ -228,6 +228,74 @@ def test_nightly_schedule_accounts_for_dst_and_rolls_to_next_evening():
     assert world_boss.next_start(datetime(2030, 11, 3, 2), settings) == datetime(2030, 11, 4, 3)
 
 
+def test_lifecycle_worker_waits_until_the_returned_deadline(monkeypatch):
+    from threading import Event
+
+    now = datetime(2030, 1, 1, 12)
+    waits = []
+    stop = Event()
+
+    class WakeOnce:
+        def clear(self):
+            pass
+
+        def wait(self, seconds):
+            waits.append(seconds)
+            stop.set()
+
+    monkeypatch.setattr(world_boss, 'now_utc', lambda: now)
+    monkeypatch.setattr(world_boss, 'tick', lambda: now + timedelta(hours=4))
+
+    world_boss.lifecycle_worker(stop, WakeOnce())
+
+    assert waits == [14400]
+
+
+def test_lifecycle_worker_waits_without_polling_when_disabled(monkeypatch):
+    from threading import Event
+
+    waits = []
+    stop = Event()
+
+    class WakeOnce:
+        def clear(self):
+            pass
+
+        def wait(self, seconds):
+            waits.append(seconds)
+            stop.set()
+
+    monkeypatch.setattr(world_boss, 'tick', lambda: None)
+
+    world_boss.lifecycle_worker(stop, WakeOnce())
+
+    assert waits == [None]
+
+
+def test_lifecycle_worker_retries_quickly_only_after_failure(monkeypatch):
+    from threading import Event
+
+    waits = []
+    stop = Event()
+
+    class WakeOnce:
+        def clear(self):
+            pass
+
+        def wait(self, seconds):
+            waits.append(seconds)
+            stop.set()
+
+    def fail():
+        raise RuntimeError('database unavailable')
+
+    monkeypatch.setattr(world_boss, 'tick', fail)
+
+    world_boss.lifecycle_worker(stop, WakeOnce(), retry_seconds=7)
+
+    assert waits == [7]
+
+
 def test_switch_is_developer_only_strict_and_persisted(client, finale):
     from app.models import User
     payload = {'delete_adventurers_on_failure':False}

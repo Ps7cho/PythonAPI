@@ -35,7 +35,8 @@ the shared HP and ten-minute deadline. All victories grant account-bound epic
 reward entitlements. With the switch armed, victory persists beta and stops events;
 timeout deletes character/game-state tables in FK order
 while retaining accounts, catalogs, and the event audit. Missed, never-opened
-windows after downtime are skipped. A one-second worker settles active deadlines.
+windows after downtime are skipped. A deadline-driven worker sleeps until the next
+start or active-event end and wakes when committed settings change that deadline.
 UTC daily and weekly refresh jobs keep durable period cursors. Startup and a
 deadline-driven background worker advance missed periods to the current one; relevant API reads
 also catch up before returning. Raid plans remain keyed by rotation period,
@@ -389,8 +390,10 @@ requires a living character outside an active adventure. Souls are not tradable.
 Gold and items transfer atomically under a listing lock and ordered character locks.
 Highest bids are held in gold; outbids refund immediately. Auctions with bids cannot
 be cancelled. Expiry delivers to the winner and pays the seller, or returns unsold
-items. PostgreSQL workers settle every 15 seconds; market reads and actions also
-settle overdue listings after downtime. Closed rows and game events retain history.
+items. PostgreSQL workers sleep until the nearest open-listing deadline and are
+woken through PostgreSQL notifications when an earlier deadline is created; market
+reads and actions also settle overdue listings after downtime. Closed rows and game
+events retain history.
 
 
 ## Armor and Accessories

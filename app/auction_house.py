@@ -5,7 +5,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, ConfigDict, Field, model_validator
-from sqlalchemy import select, or_
+from sqlalchemy import func, select, or_
 from sqlalchemy.orm import Session
 
 from app.auth import current_user, own_adventurer
@@ -166,6 +166,8 @@ def create_listing(payload: ListingRequest, db: Session = Depends(get_db), user:
     db.add(listing)
     db.flush()
     db.add(GameEvent(event_type='auction_listed', payload={'listing_id': str(listing.id), 'adventurer_id': str(hero.id)}))
+    from app.live import notify_topic
+    notify_topic(db, 'auction-deadline')
     db.commit()
     return serialize(db, listing, user)
 
@@ -254,12 +256,24 @@ def settle_expired(db):
         db.commit()
 
 
-def expiry_worker(stop):
+def next_expiry(db):
+    return db.scalar(select(func.min(AuctionListing.expires_at)).where(
+        AuctionListing.status == 'open'))
+
+
+def expiry_worker(stop, wakeup, retry_seconds=15):
     import logging
     from app.database import SessionLocal
-    while not stop.wait(15):
+    while not stop.is_set():
+        # Clear before reading so a listing committed during the query still wakes us.
+        wakeup.clear()
         try:
             with SessionLocal() as db:
                 settle_expired(db)
+                deadline = next_expiry(db)
+            delay = None if deadline is None else max(
+                0, (deadline - datetime.utcnow()).total_seconds())
         except Exception:
             logging.getLogger(__name__).exception('Auction expiry settlement failed; retrying.')
+            delay = retry_seconds
+        wakeup.wait(delay)
