@@ -133,3 +133,48 @@ def test_shop_artwork_does_not_mutate_saved_stock():
         assert display[0]['price'] == 20
         assert stock == before
         db.rollback()
+
+
+@pytest.mark.parametrize('stored_icon', ['missing', 'outdated'])
+def test_active_encounter_uses_current_icons_and_preserves_saved_combat(icon_editor, stored_icon):
+    from app.models import Ability, Encounter
+    hero = icon_editor.post('/api/adventurers', json={'name': 'Active encounter icons'}).json()
+    started = icon_editor.post('/api/encounters', json={'adventurer_ids': [hero['id']]}).json()
+    encounter_id = UUID(started['id'])
+    catalog_record = next(r for r in records(icon_editor)['abilities']['records'] if r['values']['slug'] == 'attack')
+    ability_id = catalog_record['values']['id']
+    with SessionLocal.begin() as db:
+        encounter = db.get(Encounter, encounter_id)
+        actors = deepcopy(encounter.participants)
+        spec = next(s for s in actors[0]['equipped_abilities'] if s['slug'] == ability_id)
+        spec['damage'] = 17
+        if stored_icon == 'missing':
+            spec.pop('icon_path', None)
+        else:
+            spec['icon_path'] = ICON_LIBRARY[1]['path']
+        encounter.participants = actors
+        original_combat = deepcopy(actors)
+    try:
+        values = {**catalog_record['values'], 'icon_path': ICON_LIBRARY[0]['path'], 'power': catalog_record['values']['power'] + 50}
+        result = icon_editor.post('/api/catalog-editor', json=dict(
+            catalog='abilities', key=catalog_record['key'], values=values, expected_revision=catalog_record['revision']))
+        assert result.status_code == 200, result.text
+        saved = result.json()['record']
+        response = icon_editor.get('/api/encounters/' + started['id']).json()
+        actor = response['participants'][0]
+        for field in ['equipped_abilities', 'effective_abilities']:
+            ability = next(a for a in actor[field] if a['slug'] == ability_id)
+            assert ability['icon_path'] == ICON_LIBRARY[0]['path']
+            assert ability['damage'] == 17
+        with SessionLocal() as db:
+            assert db.get(Encounter, encounter_id).participants == original_combat
+        cleared = icon_editor.post('/api/catalog-editor', json=dict(
+            catalog='abilities', key=saved['key'], values={**saved['values'], 'icon_path': None}, expected_revision=saved['revision']))
+        assert cleared.status_code == 200, cleared.text
+        actor = icon_editor.get('/api/encounters/' + started['id']).json()['participants'][0]
+        assert next(a for a in actor['effective_abilities'] if a['slug'] == ability_id)['icon_path'] is None
+    finally:
+        with SessionLocal.begin() as db:
+            ability = db.get(Ability, UUID(ability_id))
+            ability.icon_path = catalog_record['values']['icon_path']
+            ability.power = catalog_record['values']['power']

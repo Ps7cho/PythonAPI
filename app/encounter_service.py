@@ -69,8 +69,39 @@ def enemy_states(encounter: Encounter) -> list[dict]:
     return [instance.state for instance in encounter.enemy_instances] if encounter.enemy_instances else encounter.enemies
 
 
+def refresh_ability_icons(encounter, participants):
+    """Overlay current artwork on response copies, preserving saved combat rules."""
+    from sqlalchemy.orm import object_session
+    db = object_session(encounter)
+    if db is None:
+        return
+    specs = [spec for actor in participants for spec in actor.get('equipped_abilities', [])]
+    identifiers = {str(spec.get('slug', '')) for spec in specs}
+    slugs = identifiers | {spec['catalog_slug'] for spec in specs if spec.get('catalog_slug')}
+    ids = []
+    for identifier in identifiers:
+        try:
+            ids.append(UUID(identifier))
+        except ValueError:
+            pass
+    if not specs:
+        return
+    icons = {}
+    for ability_id, slug, path in db.execute(select(Ability.id, Ability.slug, Ability.icon_path).where(
+            Ability.id.in_(ids) | Ability.slug.in_(slugs))):
+        icons[str(ability_id)] = path
+        icons[slug] = path
+    for spec in specs:
+        key = str(spec.get('slug', ''))
+        if key not in icons:
+            key = spec.get('catalog_slug')
+        if key in icons:
+            spec['icon_path'] = icons[key]
+
+
 def snapshot(encounter: Encounter) -> dict:
     participants, enemies = prepared_combatants(encounter)
+    refresh_ability_icons(encounter, participants)
     for actor in participants:
         actor['effective_abilities'] = [asdict(effective_ability(actor, CombatAbility(**spec), encounter.turn))
                                         for spec in actor.get('equipped_abilities', [])]
