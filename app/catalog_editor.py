@@ -15,6 +15,7 @@ from sqlalchemy.orm import Session
 from app import models as m
 from app.auth import current_user
 from app.database import get_db
+from app.gear import GEAR_TYPES
 
 CATALOGS = {
     'armor_effects': m.ArmorEffect,
@@ -30,7 +31,9 @@ CATALOGS = {
     'ranks': m.RankDefinition, 'rest_policies': m.RestPolicy, 'loot_types': m.LootType,
     'gear_definitions': m.GearDefinition,
 }
+
 ENUMS = {
+    ('gear_definitions', 'slot'): list(GEAR_TYPES),
     ('abilities', 'trigger_mode'): ['active'],
     ('weapon_effects', 'recipient'): ['targets', 'self'],
     ('abilities', 'effect_type'): ['damage', 'guard', 'heal', 'buff', 'shield', 'cleanse', 'evade', 'affliction'],
@@ -220,6 +223,7 @@ def validate_definition(db, row):
                 require(db.scalar(select(fk.column).where(fk.column == value)) is not None,
                         f'{column.name} references a missing {fk.column.table.name} definition.')
     if isinstance(row, m.GearDefinition):
+        require(row.slot in GEAR_TYPES, 'Unknown armor or accessory slot.')
         strings(row.effect_slugs, 'effect_slugs')
         require(len(row.effect_slugs) <= 4 and len(set(row.effect_slugs)) == len(row.effect_slugs), 'Armor supports up to four distinct effects.')
         require(all(db.get(m.ArmorEffect, slug) for slug in row.effect_slugs), 'Unknown armor effect.')

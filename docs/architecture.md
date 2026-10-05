@@ -15,6 +15,9 @@ the rules interpreting that content stay in reusable server code.
 PostgreSQL/Neon persists SQLAlchemy models in `app/models.py`; tests use SQLite.
 Catalogs define abilities, weapon types, enemies, quest templates, and loot types.
 Characters own learned/equipped abilities, weapon instances, inventory, and cooldowns.
+Armor equips in Head, Shoulders, Chest, Bracers, Hands, Belt, Legs, Feet, and Cape
+slots, alongside Off Hand, Amulet, Ring 1, and Ring 2. Ring definitions fit either
+ring location; an owned item occupies one location and contributes bonuses once.
 Owned weapons and armor store rarity; serializers expose their currently empty effect-slot capacity.
 Parties and memberships connect characters to quest runs and encounters. Game events
 record combat and quest outcomes alongside encounter and quest-run records.

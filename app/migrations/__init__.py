@@ -134,3 +134,7 @@ def migrate(engine):
             from app.migrations.v042_world_boss_testing import upgrade as boss_testing_upgrade
             boss_testing_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('042_world_boss_testing')"))
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='043_full_equipment'")).first():
+            from app.migrations.v043_full_equipment import upgrade as full_equipment_upgrade
+            full_equipment_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('043_full_equipment')"))

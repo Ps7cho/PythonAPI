@@ -16,7 +16,8 @@ from app.models import (Adventurer, Encounter, GameEvent, Gear,
 
 router = APIRouter(prefix='/api/world-boss', tags=['world boss'])
 SLUG = 'alpha-wolf'
-GEAR_SET = ('alpha-wolf-head', 'alpha-wolf-chest', 'alpha-wolf-hands', 'alpha-wolf-legs', 'alpha-wolf-feet')
+GEAR_SET = tuple('alpha-wolf-' + piece for piece in (
+    'head', 'shoulders', 'chest', 'bracers', 'hands', 'belt', 'legs', 'feet', 'cape'))
 
 
 def now_utc():

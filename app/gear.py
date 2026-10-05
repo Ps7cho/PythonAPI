@@ -9,8 +9,13 @@ from app.auth import current_user, own_adventurer
 from app.models import Gear, EquippedGear, Adventurer, RankDefinition, User
 from app.attributes import DESCRIPTIONS, derived_stats
 
-SLOTS = ('Head', 'Chest', 'Hands', 'Legs', 'Feet', 'Off Hand', 'Amulet', 'Ring')
+SLOTS = ('Head', 'Shoulders', 'Chest', 'Bracers', 'Hands', 'Belt', 'Legs', 'Feet', 'Cape', 'Off Hand', 'Amulet', 'Ring 1', 'Ring 2')
+GEAR_TYPES = tuple(slot for slot in SLOTS if not slot.startswith('Ring ')) + ('Ring',)
 router = APIRouter(prefix='/api/adventurers', tags=['equipment'])
+
+
+def compatible_slots(item_slot):
+    return ('Ring 1', 'Ring 2') if item_slot == 'Ring' else (item_slot,)
 
 
 def armor_descriptions(gear):
@@ -25,7 +30,8 @@ def serialize(gear):
     from app.item_rarity import item_rarity
     definition = gear.definition
     return dict(id=str(gear.id), item_type='gear', definition_slug=definition.slug,
-        name=definition.name, icon_path=definition.icon_path, slot=definition.slot, bonuses=definition.bonuses,
+        name=definition.name, icon_path=definition.icon_path, slot=definition.slot,
+        compatible_slots=list(compatible_slots(definition.slot)), bonuses=definition.bonuses,
         account_bound=gear.bound_account_id is not None,
         required_rank=definition.required_rank,
         effects=armor_descriptions(gear), **item_rarity(gear.rarity))
@@ -68,7 +74,9 @@ def equip(adventurer_id: UUID, payload: EquipRequest, db: Session = Depends(get_
     owned_hero = own_adventurer(db, adventurer_id, user)
     hero = db.scalar(select(Adventurer).where(Adventurer.id == owned_hero.id)
         .with_for_update().execution_options(populate_existing=True))
-    if payload.slot not in SLOTS:
+    # Preserve the original API slot as an alias for Ring 1.
+    slot = 'Ring 1' if payload.slot == 'Ring' else payload.slot
+    if slot not in SLOTS:
         raise HTTPException(422, 'Unknown equipment slot.')
     if active_adventure(db, [hero.id]):
         raise HTTPException(409, 'Return to the village before changing equipment.')
@@ -78,19 +86,24 @@ def equip(adventurer_id: UUID, payload: EquipRequest, db: Session = Depends(get_
     if payload.gear_id:
         if gear is None or gear.adventurer_id != hero.id:
             raise HTTPException(422, 'Choose an owned item.')
-        if gear.definition.slot != payload.slot:
+        if slot not in compatible_slots(gear.definition.slot):
             raise HTTPException(422, 'This item does not fit that slot.')
         rank = db.get(RankDefinition, gear.definition.required_rank)
         if rank is None or hero.level < rank.min_level:
             raise HTTPException(409, 'Your rank cannot equip this item yet.')
-    entry = db.get(EquippedGear, (hero.id, payload.slot))
+    if gear:
+        previous = db.scalar(select(EquippedGear).where(EquippedGear.gear_id == gear.id))
+        if previous and previous.slot != slot:
+            db.delete(previous)
+            db.flush()
+    entry = db.get(EquippedGear, (hero.id, slot))
     if gear is None:
         if entry:
             db.delete(entry)
     elif entry:
         entry.gear_id = gear.id
     else:
-        db.add(EquippedGear(adventurer_id=hero.id, slot=payload.slot, gear_id=gear.id))
+        db.add(EquippedGear(adventurer_id=hero.id, slot=slot, gear_id=gear.id))
     db.flush()
     # Reload joined gear relationships after changing an existing slot.
     db.expire_all()

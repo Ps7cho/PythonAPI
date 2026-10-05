@@ -122,12 +122,13 @@ def test_defeat_unlocks_beta_and_grants_one_bound_epic_set(client, finale):
     reward = {'adventurer_id': hero['id'], 'event_id': status['rewards'][0]}
     claim = client.post('/api/world-boss/rewards/claim', json=reward)
     assert claim.status_code == 200, claim.text
-    assert len(claim.json()['gear_ids']) == 5
+    assert len(claim.json()['gear_ids']) == 9
     assert client.post('/api/world-boss/rewards/claim', json=reward).status_code == 409
     items = client.get('/api/adventurers/'+hero['id']).json()['inventory']
     rewarded = [g for g in items if g.get('definition_slug', '').startswith('alpha-wolf-')]
-    assert len(rewarded) == 5
+    assert len(rewarded) == 9
     assert all(g['rarity'] == 'epic' and g['account_bound'] for g in rewarded)
+    assert {g['slot'] for g in rewarded} == {'Head','Shoulders','Chest','Bracers','Hands','Belt','Legs','Feet','Cape'}
     auction = client.post('/api/auction-house', json={
         'adventurer_id': hero['id'], 'gear_id': rewarded[0]['id'], 'mode': 'fixed', 'price': 1})
     assert auction.status_code == 409
