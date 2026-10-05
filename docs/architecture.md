@@ -24,6 +24,15 @@ Schema changes use ordered migrations in `app/migrations`, tracked in
 `schema_migrations` and serialized with a PostgreSQL advisory lock. Startup currently
 performs the legacy schema bootstrap, pending migrations, and catalog seeding.
 Seeds supply initial content while preserving existing definitions.
+The Alpha Wolf runs nightly at 20:00 America/Denver. A persistent developer-only
+deletion switch defaults off: testing failures retain character state and end
+party runs, and testing victories keep the nightly schedule. Each party uses the existing
+combat resolver against its own Alpha Wolf state, while a locked event row owns
+the shared HP and ten-minute deadline. All victories grant account-bound epic
+reward entitlements. With the switch armed, victory persists beta and stops events;
+timeout deletes character/game-state tables in FK order
+while retaining accounts, catalogs, and the event audit. Missed, never-opened
+windows after downtime are skipped. A one-second worker settles active deadlines.
 UTC daily and weekly refresh jobs keep durable period cursors. Startup and a
 background check advance missed periods to the current one; relevant API reads
 also catch up before returning. Raid plans remain keyed by rotation period,

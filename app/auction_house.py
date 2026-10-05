@@ -147,6 +147,8 @@ def create_listing(payload: ListingRequest, db: Session = Depends(get_db), user:
         gear = db.scalar(select(Gear).where(Gear.id == payload.gear_id).with_for_update(of=Gear))
         if gear is None or gear.adventurer_id != hero.id:
             raise HTTPException(409, 'You do not own that gear.')
+        if gear.bound_account_id is not None:
+            raise HTTPException(409, 'Account-bound gear cannot be auctioned.')
         if db.scalar(select(EquippedGear).where(EquippedGear.gear_id == gear.id)):
             raise HTTPException(409, 'Unequip gear before listing it.')
         item = serialize_gear(gear)

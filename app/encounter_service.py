@@ -102,6 +102,9 @@ def refresh_ability_icons(encounter, participants):
 def snapshot(encounter: Encounter) -> dict:
     participants, enemies = prepared_combatants(encounter)
     refresh_ability_icons(encounter, participants)
+    from app.world_boss import sync_health, event_view
+    from sqlalchemy.orm import object_session
+    boss_event = sync_health(encounter, enemies)
     for actor in participants:
         actor['effective_abilities'] = [asdict(effective_ability(actor, CombatAbility(**spec), encounter.turn))
                                         for spec in actor.get('equipped_abilities', [])]
@@ -121,7 +124,8 @@ def snapshot(encounter: Encounter) -> dict:
                      'reached': gauntlet.highest_stage_reached, 'completed': gauntlet.highest_stage_completed,
                      'status': gauntlet.status} if gauntlet else None,
         "id": str(encounter.id), "state": encounter.state, "turn": encounter.turn,
-        "revision": encounter.updated_at.isoformat(),
+        "revision": encounter.updated_at.isoformat() + (f':{boss_event.health}:{boss_event.status}' if boss_event else ''),
+        "world_boss": event_view(object_session(encounter), boss_event) if boss_event else None,
         "combat_log": encounter_log(encounter),
         "participants": participants,
         "enemies": [{**enemy, 'next_move': intents.get(enemy['id'])} for enemy in enemies],
@@ -148,6 +152,8 @@ def snapshot(encounter: Encounter) -> dict:
 
 
 def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-bandit", encounter_count: int = 1, *, party: Party | None = None, template_slug: str | None = None, accept_rank_risk: bool = False, contract_id: UUID | None = None, gauntlet=None) -> dict:
+    from app.world_boss import lock_entry
+    boss_event = lock_entry(db, template_slug)
     journey = {}
     plan = [{"encounter_id": str(uuid4()), "enemy_slug": enemy_slug} for _ in range(encounter_count)]
     contract = None
@@ -246,6 +252,9 @@ def start_encounter(db: Session, ids: list[UUID], enemy_slug: str = "roadside-ba
                        "power_ready_turn": 1, "equipped_abilities": combat_loadout(db, h)} for h in heroes],
     )
     db.add(encounter)
+    if boss_event is not None:
+        from app.world_boss import attach
+        attach(db, boss_event, encounter, heroes, party)
     if gauntlet is not None:
         from app.gauntlets import attach_run
         for actor in encounter.participants:
@@ -373,6 +382,8 @@ def continue_quest(db: Session, encounter_id: UUID, return_to_village: bool = Fa
 
 
 def apply_action(db: Session, encounter_id: UUID, request: EncounterActionRequest) -> dict:
+    from app.world_boss import before_action, sync_health
+    boss_event = before_action(db, encounter_id)
     encounter = get_encounter(db, encounter_id, lock=True)
     is_gauntlet = encounter.quest_run.quest.rewards.get('journey', {}).get('gauntlet', False)
     if is_gauntlet and request.consumable_slug is not None:
@@ -382,6 +393,8 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
     if encounter.turn != request.expected_turn:
         raise HTTPException(409, "Turn has changed. Fetch the encounter before acting again.")
     participants, enemies = prepared_combatants(encounter)
+    if boss_event is not None:
+        sync_health(encounter, enemies, boss_event)
     for combatant in participants:
         combatant["team"] = "adventurers"
     for combatant in enemies:
@@ -545,6 +558,9 @@ def apply_action(db: Session, encounter_id: UUID, request: EncounterActionReques
         elif encounter.state == 'victory':
             events.append('Gauntlet stage completed. Continue without resting, or end this run.')
         return finish_action(db, encounter, request, events, results)
+    if boss_event is not None:
+        from app.world_boss import finish_party_action
+        return finish_party_action(db, encounter, boss_event, participants, enemies, request, results, events)
     journey = encounter.quest_run.quest.rewards.get("journey", {})
     progress = snapshot(encounter)["quest"]
     grouped = bool(journey.get('encounter_groups'))

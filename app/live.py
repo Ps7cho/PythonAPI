@@ -112,6 +112,7 @@ async def lifespan(app):
     hub.stop.clear()
     auction_thread = None
     scheduler_thread = None
+    boss_thread = None
     from app.scheduled_refresh import JOBS, run_due_jobs
     if engine.dialect.name == 'sqlite' and str(engine.url).endswith(':memory:'):
         for key in JOBS:
@@ -127,6 +128,16 @@ async def lifespan(app):
                 hub.stop.wait(30)
         scheduler_thread = threading.Thread(target=refresh_loop, daemon=True)
         scheduler_thread.start()
+        def boss_loop():
+            from app.world_boss import tick
+            while not hub.stop.is_set():
+                try:
+                    tick()
+                except Exception:
+                    logging.exception('Alpha Wolf lifecycle check failed; retrying.')
+                hub.stop.wait(1)
+        boss_thread = threading.Thread(target=boss_loop, daemon=True)
+        boss_thread.start()
     if engine.dialect.name == 'postgresql':
         hub.thread = threading.Thread(target=hub.listen, daemon=True)
         hub.thread.start()
@@ -143,6 +154,8 @@ async def lifespan(app):
             await asyncio.to_thread(auction_thread.join, 7)
         if scheduler_thread:
             await asyncio.to_thread(scheduler_thread.join, 7)
+        if boss_thread:
+            await asyncio.to_thread(boss_thread.join, 7)
         if hub.thread:
             await asyncio.to_thread(hub.thread.join, 7)
         hub.ready.clear()
@@ -239,7 +252,10 @@ def authorized_snapshot(token, encounter_id, follow=False):
             encounter = db.scalar(select(Encounter).where(Encounter.quest_run_id == run.id).order_by(Encounter.created_at.desc()).limit(1))
         elif follow and run.current_stage != str(encounter.id):
             encounter = db.get(Encounter, UUID(run.current_stage))
-        return str(run.id), snapshot(encounter)
+        from app.models import WorldBossEntry
+        entry = db.get(WorldBossEntry, encounter.id)
+        topic = 'world-boss:' + str(entry.event_id) if entry else str(run.id)
+        return topic, snapshot(encounter)
 
 
 @router.websocket('/api/encounters/{encounter_id}/live')

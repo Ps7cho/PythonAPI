@@ -7,7 +7,7 @@ def test_catalog_matches_template(client):
     response = client.get('/api/quest-templates/goblin-trouble')
     assert response.status_code == 200
     assert response.json() == {**GOBLIN_TROUBLE, "journey": {}, "rank_index": 0}
-    assert len(client.get('/api/quest-templates').json()) == 15
+    assert len(client.get('/api/quest-templates').json()) == 17
     assert client.get('/api/quest-templates/missing').status_code == 404
 
 
@@ -18,7 +18,7 @@ def test_seeding_preserves_database_edits(client):
         seed_quest_templates()
         seed_quest_templates()
         templates = client.get('/api/quest-templates').json()
-        assert len(templates) == 15
+        assert len(templates) == 17
         assert next(t for t in templates if t['slug'] == 'goblin-trouble')['region'] == 'Edited region'
     finally:
         with SessionLocal.begin() as db:

@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import CheckConstraint, Boolean, Column, DateTime, ForeignKey, Float, Integer, JSON, String, UniqueConstraint
+from sqlalchemy import CheckConstraint, Boolean, Column, DateTime, ForeignKey, Float, Integer, BigInteger, JSON, String, UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
@@ -657,7 +657,54 @@ class Gear(Base):
     adventurer_id = Column(UUID(as_uuid=True), ForeignKey('adventurers.id'), nullable=False, index=True)
     definition_slug = Column(String, ForeignKey('gear_definitions.slug'), nullable=False)
     rarity = Column(String, nullable=False, default='common')
+    bound_account_id = Column(UUID(as_uuid=True), ForeignKey('users.id'), nullable=True)
     definition = relationship('GearDefinition', lazy='joined')
+
+
+class WorldBossState(Base):
+    __tablename__ = 'world_boss_state'
+    slug = Column(String, primary_key=True)
+    phase = Column(String, nullable=False, default='alpha')
+    enabled = Column(Boolean, nullable=False, default=True)
+    delete_adventurers_on_failure = Column(Boolean, nullable=False, default=False, server_default='false')
+    max_health = Column(BigInteger, nullable=False, default=10_000_000)
+    duration_seconds = Column(Integer, nullable=False, default=600)
+    next_start_at = Column(DateTime, nullable=False)
+    settings = Column(JSON, nullable=False)
+
+
+class WorldBossEvent(Base):
+    __tablename__ = 'world_boss_events'
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    boss_slug = Column(String, ForeignKey('world_boss_state.slug'), nullable=False)
+    period = Column(String, nullable=False, unique=True)
+    status = Column(String, nullable=False, default='active')
+    health = Column(BigInteger, nullable=False)
+    max_health = Column(BigInteger, nullable=False)
+    starts_at = Column(DateTime, nullable=False)
+    ends_at = Column(DateTime, nullable=False)
+    finished_at = Column(DateTime, nullable=True)
+    wiped_adventurers = Column(Integer, nullable=False, default=0)
+
+
+class WorldBossEntry(Base):
+    __tablename__ = 'world_boss_entries'
+    # Preserve the event ledger when the failed alpha wipes game state.
+    encounter_id = Column(UUID(as_uuid=True), primary_key=True)
+    event_id = Column(UUID(as_uuid=True), ForeignKey('world_boss_events.id'), nullable=False, index=True)
+    party_id = Column(UUID(as_uuid=True), nullable=False)
+    party_name = Column(String, nullable=False)
+    account_ids = Column(JSON, nullable=False)
+    damage = Column(BigInteger, nullable=False, default=0)
+    __table_args__ = (UniqueConstraint('event_id', 'party_id'),)
+
+
+class WorldBossReward(Base):
+    __tablename__ = 'world_boss_rewards'
+    event_id = Column(UUID(as_uuid=True), ForeignKey('world_boss_events.id'), primary_key=True)
+    account_id = Column(UUID(as_uuid=True), ForeignKey('users.id'), primary_key=True)
+    claimed = Column(Boolean, nullable=False, default=False)
+    gear_ids = Column(JSON, nullable=False, default=list)
 
 
 class EquippedGear(Base):

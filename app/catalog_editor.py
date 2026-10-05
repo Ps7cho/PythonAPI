@@ -282,10 +282,13 @@ def validate_definition(db, row):
         rules = JourneyRules.model_validate(row.journey)
         require(not set(row.journey) - set(JourneyRules.model_fields), 'Journey contains unsupported top-level rule fields.')
         require(db.get(m.RankDefinition, rules.required_rank) is not None, 'Unknown required rank.')
+        if rules.world_boss:
+            require(len(rules.stages) == 1 and rules.stages[0].groups == [['alpha-wolf']] and rules.kind == 'raid',
+                    'The world boss route must contain exactly one Alpha Wolf encounter.')
         if rules.camp_rest: require(db.get(m.RestPolicy, rules.camp_rest) is not None, 'Unknown camp rest policy.')
         for stage in rules.stages:
             for group in stage.groups:
-                require(1 <= len(group) <= 6 and all(db.get(m.Enemy, slug) is not None for slug in group), 'Each enemy group needs 1–6 existing enemies.')
+                require(1 <= len(group) <= 20 and all(db.get(m.Enemy, slug) is not None for slug in group), 'Each enemy group needs 1–20 existing enemies.')
         if rules.encounter_groups:
             require(rules.max_rests is not None, 'Grouped quests require a rest budget.')
             validate_group_catalog(db, rules.model_dump())

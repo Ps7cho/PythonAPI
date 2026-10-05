@@ -1,6 +1,8 @@
 """Initial enemy content; runtime behavior reads the database catalogs."""
 # slug, name, taxonomy, HP, power, armor, speed, weapon type, ability assignments
 ENEMY_SPECS = [
+ ('rat','Rat','vermin',(18,22),(1,2),(0,0),(5,8),None,['rending_claws']),
+ ('alpha-wolf','Alpha Wolf','boss',(1000,1000),(8,12),(0,0),(12,14),None,['blood_fangs']),
  ('undead','Restless Undead','undead',(48,62),(5,7),(1,3),(3,5),None,['rending_claws']),
  ('acolyte','Acolyte','cultist',(42,55),(5,7),(0,2),(5,8),'staff',['shadow_hex']),
  ('leech','Giant Leech','vermin',(24,35),(3,5),(0,1),(2,4),None,['rending_claws']),

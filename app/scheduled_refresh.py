@@ -71,7 +71,7 @@ def _refresh_raids(db, cadence, now):
     from app.journeys import build_plan
     for template in db.scalars(select(QuestTemplate).order_by(QuestTemplate.slug)):
         raw = template.journey or {}
-        if raw.get('raid', {}).get('cadence') == cadence:
+        if (raw.get('raid') or {}).get('cadence') == cadence:
             build_plan(db, template, now=now)
 
 

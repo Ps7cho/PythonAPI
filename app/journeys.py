@@ -28,6 +28,7 @@ class Stage(BaseModel):
 
 
 class JourneyRules(BaseModel):
+    world_boss: bool = False
     death_policy: Literal["permanent", "rescue_on_return"] = "permanent"
     bank_rewards: bool = False
     repeat_groups: bool = True
@@ -66,8 +67,8 @@ def active_adventure(db, ids):
 def build_plan(db, template, now=None):
     rules = JourneyRules.model_validate(template.journey)
     pool = {slug for stage in rules.stages for group in stage.groups for slug in group}
-    if any(not group or len(group) > 6 for stage in rules.stages for group in stage.groups):
-        raise HTTPException(409, "Journey groups must contain one to six enemies.")
+    if any(not group or len(group) > 20 for stage in rules.stages for group in stage.groups):
+        raise HTTPException(409, "Journey groups must contain one to twenty enemies.")
     found = set(db.scalars(select(Enemy.slug).where(Enemy.slug.in_(pool))))
     if found != pool:
         raise HTTPException(409, "Journey references an unavailable enemy.")

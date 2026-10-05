@@ -155,6 +155,8 @@ app.include_router(live_router)
 app.include_router(contract_router)
 app.include_router(affliction_router)
 app.include_router(catalog_editor_router)
+from app.world_boss import router as world_boss_router
+app.include_router(world_boss_router)
 from app.gauntlets import router as gauntlet_router
 app.include_router(gauntlet_router)
 

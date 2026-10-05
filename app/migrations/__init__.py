@@ -126,3 +126,11 @@ def migrate(engine):
             from app.migrations.v040_catalog_icons import upgrade as icons_upgrade
             icons_upgrade(conn)
             conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('040_catalog_icons')"))
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='041_alpha_finale'")).first():
+            from app.migrations.v041_alpha_finale import upgrade as alpha_upgrade
+            alpha_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('041_alpha_finale')"))
+        if not conn.execute(text("SELECT version FROM schema_migrations WHERE version='042_world_boss_testing'")).first():
+            from app.migrations.v042_world_boss_testing import upgrade as boss_testing_upgrade
+            boss_testing_upgrade(conn)
+            conn.execute(text("INSERT INTO schema_migrations (version) VALUES ('042_world_boss_testing')"))

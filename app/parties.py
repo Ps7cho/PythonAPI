@@ -246,6 +246,10 @@ def rotate_invite(party_id: UUID, response: Response, db: Session = Depends(get_
 def start_party_encounter(party_id: UUID, payload: PartyEncounter,
                           db: Session = Depends(get_db), user: User = Depends(current_user)):
     from app.encounter_service import start_encounter
+    # Event settlement locks world state before touching parties. Use the same
+    # order when a party enters a fight, avoiding a deadline/join deadlock.
+    from app.world_boss import locked_state
+    locked_state(db)
     party = locked_party(db, party_id)
     require_leader(party, user)
     require_idle(db, party)

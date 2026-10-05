@@ -26,6 +26,7 @@ def serialize(gear):
     definition = gear.definition
     return dict(id=str(gear.id), item_type='gear', definition_slug=definition.slug,
         name=definition.name, icon_path=definition.icon_path, slot=definition.slot, bonuses=definition.bonuses,
+        account_bound=gear.bound_account_id is not None,
         required_rank=definition.required_rank,
         effects=armor_descriptions(gear), **item_rarity(gear.rarity))
 
