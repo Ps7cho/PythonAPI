@@ -37,7 +37,7 @@ timeout deletes character/game-state tables in FK order
 while retaining accounts, catalogs, and the event audit. Missed, never-opened
 windows after downtime are skipped. A one-second worker settles active deadlines.
 UTC daily and weekly refresh jobs keep durable period cursors. Startup and a
-background check advance missed periods to the current one; relevant API reads
+deadline-driven background worker advance missed periods to the current one; relevant API reads
 also catch up before returning. Raid plans remain keyed by rotation period,
 and daily shop stock is a saved subset of the editable shop catalog.
 
